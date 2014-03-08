@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>CheckboxSwitch plugin</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+    <script type="text/javascript" src="jquery.rsCheckboxSwitch.js"></script>
+    <link href="rsCheckboxSwitch.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript">
+        $(document).ready(function () {
+           $("input[type=checkbox]").eq(0).rsCheckboxSwitch({
+                slidingType: {
+                    horizontal: false
+                }
+            });
+            $("input[type=checkbox]").eq(1).rsCheckboxSwitch({
+                type: 'toggle'
+            });
+        });
+    </script>
+  </head>
+  <body>
+    
+    <input id="a" type="checkbox" name="vehicle" tabindex="1" value="Bike">
+    <input id="b" type="checkbox" name="vehicle" tabindex="2" value="Car">
+    <div tabindex="3">this is a div<br />final row</div>
+    <div tabindex="4">this is a seconds div<br />final second row</div>
+  </body>
+</html>
