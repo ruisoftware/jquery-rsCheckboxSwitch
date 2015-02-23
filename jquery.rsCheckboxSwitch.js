@@ -6,13 +6,12 @@
             $animObj = null,
             isInputCheckboxMarkup,
             isDocumentKeyEventsBound = false,
-            hasSlidingType,
+            isSlidingType,
             tabIndex,
             
             // sliding type related data
             $sliderBar = null,
             $sliderHandle = null,
-            handleOffset = 0,
             slidingPos = 0,
             mouseDownPos = 0,
             startPos = 0,
@@ -62,7 +61,7 @@
             },
             init = function() {
                 isInputCheckboxMarkup = $elem.is("input[type=checkbox]");
-                hasSlidingType = opts.type === 'sliding';
+                isSlidingType = opts.type === 'sliding';
                 tabIndex = $elem.attr('tabindex');
                 // input elements are focusable, even if there is no tabindex attribute
                 if ($elem.is("input") && tabIndex === undefined) {
@@ -72,11 +71,11 @@
                     isInline = isInlineElement($elem);
                 originalClass = $elem.attr('class');
                 originalStyle = $elem.attr('style');
-                if (hasSlidingType || isInline) {
-                    $switch = $elem.wrap($("<div />").addClass(hasSlidingType ? opts.slidingType.outerClass : null)).hide().parent();
+                if (isSlidingType || isInline) {
+                    $switch = $elem.wrap($("<div />").addClass(isSlidingType ? opts.slidingType.outerClass : null)).hide().parent();
                     if (isInline) {
                         $switch.addClass($elem.attr('class')).css('position', elemCssPos);
-                        if (hasSlidingType) {
+                        if (isSlidingType) {
                             $switch.css(getCssPos($elem));
                         }
                         $elem.removeAttr('class');
@@ -88,50 +87,35 @@
                 } else {
                     $switch = $elem;
                 }
-                if (hasSlidingType) {
+                if (isSlidingType) {
                     $sliderBar = $("<div />").addClass(opts.slidingType.sliderClass).css('position', 'relative');
                     $switch.append($sliderBar);
                     // need to retrieve the $sliderHandle height or width, so add it temporarily as hidden to the DOM
                     $sliderHandle = $("<div />").hide().addClass(opts.slidingType.handleClass);
-                    $switch.after($sliderHandle);
-                    $switch.add($sliderHandle).wrapAll("<div />");
+                    $sliderBar.append($sliderHandle);
+
                     if (elemCssPos === 'static') {
-                        $switch.parent().css('position', 'relative');
+                        $switch.css('position', 'relative');
                     } else {
-                        $switch.parent().css('position', elemCssPos).css(getCssPos($elem));
+                        $switch.css('position', elemCssPos).css(getCssPos($elem));
                     }
-                    $switch.parent().css('display', 'inline-block');
+                    $switch.css('display', 'inline-block');
                     if (!opts.slidingType.horizontal && !!opts.slidingType.verticalClass) {
-                        $switch.parent().addClass(opts.slidingType.verticalClass);
+                        $switch.addClass(opts.slidingType.verticalClass);
                     }
-                    var switchPos = $switch.position();
-                    if (elemCssPos === 'static') {
-                        switchPos.left = switchPos.top = 0;
-                    }
+
                     if (opts.slidingType.horizontal) {
                         $switch.css({
                             'overflow': 'hidden',
                             'width': (($sliderBar.outerWidth(true) + $sliderHandle.outerWidth(true)) / 2) + 'px',
                             'height': $sliderBar.outerHeight(true) + 'px'
                         });
-                        
-                        var sliderHandleHeight = $sliderHandle.outerHeight(true);
-                        $sliderHandle.css({
-                            'position': 'absolute',
-                            'top': (switchPos.top - (sliderHandleHeight - $switch.outerHeight(true)) / 2 + opts.slidingType.handleAdjustY) + 'px'
-                        });
-                        handleOffset = ($sliderBar.outerWidth(true) - $sliderHandle.outerWidth(true)) / 2 + toInt($switch.css('margin-left')) + switchPos.left + opts.slidingType.handleAdjustX;
                     } else {
                         $switch.css({
                             'overflow': 'hidden',
                             'width': $sliderBar.outerWidth(true) + 'px',
                             'height': (($sliderBar.outerHeight(true) + $sliderHandle.outerHeight(true)) / 2) + 'px'
                         });
-                        $sliderHandle.css({
-                            'position': 'absolute',
-                            'left': (switchPos.left - ($sliderHandle.outerWidth(true) - $switch.outerWidth(true)) / 2 + opts.slidingType.handleAdjustX) + 'px'
-                        });
-                        handleOffset = ($sliderBar.outerHeight(true) - $sliderHandle.outerHeight(true)) / 2 + toInt($switch.css('margin-top')) + switchPos.top + opts.slidingType.handleAdjustY;
                     }
                     $sliderHandle.css('display', ''); // show it (not as $sliderHandle.show())
 
@@ -140,7 +124,7 @@
                         $sliderHandle.bind('mousedown.rsCheckboxSwitch', onmousedownHandle);
                     } else {
                         if (!!opts.classDisabled) {
-                            $switch.parent().addClass(opts.classDisabled);
+                            $switch.addClass(opts.classDisabled);
                         }
                     }
                     sizeInner = opts.slidingType.horizontal ? $sliderBar.width() : $sliderBar.height();
@@ -177,6 +161,7 @@
                 if (!opts.enabled && tabIndex !== undefined) {
                     $switch.removeAttr('tabindex');
                 }
+                return;
                 initialValue = isOnInput(); 
                 initialValue? doOn(false, null) : doOff(false, null);
                 toggleClassOnOff(initialValue);
@@ -208,7 +193,7 @@
                 return !isOnInput();
             },
             isOnSwitch = function() {
-                if (hasSlidingType) {
+                if (isSlidingType) {
                     var isLeftOrTopSide = slidingPos < (sizeInner - size) / 2;
                     if (opts.slidingType.flipped) { // then ON is on the right (or bottom)
                         return !isLeftOrTopSide;
@@ -227,7 +212,7 @@
                     relativeDuration,
                     updateUI = function () {
                         $sliderBar.css(opts.slidingType.horizontal ? 'left' : 'top', (-slidingPos) + 'px');
-                        $sliderHandle.css(opts.slidingType.horizontal ? 'left' : 'top', (handleOffset - slidingPos) + 'px');
+                        //$sliderHandle.css(opts.slidingType.horizontal ? 'left' : 'top', (handleOffset - slidingPos) + 'px');
                     },
                     doComplete = function () {
                         slidingPos = dest;
@@ -294,7 +279,7 @@
                 }
             },
             doOnOff = function(anim, changeToOn, onFinish) {
-                if (hasSlidingType) {
+                if (isSlidingType) {
                     doOnOffSliding(anim, changeToOn, onFinish);
                 } else {
                     doOnOffToggle(anim, changeToOn, onFinish);
@@ -370,7 +355,7 @@
                 if ($animObj) { // is some animation going on?
                     $animObj.stop();
                 }
-                if (hasSlidingType) {
+                if (isSlidingType) {
                     startPos = slidingPos;
                     startPosSwitch = isOnSwitch();
                     dragged = false;
@@ -381,14 +366,14 @@
                $switch.focus();
             },
             onmousemove = function (e) { // onmousemove is only for sliding type
-            	e.preventDefault();
+                e.preventDefault();
                 if (mouseIsDown) {
                     var mouseOffset = mouseDownPos - (opts.slidingType.horizontal ? e.pageX : e.pageY),
                         newValue = startPos + mouseOffset;
                     if (newValue > -1 && newValue <= sizeInner - size) {
                         slidingPos = newValue;
                         $sliderBar.css(opts.slidingType.horizontal ? 'left' : 'top', (- slidingPos) + 'px');
-                        $sliderHandle.css(opts.slidingType.horizontal ? 'left' : 'top', (handleOffset - slidingPos) + 'px');
+                        //$sliderHandle.css(opts.slidingType.horizontal ? 'left' : 'top', (handleOffset - slidingPos) + 'px');
                         dragged = true;
                     }
                 }
@@ -397,7 +382,7 @@
                 e.preventDefault();
                 if (mouseIsDown) {
                     mouseIsDown = false;
-                    if (hasSlidingType) {
+                    if (isSlidingType) {
                         $(document).unbind('mouseup.rsCheckboxSwitch', onmouseup).unbind('mousemove.rsCheckboxSwitch', onmousemove);
                         $switch.removeClass(opts.slidingType.draggingClass);
                         $sliderHandle.removeClass(opts.slidingType.pushdownClass);
@@ -438,7 +423,7 @@
                             if (opts.enabled) {
                                 // from enabled to disabled
                                 opts.enabled = false;
-                                if (hasSlidingType) {
+                                if (isSlidingType) {
                                     $sliderBar.unbind('mousedown.rsCheckboxSwitch', onmousedown);
                                     $sliderHandle.unbind('mousedown.rsCheckboxSwitch', onmousedownHandle);
                                     if (!!opts.classDisabled) {
@@ -459,7 +444,7 @@
                                 if (!opts.enabled) {
                                     // from disabled to enabled
                                     opts.enabled = true;
-                                    if (hasSlidingType) {
+                                    if (isSlidingType) {
                                         $sliderBar.bind('mousedown.rsCheckboxSwitch', onmousedown);
                                         $sliderHandle.bind('mousedown.rsCheckboxSwitch', onmousedownHandle);
                                         if (!!opts.classDisabled) {
@@ -585,7 +570,7 @@
                     unbind('mousemove.rsCheckboxSwitch', onmousemove).
                     unbind('keydown.rsCheckboxSwitch', onKeydown);
                 
-                if (hasSlidingType) {
+                if (isSlidingType) {
                     $sliderBar.unbind('mousedown.rsCheckboxSwitch', onmousedown);
                     $sliderHandle.unbind('mousedown.rsCheckboxSwitch', onmousedownHandle);
     
@@ -631,7 +616,7 @@
                 return isNaN(value) ? 0 : value;
             };
             
-        init();    
+        init();
     };
         
     $.fn.rsCheckboxSwitch = function (options) {
