@@ -144,7 +144,7 @@
   border-radius: @refScale*0.375 ~"/" @refScale*0.625;
   @offset: @refScale*.0625;
   .box-shadow(-@offset -@offset @offset @offset @fromGradientOuter, @offset @offset @offset @offset @toGradientOuter);
-  width: (@sliderMaxSize - @sliderHandleSize)/2 + @sliderHandleSize !important;
+  width: (@sliderMaxSize + @sliderHandleSize)/2 !important;
   height: @sliderMinSize !important;
 }
 
@@ -186,27 +186,25 @@
     color: hsl(0, 0%, 32%);
     right: @refScale*0.375;
   }
+
+  .checkboxswitch-handle {
+    width: @sliderHandleSize;
+    height: @sliderMinSize;
+    left: (@sliderMaxSize - @sliderHandleSize)/2;
+    background-color: cyan;
+    /*
+    background-image: -webkit-linear-gradient(left, hsl(0, 0%, 40%) 0%, hsl(0, 0%, 20%) 5%, hsl(0, 0%, 40%) 10%, hsl(0, 0%, 20%) 15%, hsl(0, 0%, 40%) 20%, hsl(0, 0%, 20%) 25%, hsl(0, 0%, 40%) 40%, hsl(0, 0%, 35%) 48%, hsl(55, 40%, 40%) 49%, hsl(55, 40%, 40%) 51%, hsl(0, 0%, 35%) 52%, hsl(0, 0%, 40%) 60%, hsl(0, 0%, 20%) 75%, hsl(0, 0%, 40%) 80%, hsl(0, 0%, 20%) 85%, hsl(0, 0%, 40%) 90%, hsl(0, 0%, 20%) 95%, hsl(0, 0%, 40%) 100%);
+    background-image: -moz-linear-gradient(left, hsl(0, 0%, 40%) 0%, hsl(0, 0%, 20%) 5%, hsl(0, 0%, 40%) 10%, hsl(0, 0%, 20%) 15%, hsl(0, 0%, 40%) 20%, hsl(0, 0%, 20%) 25%, hsl(0, 0%, 40%) 40%, hsl(0, 0%, 35%) 48%, hsl(55, 40%, 40%) 49%, hsl(55, 40%, 40%) 51%, hsl(0, 0%, 35%) 52%, hsl(0, 0%, 40%) 60%, hsl(0, 0%, 20%) 75%, hsl(0, 0%, 40%) 80%, hsl(0, 0%, 20%) 85%, hsl(0, 0%, 40%) 90%, hsl(0, 0%, 20%) 95%, hsl(0, 0%, 40%) 100%);
+    background-image: -o-linear-gradient(left, hsl(0, 0%, 40%) 0%, hsl(0, 0%, 20%) 5%, hsl(0, 0%, 40%) 10%, hsl(0, 0%, 20%) 15%, hsl(0, 0%, 40%) 20%, hsl(0, 0%, 20%) 25%, hsl(0, 0%, 40%) 40%, hsl(0, 0%, 35%) 48%, hsl(55, 40%, 40%) 49%, hsl(55, 40%, 40%) 51%, hsl(0, 0%, 35%) 52%, hsl(0, 0%, 40%) 60%, hsl(0, 0%, 20%) 75%, hsl(0, 0%, 40%) 80%, hsl(0, 0%, 20%) 85%, hsl(0, 0%, 40%) 90%, hsl(0, 0%, 20%) 95%, hsl(0, 0%, 40%) 100%);
+    background-image: -ms-linear-gradient(left, hsl(0, 0%, 40%) 0%, hsl(0, 0%, 20%) 5%, hsl(0, 0%, 40%) 10%, hsl(0, 0%, 20%) 15%, hsl(0, 0%, 40%) 20%, hsl(0, 0%, 20%) 25%, hsl(0, 0%, 40%) 40%, hsl(0, 0%, 35%) 48%, hsl(55, 40%, 40%) 49%, hsl(55, 40%, 40%) 51%, hsl(0, 0%, 35%) 52%, hsl(0, 0%, 40%) 60%, hsl(0, 0%, 20%) 75%, hsl(0, 0%, 40%) 80%, hsl(0, 0%, 20%) 85%, hsl(0, 0%, 40%) 90%, hsl(0, 0%, 20%) 95%, hsl(0, 0%, 40%) 100%);
+    background-image: linear-gradient(left, hsl(0, 0%, 40%) 0%, hsl(0, 0%, 20%) 5%, hsl(0, 0%, 40%) 10%, hsl(0, 0%, 20%) 15%, hsl(0, 0%, 40%) 20%, hsl(0, 0%, 20%) 25%, hsl(0, 0%, 40%) 40%, hsl(0, 0%, 35%) 48%, hsl(55, 40%, 40%) 49%, hsl(55, 40%, 40%) 51%, hsl(0, 0%, 35%) 52%, hsl(0, 0%, 40%) 60%, hsl(0, 0%, 20%) 75%, hsl(0, 0%, 40%) 80%, hsl(0, 0%, 20%) 85%, hsl(0, 0%, 40%) 90%, hsl(0, 0%, 20%) 95%, hsl(0, 0%, 40%) 100%);
+    border: @refScale*0.0625 hsl(0, 0%, 32%) solid;
+    border-radius: @refScale*0.25 ~"/" @refScale*0.4375;
+    .box-shadow(0 @refScale*0.0625 @refScale*0.0625 black, 0 0 @refScale*0.0625 hsl(0, 0%, 10%), 0 @refScale*0.25 @refScale*0.4375 -@refScale*0.1875 hsla(0, 0%, 0%, 0.7));
+    */
+  }
 }
-/*
-.w .checkboxswitch:before,
-.w .checkboxswitch:after {
-  color: hsl(0, 0%, 45%);
-}
-*/
-.checkboxswitch-handle {
-  width: @sliderHandleSize;
-  height: @sliderMinSize + @refScale*0.25;
-  left: (@sliderMaxSize - @sliderHandleSize)/2;
-  top: -@refScale*0.125;
-  background-image: -webkit-linear-gradient(left, hsl(0, 0%, 40%) 0%, hsl(0, 0%, 20%) 5%, hsl(0, 0%, 40%) 10%, hsl(0, 0%, 20%) 15%, hsl(0, 0%, 40%) 20%, hsl(0, 0%, 20%) 25%, hsl(0, 0%, 40%) 40%, hsl(0, 0%, 35%) 48%, hsl(55, 40%, 40%) 49%, hsl(55, 40%, 40%) 51%, hsl(0, 0%, 35%) 52%, hsl(0, 0%, 40%) 60%, hsl(0, 0%, 20%) 75%, hsl(0, 0%, 40%) 80%, hsl(0, 0%, 20%) 85%, hsl(0, 0%, 40%) 90%, hsl(0, 0%, 20%) 95%, hsl(0, 0%, 40%) 100%);
-  background-image: -moz-linear-gradient(left, hsl(0, 0%, 40%) 0%, hsl(0, 0%, 20%) 5%, hsl(0, 0%, 40%) 10%, hsl(0, 0%, 20%) 15%, hsl(0, 0%, 40%) 20%, hsl(0, 0%, 20%) 25%, hsl(0, 0%, 40%) 40%, hsl(0, 0%, 35%) 48%, hsl(55, 40%, 40%) 49%, hsl(55, 40%, 40%) 51%, hsl(0, 0%, 35%) 52%, hsl(0, 0%, 40%) 60%, hsl(0, 0%, 20%) 75%, hsl(0, 0%, 40%) 80%, hsl(0, 0%, 20%) 85%, hsl(0, 0%, 40%) 90%, hsl(0, 0%, 20%) 95%, hsl(0, 0%, 40%) 100%);
-  background-image: -o-linear-gradient(left, hsl(0, 0%, 40%) 0%, hsl(0, 0%, 20%) 5%, hsl(0, 0%, 40%) 10%, hsl(0, 0%, 20%) 15%, hsl(0, 0%, 40%) 20%, hsl(0, 0%, 20%) 25%, hsl(0, 0%, 40%) 40%, hsl(0, 0%, 35%) 48%, hsl(55, 40%, 40%) 49%, hsl(55, 40%, 40%) 51%, hsl(0, 0%, 35%) 52%, hsl(0, 0%, 40%) 60%, hsl(0, 0%, 20%) 75%, hsl(0, 0%, 40%) 80%, hsl(0, 0%, 20%) 85%, hsl(0, 0%, 40%) 90%, hsl(0, 0%, 20%) 95%, hsl(0, 0%, 40%) 100%);
-  background-image: -ms-linear-gradient(left, hsl(0, 0%, 40%) 0%, hsl(0, 0%, 20%) 5%, hsl(0, 0%, 40%) 10%, hsl(0, 0%, 20%) 15%, hsl(0, 0%, 40%) 20%, hsl(0, 0%, 20%) 25%, hsl(0, 0%, 40%) 40%, hsl(0, 0%, 35%) 48%, hsl(55, 40%, 40%) 49%, hsl(55, 40%, 40%) 51%, hsl(0, 0%, 35%) 52%, hsl(0, 0%, 40%) 60%, hsl(0, 0%, 20%) 75%, hsl(0, 0%, 40%) 80%, hsl(0, 0%, 20%) 85%, hsl(0, 0%, 40%) 90%, hsl(0, 0%, 20%) 95%, hsl(0, 0%, 40%) 100%);
-  background-image: linear-gradient(left, hsl(0, 0%, 40%) 0%, hsl(0, 0%, 20%) 5%, hsl(0, 0%, 40%) 10%, hsl(0, 0%, 20%) 15%, hsl(0, 0%, 40%) 20%, hsl(0, 0%, 20%) 25%, hsl(0, 0%, 40%) 40%, hsl(0, 0%, 35%) 48%, hsl(55, 40%, 40%) 49%, hsl(55, 40%, 40%) 51%, hsl(0, 0%, 35%) 52%, hsl(0, 0%, 40%) 60%, hsl(0, 0%, 20%) 75%, hsl(0, 0%, 40%) 80%, hsl(0, 0%, 20%) 85%, hsl(0, 0%, 40%) 90%, hsl(0, 0%, 20%) 95%, hsl(0, 0%, 40%) 100%);
-  border: @refScale*0.0625 hsl(0, 0%, 32%) solid;
-  border-radius: @refScale*0.25 ~"/" @refScale*0.4375;
-  .box-shadow(0 @refScale*0.0625 @refScale*0.0625 black, 0 0 @refScale*0.0625 hsl(0, 0%, 10%), 0 @refScale*0.25 @refScale*0.4375 -@refScale*0.1875 hsla(0, 0%, 0%, 0.7));
-}
+
 /*
 .w .checkboxswitch-handle {
   background-image: -webkit-linear-gradient(left, hsl(0, 0%, 90%) 0%, hsl(0, 0%, 45%) 5%, hsl(0, 0%, 90%) 10%, hsl(0, 0%, 45%) 15%, hsl(0, 0%, 90%) 20%, hsl(0, 0%, 45%) 25%, hsl(0, 0%, 90%) 40%, hsl(0, 0%, 55%) 48%, hsl(55, 55%, 65%) 49%, hsl(55, 55%, 65%) 51%, hsl(0, 0%, 55%) 52%, hsl(0, 0%, 90%) 60%, hsl(0, 0%, 45%) 75%, hsl(0, 0%, 90%) 80%, hsl(0, 0%, 45%) 85%, hsl(0, 0%, 90%) 90%, hsl(0, 0%, 45%) 95%, hsl(0, 0%, 90%) 100%);

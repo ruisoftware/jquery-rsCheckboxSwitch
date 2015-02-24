@@ -4,7 +4,6 @@
             initialValue = false,
             mouseIsDown = false,
             $animObj = null,
-            isInputCheckboxMarkup,
             isDocumentKeyEventsBound = false,
             isSlidingType,
             tabIndex,
@@ -59,8 +58,17 @@
                 }
                 return json;
             },
+            getCheckedAttrName,
             init = function() {
-                isInputCheckboxMarkup = $elem.is("input[type=checkbox]");
+                if ($elem.is("input[type=checkbox]")) {
+                    getCheckedAttrName = function() {
+                        return 'checked';
+                    }
+                } else {
+                    getCheckedAttrName = function() {
+                        return 'data-checked';
+                    }
+                }
                 isSlidingType = opts.type === 'sliding';
                 tabIndex = $elem.attr('tabindex');
                 // input elements are focusable, even if there is no tabindex attribute
@@ -117,7 +125,10 @@
                             'height': (($sliderBar.outerHeight(true) + $sliderHandle.outerHeight(true)) / 2) + 'px'
                         });
                     }
-                    $sliderHandle.css('display', ''); // show it (not as $sliderHandle.show())
+                    $sliderHandle.css({
+                        'display': '',  // remove the display to show it (not as $sliderHandle.show())
+                        'position': 'absolute'
+                    }); 
 
                     if (opts.enabled) {
                         $sliderBar.bind('mousedown.rsCheckboxSwitch', onmousedown);
@@ -161,7 +172,6 @@
                 if (!opts.enabled && tabIndex !== undefined) {
                     $switch.removeAttr('tabindex');
                 }
-                return;
                 initialValue = isOnInput(); 
                 initialValue? doOn(false, null) : doOff(false, null);
                 toggleClassOnOff(initialValue);
@@ -182,9 +192,6 @@
                 $switch.
                     bind('focus.rsCheckboxSwitch', gotFocus).
                     bind('blur.rsCheckboxSwitch', loseFocus);
-            },
-            getCheckedAttrName = function() {
-                return isInputCheckboxMarkup ? 'checked' : 'data-checked';
             },
             isOnInput = function() {
                 return $elem.attr(getCheckedAttrName()) == 'checked'; 
@@ -209,6 +216,7 @@
             },
             doOnOffSliding = function(anim, changeToOn, onFinish) {
                 var dest = changeToOn ? (opts.slidingType.flipped ? sizeInner - size : 0) : (opts.slidingType.flipped ? 0 : sizeInner - size),
+                    // TODO make dest a relative value by doing dest /= size*100
                     relativeDuration,
                     updateUI = function () {
                         $sliderBar.css(opts.slidingType.horizontal ? 'left' : 'top', (-slidingPos) + 'px');
