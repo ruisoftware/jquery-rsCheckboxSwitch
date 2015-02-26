@@ -134,7 +134,7 @@
                         $sliderBar.bind('mousedown.rsCheckboxSwitch', onmousedown);
                         $sliderHandle.bind('mousedown.rsCheckboxSwitch', onmousedownHandle);
                     } else {
-                        if (!!opts.classDisabled) {
+                        if (opts.classDisabled) {
                             $switch.addClass(opts.classDisabled);
                         }
                     }
@@ -154,7 +154,7 @@
                     if (opts.enabled) {
                         $switch.bind('mousedown.rsCheckboxSwitch', onmousedown).bind('mouseup.rsCheckboxSwitch', onmouseup);
                     } else {
-                        if (!!opts.classDisabled) {
+                        if (opts.classDisabled) {
                             $switch.addClass(opts.classDisabled);
                         }
                     }
@@ -201,7 +201,7 @@
             },
             isOnSwitch = function() {
                 if (isSlidingType) {
-                    var isLeftOrTopSide = slidingPos < (sizeInner - size) / 2;
+                    var isLeftOrTopSide = slidingPos > (size - sizeInner)/size/2;
                     if (opts.slidingType.flipped) { // then ON is on the right (or bottom)
                         return !isLeftOrTopSide;
                     } else { // then ON is on the left (or top)
@@ -215,36 +215,32 @@
                 return !isOnSwitch();
             },
             doOnOffSliding = function(anim, changeToOn, onFinish) {
-                var dest = changeToOn ? (opts.slidingType.flipped ? sizeInner - size : 0) : (opts.slidingType.flipped ? 0 : sizeInner - size),
-                    // TODO make dest a relative value by doing dest /= size*100
+                var dest = changeToOn ? (opts.slidingType.flipped ? size - sizeInner : 0) : (opts.slidingType.flipped ? 0 : size - sizeInner),
                     relativeDuration,
-                    updateUI = function () {
-                        $sliderBar.css(opts.slidingType.horizontal ? 'left' : 'top', (-slidingPos) + 'px');
-                        //$sliderHandle.css(opts.slidingType.horizontal ? 'left' : 'top', (handleOffset - slidingPos) + 'px');
-                    },
+                    property = opts.slidingType.horizontal ? 'left' : 'top',
+                    animProp,
                     doComplete = function () {
                         slidingPos = dest;
-                        updateUI();
+                        $sliderBar.css(property, slidingPos*100 + '%');
                         $animObj = null;
                         if (onFinish) {
                             onFinish();
                         }
                     };
-                    
+                dest /= size;
                 if (anim && sizeInner > size) {
-                    relativeDuration = Math.abs((dest - slidingPos) / (sizeInner - size))*opts.speed;
-                    if (relativeDuration < 10) { // Not worth to animate if it takes less than 10 miliseconds
+                    relativeDuration = Math.abs((dest - slidingPos)*size/(sizeInner - size))*opts.speed;
+                    if (relativeDuration < 10) { // Not worth animating if it takes less than 10 miliseconds
                         doComplete();
                     } else {
-                        // need to simultaneously animate both the slider bar and the handle. Can be done with two unqueued $.animate() functions, but this uses two timers,
-                        // so I believe a single animation that handles both objects has a better performance. 
-                        $animObj = $({ 'n': slidingPos });
-                        $animObj.animate({ 'n': dest }, {
-                        	queue: false,
-                        	duration: relativeDuration,
+                        animProp = {};
+                        animProp[property] = dest*100 + '%';
+                        $animObj = $sliderBar.css(property, slidingPos*100 + '%');
+                        $animObj.animate(animProp, {
+                            queue: false,
+                            duration: relativeDuration,
                             step: function (now) {
-                                slidingPos = now;
-                                updateUI();
+                                slidingPos = now/100;
                             },
                             complete: doComplete
                         });
@@ -276,7 +272,7 @@
                         $animObj = $({ 'n': currFrame });
                         $animObj.animate({ 'n': dest }, { 
                             queue: false,
-                        	duration: opts.speed, 
+                            duration: opts.speed, 
                             step: doStep, 
                             complete: doComplete
                         });
@@ -301,9 +297,9 @@
             },
             checkClassChanged = function () {
                 if (initialValue == isOnInput()) {
-                	$switch.removeClass(opts.classChanged);
+                    $switch.removeClass(opts.classChanged);
                 } else {
-                	$switch.addClass(opts.classChanged);
+                    $switch.addClass(opts.classChanged);
                 }
             },
             toggleClassOnOff = function (isOn) {
@@ -334,8 +330,8 @@
                 doOn(anim === undefined ? true : anim, function() {
                     if (fireEvents === undefined) {
                         if (state != isOnSwitch()) {
-                            triggerOn(true);    
-                        }                            
+                            triggerOn(true);
+                        }
                     } else {
                         triggerOn(fireEvents);
                     }
@@ -346,8 +342,8 @@
                 doOff(anim === undefined ? true : anim, function() {
                     if (fireEvents === undefined) {
                         if (state != isOffSwitch()) {
-                            triggerOff(true);    
-                        }                            
+                            triggerOff(true);
+                        }
                     } else {
                         triggerOff(fireEvents);
                     }
@@ -377,11 +373,10 @@
                 e.preventDefault();
                 if (mouseIsDown) {
                     var mouseOffset = mouseDownPos - (opts.slidingType.horizontal ? e.pageX : e.pageY),
-                        newValue = startPos + mouseOffset;
-                    if (newValue > -1 && newValue <= sizeInner - size) {
+                        newValue = startPos - mouseOffset/size;
+                    if (newValue <= 0  && newValue >= (size - sizeInner)/size) {
                         slidingPos = newValue;
-                        $sliderBar.css(opts.slidingType.horizontal ? 'left' : 'top', (- slidingPos) + 'px');
-                        //$sliderHandle.css(opts.slidingType.horizontal ? 'left' : 'top', (handleOffset - slidingPos) + 'px');
+                        $sliderBar.css(opts.slidingType.horizontal ? 'left' : 'top', slidingPos*100 + '%');
                         dragged = true;
                     }
                 }
@@ -427,46 +422,36 @@
                         opts.onChangeOff = value;
                         break;
                     case 'enabled':
-                        if (value === false) {
-                            if (opts.enabled) {
-                                // from enabled to disabled
-                                opts.enabled = false;
-                                if (isSlidingType) {
-                                    $sliderBar.unbind('mousedown.rsCheckboxSwitch', onmousedown);
-                                    $sliderHandle.unbind('mousedown.rsCheckboxSwitch', onmousedownHandle);
-                                    if (!!opts.classDisabled) {
-                                        $switch.parent().addClass(opts.classDisabled);
-                                    }
-                                } else {
-                                    $switch.unbind('mousedown.rsCheckboxSwitch', onmousedown).unbind('mouseup.rsCheckboxSwitch', onmouseup);
-                                    if (!!opts.classDisabled) {
-                                        $switch.addClass(opts.classDisabled);
-                                    }
-                                }
-                                if (tabIndex !== undefined) {
-                                    $switch.removeAttr('tabindex');
-                                }
+                        if (opts.enabled && value === false) {
+                            // from enabled to disabled
+                            opts.enabled = false;
+                            if (isSlidingType) {
+                                $sliderBar.unbind('mousedown.rsCheckboxSwitch', onmousedown);
+                                $sliderHandle.unbind('mousedown.rsCheckboxSwitch', onmousedownHandle);
+                            } else {
+                                $switch.unbind('mousedown.rsCheckboxSwitch', onmousedown).unbind('mouseup.rsCheckboxSwitch', onmouseup);
+                            }
+                            if (opts.classDisabled) {
+                                $switch.addClass(opts.classDisabled);
+                            }
+                            if (tabIndex !== undefined) {
+                                $switch.removeAttr('tabindex');
                             }
                         } else {
-                            if (value === true) {
-                                if (!opts.enabled) {
-                                    // from disabled to enabled
-                                    opts.enabled = true;
-                                    if (isSlidingType) {
-                                        $sliderBar.bind('mousedown.rsCheckboxSwitch', onmousedown);
-                                        $sliderHandle.bind('mousedown.rsCheckboxSwitch', onmousedownHandle);
-                                        if (!!opts.classDisabled) {
-                                            $switch.parent().removeClass(opts.classDisabled);
-                                        }
-                                    } else {
-                                        $switch.bind('mousedown.rsCheckboxSwitch', onmousedown).bind('mouseup.rsCheckboxSwitch', onmouseup);
-                                        if (!!opts.classDisabled) {
-                                            $switch.removeClass(opts.classDisabled);
-                                        }
-                                    }
-                                    if (tabIndex !== undefined) {
-                                        $switch.attr('tabindex', tabIndex);
-                                    }
+                            if (!opts.enabled && value === true) {
+                                // from disabled to enabled
+                                opts.enabled = true;
+                                if (isSlidingType) {
+                                    $sliderBar.bind('mousedown.rsCheckboxSwitch', onmousedown);
+                                    $sliderHandle.bind('mousedown.rsCheckboxSwitch', onmousedownHandle);
+                                } else {
+                                    $switch.bind('mousedown.rsCheckboxSwitch', onmousedown).bind('mouseup.rsCheckboxSwitch', onmouseup);
+                                }
+                                if (opts.classDisabled) {
+                                    $switch.removeClass(opts.classDisabled);
+                                }
+                                if (tabIndex !== undefined) {
+                                    $switch.attr('tabindex', tabIndex);
                                 }
                             }
                         }
@@ -519,18 +504,18 @@
                 return $(this);
             },
             onKeydown = function (event) {
-                var key = { 
-                    enter: 13,
-                    esc: 27,
-                    space: 32
-                }, allowedKey = function () {                    
-                    switch (event.which) {
-                        case key.enter: return $.inArray('enter', opts.keyboard.allowed) > -1;
-                        case key.esc:   return $.inArray('esc', opts.keyboard.allowed) > -1;
-                        case key.space: return $.inArray('space', opts.keyboard.allowed) > -1; 
-                    }
-                    return false;
-                };
+                var key = {
+                        enter: 13,
+                        esc: 27,
+                        space: 32
+                    }, allowedKey = function () {                    
+                        switch (event.which) {
+                            case key.enter: return $.inArray('enter', opts.keyboard.allowed) > -1;
+                            case key.esc:   return $.inArray('esc', opts.keyboard.allowed) > -1;
+                            case key.space: return $.inArray('space', opts.keyboard.allowed) > -1; 
+                        }
+                        return false;
+                    };
 
                 if (opts.enabled && allowedKey()) {
                     switch (event.which) {
