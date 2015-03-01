@@ -134,8 +134,8 @@
                         $sliderBar.bind('mousedown.rsCheckboxSwitch', onmousedown);
                         $sliderHandle.bind('mousedown.rsCheckboxSwitch', onmousedownHandle);
                     } else {
-                        if (opts.classDisabled) {
-                            $switch.addClass(opts.classDisabled);
+                        if (opts.disabledClass) {
+                            $switch.addClass(opts.disabledClass);
                         }
                     }
                     sizeInner = opts.slidingType.horizontal ? $sliderBar.width() : $sliderBar.height();
@@ -154,8 +154,8 @@
                     if (opts.enabled) {
                         $switch.bind('mousedown.rsCheckboxSwitch', onmousedown).bind('mouseup.rsCheckboxSwitch', onmouseup);
                     } else {
-                        if (opts.classDisabled) {
-                            $switch.addClass(opts.classDisabled);
+                        if (opts.disabledClass) {
+                            $switch.addClass(opts.disabledClass);
                         }
                     }
                     if (opts.toggleType.caption) {
@@ -295,11 +295,11 @@
             doOff = function(anim, onFinish) {
                 doOnOff(anim, false, onFinish);
             },
-            checkClassChanged = function () {
+            checkChangedClass = function () {
                 if (initialValue == isOnInput()) {
-                    $switch.removeClass(opts.classChanged);
+                    $switch.removeClass(opts.changedClass);
                 } else {
-                    $switch.addClass(opts.classChanged);
+                    $switch.addClass(opts.changedClass);
                 }
             },
             toggleClassOnOff = function (isOn) {
@@ -310,7 +310,7 @@
             triggerOn = function (fireEvents) {
                 $elem.attr(getCheckedAttrName(), 'checked');
                 toggleClassOnOff(true);
-                checkClassChanged();
+                checkChangedClass();
                 if (fireEvents) {
                     $elem.triggerHandler('onChange.rsCheckboxSwitch', [true]);
                     $elem.triggerHandler('onChangeOn.rsCheckboxSwitch');
@@ -319,7 +319,7 @@
             triggerOff = function (fireEvents) {
                 $elem.removeAttr(getCheckedAttrName());
                 toggleClassOnOff(false);
-                checkClassChanged();
+                checkChangedClass();
                 if (fireEvents) {
                     $elem.triggerHandler('onChange.rsCheckboxSwitch', [false]);
                     $elem.triggerHandler('onChangeOff.rsCheckboxSwitch');
@@ -354,6 +354,7 @@
                 onmousedown(e);
             },
             onmousedown = function (e) {
+                console.log('onmousedown')
                 e.preventDefault();
                 mouseIsDown = true;
                 if ($animObj) { // is some animation going on?
@@ -431,8 +432,8 @@
                             } else {
                                 $switch.unbind('mousedown.rsCheckboxSwitch', onmousedown).unbind('mouseup.rsCheckboxSwitch', onmouseup);
                             }
-                            if (opts.classDisabled) {
-                                $switch.addClass(opts.classDisabled);
+                            if (opts.disabledClass) {
+                                $switch.addClass(opts.disabledClass);
                             }
                             if (tabIndex !== undefined) {
                                 $switch.removeAttr('tabindex');
@@ -447,8 +448,8 @@
                                 } else {
                                     $switch.bind('mousedown.rsCheckboxSwitch', onmousedown).bind('mouseup.rsCheckboxSwitch', onmouseup);
                                 }
-                                if (opts.classDisabled) {
-                                    $switch.removeClass(opts.classDisabled);
+                                if (opts.disabledClass) {
+                                    $switch.removeClass(opts.disabledClass);
                                 }
                                 if (tabIndex !== undefined) {
                                     $switch.attr('tabindex', tabIndex);
@@ -690,13 +691,11 @@
             handleClass: 'checkboxswitch-handle', // Classes for the handle usually located in the middle of the slider element. Type: string.
             pushdownClass: 'checkboxswitch-down', // Classes for the handle when mouse is applied to it. Type: string.
             draggingClass: 'switch-dragging',     // Classes used during the time user is moving the switch with the mouse. Type: string.
-            verticalClass: 'checkboxswitchV', // Classes applied to the topmost element for vertical sliders (when horizontal is false). 
+            verticalClass: 'vert',                // Classes applied to the topmost element for vertical sliders (when horizontal is false). 
             flipped: false,     // Determines the location of the on and off. Type: boolean.
                                 // When flipped is false, the switch is ON--OFF (for horizontal switches) or ON on the top and OFF on the bottom (for vertical switches)
                                 // When flipped is true, the switch is OFF--ON (for horizontal switches) or OFF on the top and ON on the bottom (for vertical switches) 
-            horizontal: true,   // Determines the switch orientation, either horizontal or vertical. Type: boolean.
-            handleAdjustX: 0,   // Relative horizontal pixel adjustment for the handle position. Type: integer
-            handleAdjustY: 0    // Relative vertical pixel adjustment for the handle position. Type: integer
+            horizontal: true    // Determines the switch orientation, either horizontal or vertical. Type: boolean.
         },        
 
         // toggleType is only meaningful if type is 'toggle' (or other value other than 'sliding')
@@ -727,8 +726,8 @@
                                   //  true - The current value is commited when switch loses focus.
                                   // false - Value is not commited.
         },
-        classChanged: 'changed',    // Classes set to the outer div when the switch has been changed. Type: string.
-        classDisabled: 'disabled',  // Classes set to the outer div when the switch is disabled. Type: string.
+        changedClass: 'changed',    // Classes set to the outer div when the switch has been changed. Type: string.
+        disabledClass: 'disabled',  // Classes set to the outer div when the switch is disabled. Type: string.
         enabled: true,  // Determines whether the control is editable. If the plugin is associated with a disabled <input type="checkbox" disabled>, then enabled is set to false. Type: boolean.
         speed: 100,     // Handle animation in milliseconds. Type: positive integer number.
                         // For Sliding switches, specifies the time it takes to move from one side to the other.

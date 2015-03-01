@@ -17,113 +17,6 @@
 
 @font-size: @refScale;
 
-// mixins
-// ===============
-.padding(@padding) {
-  .padding(@padding, @padding, @padding, @padding);
-}
-
-.padding(@topBottom, @rightLeft) {
-  .padding(@topBottom, @rightLeft, @topBottom, @rightLeft);
-}
-
-.padding(@top, @right, @bottom) {
-  .padding(@top, @right, @bottom, @right);
-}
-
-.padding(@top, @right, @bottom, @left) when(@top = @right) and (@right = @bottom) and (@bottom = @left) {
-  padding: @top;
-}
-
-.padding(@top, @right, @bottom, @left) when (@top = @bottom) and (@right = @left) and not (@top = @right) {
-  padding: @top @right;
-}
-
-.padding(@top, @right, @bottom, @left) when not (@top = @bottom), not (@right = @left) {
-  padding: @top @right @bottom @left;
-}
-
-.margin(@margin) {
-  .margin(@margin, @margin, @margin, @margin);
-}
-
-.margin(@topBottom, @rightLeft) {
-  .margin(@topBottom, @rightLeft, @topBottom, @rightLeft);
-}
-
-.margin(@top, @right, @bottom) {
-  .margin(@top, @right, @bottom, @right);
-}
-
-.margin(@top, @right, @bottom, @left) when (@top = @right) and (@right = @bottom) and (@bottom = @left) {
-  margin: @top;
-}
-
-.margin(@top, @right, @bottom, @left) when (@top = @bottom) and (@right = @left) and not (@top = @right) {
-  margin: @top @right;
-}
-
-.margin(@top, @right, @bottom, @left) when not (@top = @bottom), not (@right = @left) {
-  margin: @top @right @bottom @left;
-}
-
-.lineargradient(@g1, @g2, @g3) {
-  background: -webkit-linear-gradient(@g1, @g2, @g3);
-  background: -moz-linear-gradient(@g1, @g2, @g3);
-  background: -o-linear-gradient(@g1, @g2, @g3);
-  background: -ms-linear-gradient(@g1, @g2, @g3);
-  background: linear-gradient(@g1, @g2, @g3);
-}
-.lineargradient(@g1, @g2, @g3, @g4) {
-  background: -webkit-linear-gradient(@g1, @g2, @g3, @g4);
-  background: -moz-linear-gradient(@g1, @g2, @g3, @g4);
-  background: -o-linear-gradient(@g1, @g2, @g3, @g4);
-  background: -ms-linear-gradient(@g1, @g2, @g3, @g4);
-  background: linear-gradient(@g1, @g2, @g3, @g4);
-}
-.lineargradient(@g1, @g2, @g3, @g4, @g5) {
-  background: -webkit-linear-gradient(@g1, @g2, @g3, @g4, @g5);
-  background: -moz-linear-gradient(@g1, @g2, @g3, @g4, @g5);
-  background: -o-linear-gradient(@g1, @g2, @g3, @g4, @g5);
-  background: -ms-linear-gradient(@g1, @g2, @g3, @g4, @g5);
-  background: linear-gradient(@g1, @g2, @g3, @g4, @g5);
-}
-
-.border-radius(@radius) {
-  -webkit-border-radius: @radius;
-  -moz-border-radius: @radius;
-  -o-border-radius: @radius;
-  border-radius: @radius;
-}
-
-.box-shadow(@shadow) {
-  -webkit-box-shadow: @shadow;
-  -moz-box-shadow: @shadow;
-  -o-box-shadow: @shadow;
-  box-shadow: @shadow;
-}
-
-.box-shadow(@shadow1, @shadow2) {
-  -webkit-box-shadow: @shadow1, @shadow2;
-  -moz-box-shadow: @shadow1, @shadow2;
-  -o-box-shadow: @shadow1, @shadow2;
-  box-shadow: @shadow1, @shadow2;
-}
-
-.box-shadow(@shadow1, @shadow2, @shadow3) {
-  -webkit-box-shadow: @shadow1, @shadow2, @shadow3;
-  -moz-box-shadow: @shadow1, @shadow2, @shadow3;
-  -o-box-shadow: @shadow1, @shadow2, @shadow3;
-  box-shadow: @shadow1, @shadow2, @shadow3;
-}
-
-.user-select(@s) {
-  -o-user-select: @s;
-  -moz-user-select: @s;
-  -webkit-user-select: @s;
-  user-select: @s;
-}
-
 @fromGradientOuter: @baseColor + #5c5c5c*(.5 - unit(lightness(@baseColor))/100);
 @toGradientOuter: lighten(lighten(@fromGradientOuter, 18%), lightness(@baseColor)*0.07);
 @fromGradientInner: darken(@toGradientOuter, 10%);
@@ -131,9 +24,10 @@
 @background: average(@fromGradientOuter, @toGradientOuter);
 @borderColor: darken(@fromGradientOuter, lightness(@baseColor)/10 + 3%);
 
-@sliderMaxSize: @refScale*6.875;
-@sliderMinSize: @refScale*1.25;
-@sliderHandleSize: @refScale*2.5;
+@sliderMaxSize: @refScale*6;
+@sliderMinSize: @refScale*1.3;
+@sliderHandleSize: @refScale*2;
+@border-radius: @sliderMinSize;
 
 /*
  * Horizontal and Vertical slider switch
@@ -141,11 +35,102 @@
  */
 .checkboxswitch-outer {
   outline: none;
-  border-radius: @refScale*0.375 ~"/" @refScale*0.625;
+  border-radius: @border-radius;
   @offset: @refScale*.0625;
   .box-shadow(-@offset -@offset @offset @offset @fromGradientOuter, @offset @offset @offset @offset @toGradientOuter);
   width: (@sliderMaxSize + @sliderHandleSize)/2 !important;
   height: @sliderMinSize !important;
+  
+  > .checkboxswitch {
+    width: @sliderMaxSize;
+    height: @sliderMinSize;
+    @onBackground: darken(@colorCaption, 7%);
+    @offBackground: lighten(@fromGradientOuter, 2%);
+    .lineargradient(left, @onBackground 0%, @onBackground 50%, @offBackground 50%, @offBackground 100%);
+
+    &:before,
+    &:after {
+      position: absolute;
+      font-size: @refScale*0.75;
+      font-weight: bold;
+      line-height: @sliderMinSize;
+    }
+    &:before {
+      content: 'ON';
+      color: @background;
+      left: @refScale*0.5625;
+    }
+    &:after {
+      content: 'OFF';
+      color: @background;
+      right: @refScale*0.375;
+    }
+
+    .checkboxswitch-handle {
+      width: @sliderHandleSize;
+      height: @sliderMinSize;
+      top: 0;
+      left: (@sliderMaxSize - @sliderHandleSize)/2;
+      background-color: @background;
+      border-radius: @border-radius;
+      .box-shadow(inset -@offset -@offset @offset @offset @fromGradientOuter, inset @offset @offset @offset @offset @toGradientOuter);
+      @handle: lighten(@background, 4%);
+      @handleHighlight: lighten(@handle, 8%);
+      @handleHighlight2: lighten(@handleHighlight, 8%);
+      .lineargradient2grads(~'left, @{background} 20%, @{fromGradientOuter} 45%, transparent 49%, transparent 51%, @{fromGradientOuter} 55%, @{background} 80%',
+                            ~'top, @{handle} 20%, @{handleHighlight} 40%, @{handleHighlight2} 50%, @{handleHighlight} 60%, @{handle} 80%');
+      &.checkboxswitch-down {
+        .box-shadow(inset -@offset -@offset @offset @offset @fromGradientOuter, inset @offset @offset @offset @offset darken(@toGradientOuter, 2%));
+      }
+    }
+  }
+
+  /*
+   * Vertical slider switch
+   *
+   */
+  &.vert {
+    width: @sliderMinSize !important;
+    height: (@sliderMaxSize + @sliderHandleSize)/2 !important;
+    
+    > .checkboxswitch {
+      width: @sliderMinSize;
+      height: @sliderMaxSize;
+      @onBackground: darken(@colorCaption, 7%);
+      @offBackground: lighten(@fromGradientOuter, 2%);
+      .lineargradient(top, @onBackground 0%, @onBackground 50%, @offBackground 50%, @offBackground 100%);
+
+      &:before,
+      &:after {
+        left: 0;
+        right: 0;
+        text-align: center;
+        font-size: @refScale*0.5;
+      }
+      &:before {
+        content: 'ON';
+        color: @background;
+        top: @refScale*0.5625;
+      }
+      &:after {
+        content: 'OFF';
+        color: @background;
+        bottom: @refScale*0.375;
+      }
+
+      .checkboxswitch-handle {
+        width: @sliderMinSize;
+        height: @sliderHandleSize;
+        left: 0;
+        top: (@sliderMaxSize - @sliderHandleSize)/2;
+        @handle: lighten(@background, 4%);
+        @handleHighlight: lighten(@handle, 8%);
+        @handleHighlight2: lighten(@handleHighlight, 8%);
+        .lineargradient2grads(~'top, @{background} 20%, @{fromGradientOuter} 45%, transparent 49%, transparent 51%, @{fromGradientOuter} 55%, @{background} 80%',
+                              ~'left, @{handle} 20%, @{handleHighlight} 40%, @{handleHighlight2} 50%, @{handleHighlight} 60%, @{handle} 80%');
+      }
+    }
+  }
 }
 
 .checkboxswitch-outer,
@@ -153,8 +138,9 @@
   cursor: pointer;
 }
 
-.disabled > .checkboxswitch-outer,
-.disabled > .checkboxswitch-handle {
+.disabled.checkboxswitch-outer,
+.disabled.checkboxswitch-outer > .checkboxswitch,
+.disabled.checkboxswitch-outer .checkboxswitch-handle {
   cursor: default;
 }
 
@@ -163,201 +149,8 @@
   cursor: e-resize;
 }
 
-.checkboxswitch {
-  width: @sliderMaxSize;
-  height: @refScale*1.25;
-  @onBackground: darken(@colorCaption, 7%);
-  .lineargradient(left, @onBackground 0%, @onBackground 50%, @fromGradientOuter 50%, @fromGradientOuter 100%);
-  
-  &:before,
-  &:after {
-    position: absolute;
-    font-size: @refScale*0.75;
-    font-weight: bold;
-    line-height: @refScale*1.25;
-  }
-  &:before {
-    content: 'ON';
-    color: hsl(0, 0%, 27%);
-    left: @refScale*0.5625;
-  }
-  &:after {
-    content: 'OFF';
-    color: hsl(0, 0%, 32%);
-    right: @refScale*0.375;
-  }
-
-  .checkboxswitch-handle {
-    width: @sliderHandleSize;
-    height: @sliderMinSize;
-    left: (@sliderMaxSize - @sliderHandleSize)/2;
-    background-color: cyan;
-    /*
-    background-image: -webkit-linear-gradient(left, hsl(0, 0%, 40%) 0%, hsl(0, 0%, 20%) 5%, hsl(0, 0%, 40%) 10%, hsl(0, 0%, 20%) 15%, hsl(0, 0%, 40%) 20%, hsl(0, 0%, 20%) 25%, hsl(0, 0%, 40%) 40%, hsl(0, 0%, 35%) 48%, hsl(55, 40%, 40%) 49%, hsl(55, 40%, 40%) 51%, hsl(0, 0%, 35%) 52%, hsl(0, 0%, 40%) 60%, hsl(0, 0%, 20%) 75%, hsl(0, 0%, 40%) 80%, hsl(0, 0%, 20%) 85%, hsl(0, 0%, 40%) 90%, hsl(0, 0%, 20%) 95%, hsl(0, 0%, 40%) 100%);
-    background-image: -moz-linear-gradient(left, hsl(0, 0%, 40%) 0%, hsl(0, 0%, 20%) 5%, hsl(0, 0%, 40%) 10%, hsl(0, 0%, 20%) 15%, hsl(0, 0%, 40%) 20%, hsl(0, 0%, 20%) 25%, hsl(0, 0%, 40%) 40%, hsl(0, 0%, 35%) 48%, hsl(55, 40%, 40%) 49%, hsl(55, 40%, 40%) 51%, hsl(0, 0%, 35%) 52%, hsl(0, 0%, 40%) 60%, hsl(0, 0%, 20%) 75%, hsl(0, 0%, 40%) 80%, hsl(0, 0%, 20%) 85%, hsl(0, 0%, 40%) 90%, hsl(0, 0%, 20%) 95%, hsl(0, 0%, 40%) 100%);
-    background-image: -o-linear-gradient(left, hsl(0, 0%, 40%) 0%, hsl(0, 0%, 20%) 5%, hsl(0, 0%, 40%) 10%, hsl(0, 0%, 20%) 15%, hsl(0, 0%, 40%) 20%, hsl(0, 0%, 20%) 25%, hsl(0, 0%, 40%) 40%, hsl(0, 0%, 35%) 48%, hsl(55, 40%, 40%) 49%, hsl(55, 40%, 40%) 51%, hsl(0, 0%, 35%) 52%, hsl(0, 0%, 40%) 60%, hsl(0, 0%, 20%) 75%, hsl(0, 0%, 40%) 80%, hsl(0, 0%, 20%) 85%, hsl(0, 0%, 40%) 90%, hsl(0, 0%, 20%) 95%, hsl(0, 0%, 40%) 100%);
-    background-image: -ms-linear-gradient(left, hsl(0, 0%, 40%) 0%, hsl(0, 0%, 20%) 5%, hsl(0, 0%, 40%) 10%, hsl(0, 0%, 20%) 15%, hsl(0, 0%, 40%) 20%, hsl(0, 0%, 20%) 25%, hsl(0, 0%, 40%) 40%, hsl(0, 0%, 35%) 48%, hsl(55, 40%, 40%) 49%, hsl(55, 40%, 40%) 51%, hsl(0, 0%, 35%) 52%, hsl(0, 0%, 40%) 60%, hsl(0, 0%, 20%) 75%, hsl(0, 0%, 40%) 80%, hsl(0, 0%, 20%) 85%, hsl(0, 0%, 40%) 90%, hsl(0, 0%, 20%) 95%, hsl(0, 0%, 40%) 100%);
-    background-image: linear-gradient(left, hsl(0, 0%, 40%) 0%, hsl(0, 0%, 20%) 5%, hsl(0, 0%, 40%) 10%, hsl(0, 0%, 20%) 15%, hsl(0, 0%, 40%) 20%, hsl(0, 0%, 20%) 25%, hsl(0, 0%, 40%) 40%, hsl(0, 0%, 35%) 48%, hsl(55, 40%, 40%) 49%, hsl(55, 40%, 40%) 51%, hsl(0, 0%, 35%) 52%, hsl(0, 0%, 40%) 60%, hsl(0, 0%, 20%) 75%, hsl(0, 0%, 40%) 80%, hsl(0, 0%, 20%) 85%, hsl(0, 0%, 40%) 90%, hsl(0, 0%, 20%) 95%, hsl(0, 0%, 40%) 100%);
-    border: @refScale*0.0625 hsl(0, 0%, 32%) solid;
-    border-radius: @refScale*0.25 ~"/" @refScale*0.4375;
-    .box-shadow(0 @refScale*0.0625 @refScale*0.0625 black, 0 0 @refScale*0.0625 hsl(0, 0%, 10%), 0 @refScale*0.25 @refScale*0.4375 -@refScale*0.1875 hsla(0, 0%, 0%, 0.7));
-    */
-  }
-}
-
-/*
-.w .checkboxswitch-handle {
-  background-image: -webkit-linear-gradient(left, hsl(0, 0%, 90%) 0%, hsl(0, 0%, 45%) 5%, hsl(0, 0%, 90%) 10%, hsl(0, 0%, 45%) 15%, hsl(0, 0%, 90%) 20%, hsl(0, 0%, 45%) 25%, hsl(0, 0%, 90%) 40%, hsl(0, 0%, 55%) 48%, hsl(55, 55%, 65%) 49%, hsl(55, 55%, 65%) 51%, hsl(0, 0%, 55%) 52%, hsl(0, 0%, 90%) 60%, hsl(0, 0%, 45%) 75%, hsl(0, 0%, 90%) 80%, hsl(0, 0%, 45%) 85%, hsl(0, 0%, 90%) 90%, hsl(0, 0%, 45%) 95%, hsl(0, 0%, 90%) 100%);
-  background-image: -moz-linear-gradient(left, hsl(0, 0%, 90%) 0%, hsl(0, 0%, 45%) 5%, hsl(0, 0%, 90%) 10%, hsl(0, 0%, 45%) 15%, hsl(0, 0%, 90%) 20%, hsl(0, 0%, 45%) 25%, hsl(0, 0%, 90%) 40%, hsl(0, 0%, 55%) 48%, hsl(55, 55%, 65%) 49%, hsl(55, 55%, 65%) 51%, hsl(0, 0%, 55%) 52%, hsl(0, 0%, 90%) 60%, hsl(0, 0%, 45%) 75%, hsl(0, 0%, 90%) 80%, hsl(0, 0%, 45%) 85%, hsl(0, 0%, 90%) 90%, hsl(0, 0%, 45%) 95%, hsl(0, 0%, 90%) 100%);
-  background-image: -o-linear-gradient(left, hsl(0, 0%, 90%) 0%, hsl(0, 0%, 45%) 5%, hsl(0, 0%, 90%) 10%, hsl(0, 0%, 45%) 15%, hsl(0, 0%, 90%) 20%, hsl(0, 0%, 45%) 25%, hsl(0, 0%, 90%) 40%, hsl(0, 0%, 55%) 48%, hsl(55, 55%, 65%) 49%, hsl(55, 55%, 65%) 51%, hsl(0, 0%, 55%) 52%, hsl(0, 0%, 90%) 60%, hsl(0, 0%, 45%) 75%, hsl(0, 0%, 90%) 80%, hsl(0, 0%, 45%) 85%, hsl(0, 0%, 90%) 90%, hsl(0, 0%, 45%) 95%, hsl(0, 0%, 90%) 100%);
-  background-image: -ms-linear-gradient(left, hsl(0, 0%, 90%) 0%, hsl(0, 0%, 45%) 5%, hsl(0, 0%, 90%) 10%, hsl(0, 0%, 45%) 15%, hsl(0, 0%, 90%) 20%, hsl(0, 0%, 45%) 25%, hsl(0, 0%, 90%) 40%, hsl(0, 0%, 55%) 48%, hsl(55, 55%, 65%) 49%, hsl(55, 55%, 65%) 51%, hsl(0, 0%, 55%) 52%, hsl(0, 0%, 90%) 60%, hsl(0, 0%, 45%) 75%, hsl(0, 0%, 90%) 80%, hsl(0, 0%, 45%) 85%, hsl(0, 0%, 90%) 90%, hsl(0, 0%, 45%) 95%, hsl(0, 0%, 90%) 100%);
-  background-image: linear-gradient(left, hsl(0, 0%, 90%) 0%, hsl(0, 0%, 45%) 5%, hsl(0, 0%, 90%) 10%, hsl(0, 0%, 45%) 15%, hsl(0, 0%, 90%) 20%, hsl(0, 0%, 45%) 25%, hsl(0, 0%, 90%) 40%, hsl(0, 0%, 55%) 48%, hsl(55, 55%, 65%) 49%, hsl(55, 55%, 65%) 51%, hsl(0, 0%, 55%) 52%, hsl(0, 0%, 90%) 60%, hsl(0, 0%, 45%) 75%, hsl(0, 0%, 90%) 80%, hsl(0, 0%, 45%) 85%, hsl(0, 0%, 90%) 90%, hsl(0, 0%, 45%) 95%, hsl(0, 0%, 90%) 100%);
-  border-color: hsl(0, 0%, 60%);
-  -webkit-box-shadow: 0 1px 1px hsl(0, 0%, 10%), 0 4px 7px -3px hsla(0, 0%, 0%, 0.7);
-  -moz-box-shadow: 0 1px 1px hsl(0, 0%, 10%), 0 4px 7px -3px hsla(0, 0%, 0%, 0.7);
-  box-shadow: 0 1px 1px hsl(0, 0%, 10%), 0 4px 7px -3px hsla(0, 0%, 0%, 0.7);
-}
-*/
-.checkboxswitch-outer:focus + .checkboxswitch-handle {
-  background-image: -webkit-linear-gradient(left, hsl(0, 0%, 40%) 0%, hsl(0, 0%, 20%) 5%, hsl(0, 0%, 40%) 10%, hsl(0, 0%, 20%) 15%, hsl(0, 0%, 40%) 20%, hsl(0, 0%, 20%) 25%, hsl(0, 0%, 40%) 40%, hsl(0, 0%, 35%) 48%, hsl(55, 55%, 50%) 49%, hsl(55, 55%, 50%) 51%, hsl(0, 0%, 35%) 52%, hsl(0, 0%, 40%) 60%, hsl(0, 0%, 20%) 75%, hsl(0, 0%, 40%) 80%, hsl(0, 0%, 20%) 85%, hsl(0, 0%, 40%) 90%, hsl(0, 0%, 20%) 95%, hsl(0, 0%, 40%) 100%);
-  background-image: -moz-linear-gradient(left, hsl(0, 0%, 40%) 0%, hsl(0, 0%, 20%) 5%, hsl(0, 0%, 40%) 10%, hsl(0, 0%, 20%) 15%, hsl(0, 0%, 40%) 20%, hsl(0, 0%, 20%) 25%, hsl(0, 0%, 40%) 40%, hsl(0, 0%, 35%) 48%, hsl(55, 55%, 50%) 49%, hsl(55, 55%, 50%) 51%, hsl(0, 0%, 35%) 52%, hsl(0, 0%, 40%) 60%, hsl(0, 0%, 20%) 75%, hsl(0, 0%, 40%) 80%, hsl(0, 0%, 20%) 85%, hsl(0, 0%, 40%) 90%, hsl(0, 0%, 20%) 95%, hsl(0, 0%, 40%) 100%);
-  background-image: -o-linear-gradient(left, hsl(0, 0%, 40%) 0%, hsl(0, 0%, 20%) 5%, hsl(0, 0%, 40%) 10%, hsl(0, 0%, 20%) 15%, hsl(0, 0%, 40%) 20%, hsl(0, 0%, 20%) 25%, hsl(0, 0%, 40%) 40%, hsl(0, 0%, 35%) 48%, hsl(55, 55%, 50%) 49%, hsl(55, 55%, 50%) 51%, hsl(0, 0%, 35%) 52%, hsl(0, 0%, 40%) 60%, hsl(0, 0%, 20%) 75%, hsl(0, 0%, 40%) 80%, hsl(0, 0%, 20%) 85%, hsl(0, 0%, 40%) 90%, hsl(0, 0%, 20%) 95%, hsl(0, 0%, 40%) 100%);
-  background-image: -ms-linear-gradient(left, hsl(0, 0%, 40%) 0%, hsl(0, 0%, 20%) 5%, hsl(0, 0%, 40%) 10%, hsl(0, 0%, 20%) 15%, hsl(0, 0%, 40%) 20%, hsl(0, 0%, 20%) 25%, hsl(0, 0%, 40%) 40%, hsl(0, 0%, 35%) 48%, hsl(55, 55%, 50%) 49%, hsl(55, 55%, 50%) 51%, hsl(0, 0%, 35%) 52%, hsl(0, 0%, 40%) 60%, hsl(0, 0%, 20%) 75%, hsl(0, 0%, 40%) 80%, hsl(0, 0%, 20%) 85%, hsl(0, 0%, 40%) 90%, hsl(0, 0%, 20%) 95%, hsl(0, 0%, 40%) 100%);
-  background-image: linear-gradient(left, hsl(0, 0%, 40%) 0%, hsl(0, 0%, 20%) 5%, hsl(0, 0%, 40%) 10%, hsl(0, 0%, 20%) 15%, hsl(0, 0%, 40%) 20%, hsl(0, 0%, 20%) 25%, hsl(0, 0%, 40%) 40%, hsl(0, 0%, 35%) 48%, hsl(55, 55%, 50%) 49%, hsl(55, 55%, 50%) 51%, hsl(0, 0%, 35%) 52%, hsl(0, 0%, 40%) 60%, hsl(0, 0%, 20%) 75%, hsl(0, 0%, 40%) 80%, hsl(0, 0%, 20%) 85%, hsl(0, 0%, 40%) 90%, hsl(0, 0%, 20%) 95%, hsl(0, 0%, 40%) 100%);
-}
-
-.w .checkboxswitch-outer:focus + .checkboxswitch-handle {
-  background-image: -webkit-linear-gradient(left, hsl(0, 0%, 90%) 0%, hsl(0, 0%, 45%) 5%, hsl(0, 0%, 90%) 10%, hsl(0, 0%, 45%) 15%, hsl(0, 0%, 90%) 20%, hsl(0, 0%, 45%) 25%, hsl(0, 0%, 90%) 40%, hsl(0, 0%, 55%) 48%, hsl(55, 90%, 65%) 49%, hsl(55, 90%, 65%) 51%, hsl(0, 0%, 55%) 52%, hsl(0, 0%, 90%) 60%, hsl(0, 0%, 45%) 75%, hsl(0, 0%, 90%) 80%, hsl(0, 0%, 45%) 85%, hsl(0, 0%, 90%) 90%, hsl(0, 0%, 45%) 95%, hsl(0, 0%, 90%) 100%);
-  background-image: -moz-linear-gradient(left, hsl(0, 0%, 90%) 0%, hsl(0, 0%, 45%) 5%, hsl(0, 0%, 90%) 10%, hsl(0, 0%, 45%) 15%, hsl(0, 0%, 90%) 20%, hsl(0, 0%, 45%) 25%, hsl(0, 0%, 90%) 40%, hsl(0, 0%, 55%) 48%, hsl(55, 90%, 65%) 49%, hsl(55, 90%, 65%) 51%, hsl(0, 0%, 55%) 52%, hsl(0, 0%, 90%) 60%, hsl(0, 0%, 45%) 75%, hsl(0, 0%, 90%) 80%, hsl(0, 0%, 45%) 85%, hsl(0, 0%, 90%) 90%, hsl(0, 0%, 45%) 95%, hsl(0, 0%, 90%) 100%);
-  background-image: -o-linear-gradient(left, hsl(0, 0%, 90%) 0%, hsl(0, 0%, 45%) 5%, hsl(0, 0%, 90%) 10%, hsl(0, 0%, 45%) 15%, hsl(0, 0%, 90%) 20%, hsl(0, 0%, 45%) 25%, hsl(0, 0%, 90%) 40%, hsl(0, 0%, 55%) 48%, hsl(55, 90%, 65%) 49%, hsl(55, 90%, 65%) 51%, hsl(0, 0%, 55%) 52%, hsl(0, 0%, 90%) 60%, hsl(0, 0%, 45%) 75%, hsl(0, 0%, 90%) 80%, hsl(0, 0%, 45%) 85%, hsl(0, 0%, 90%) 90%, hsl(0, 0%, 45%) 95%, hsl(0, 0%, 90%) 100%);
-  background-image: -ms-linear-gradient(left, hsl(0, 0%, 90%) 0%, hsl(0, 0%, 45%) 5%, hsl(0, 0%, 90%) 10%, hsl(0, 0%, 45%) 15%, hsl(0, 0%, 90%) 20%, hsl(0, 0%, 45%) 25%, hsl(0, 0%, 90%) 40%, hsl(0, 0%, 55%) 48%, hsl(55, 90%, 65%) 49%, hsl(55, 90%, 65%) 51%, hsl(0, 0%, 55%) 52%, hsl(0, 0%, 90%) 60%, hsl(0, 0%, 45%) 75%, hsl(0, 0%, 90%) 80%, hsl(0, 0%, 45%) 85%, hsl(0, 0%, 90%) 90%, hsl(0, 0%, 45%) 95%, hsl(0, 0%, 90%) 100%);
-  background-image: linear-gradient(left, hsl(0, 0%, 90%) 0%, hsl(0, 0%, 45%) 5%, hsl(0, 0%, 90%) 10%, hsl(0, 0%, 45%) 15%, hsl(0, 0%, 90%) 20%, hsl(0, 0%, 45%) 25%, hsl(0, 0%, 90%) 40%, hsl(0, 0%, 55%) 48%, hsl(55, 90%, 65%) 49%, hsl(55, 90%, 65%) 51%, hsl(0, 0%, 55%) 52%, hsl(0, 0%, 90%) 60%, hsl(0, 0%, 45%) 75%, hsl(0, 0%, 90%) 80%, hsl(0, 0%, 45%) 85%, hsl(0, 0%, 90%) 90%, hsl(0, 0%, 45%) 95%, hsl(0, 0%, 90%) 100%);
-}
-
-.disabled .checkboxswitch-handle {
-  background-image: -webkit-linear-gradient(left, hsl(0, 0%, 40%) 0%, hsl(0, 0%, 20%) 5%, hsl(0, 0%, 40%) 10%, hsl(0, 0%, 20%) 15%, hsl(0, 0%, 40%) 20%, hsl(0, 0%, 20%) 25%, hsl(0, 0%, 40%) 40%, hsl(0, 0%, 35%) 48%, hsl(0, 0%, 35%) 52%, hsl(0, 0%, 40%) 60%, hsl(0, 0%, 20%) 75%, hsl(0, 0%, 40%) 80%, hsl(0, 0%, 20%) 85%, hsl(0, 0%, 40%) 90%, hsl(0, 0%, 20%) 95%, hsl(0, 0%, 40%) 100%);
-  background-image: -moz-linear-gradient(left, hsl(0, 0%, 40%) 0%, hsl(0, 0%, 20%) 5%, hsl(0, 0%, 40%) 10%, hsl(0, 0%, 20%) 15%, hsl(0, 0%, 40%) 20%, hsl(0, 0%, 20%) 25%, hsl(0, 0%, 40%) 40%, hsl(0, 0%, 35%) 48%, hsl(0, 0%, 35%) 52%, hsl(0, 0%, 40%) 60%, hsl(0, 0%, 20%) 75%, hsl(0, 0%, 40%) 80%, hsl(0, 0%, 20%) 85%, hsl(0, 0%, 40%) 90%, hsl(0, 0%, 20%) 95%, hsl(0, 0%, 40%) 100%);
-  background-image: -o-linear-gradient(left, hsl(0, 0%, 40%) 0%, hsl(0, 0%, 20%) 5%, hsl(0, 0%, 40%) 10%, hsl(0, 0%, 20%) 15%, hsl(0, 0%, 40%) 20%, hsl(0, 0%, 20%) 25%, hsl(0, 0%, 40%) 40%, hsl(0, 0%, 35%) 48%, hsl(0, 0%, 35%) 52%, hsl(0, 0%, 40%) 60%, hsl(0, 0%, 20%) 75%, hsl(0, 0%, 40%) 80%, hsl(0, 0%, 20%) 85%, hsl(0, 0%, 40%) 90%, hsl(0, 0%, 20%) 95%, hsl(0, 0%, 40%) 100%);
-  background-image: -ms-linear-gradient(left, hsl(0, 0%, 40%) 0%, hsl(0, 0%, 20%) 5%, hsl(0, 0%, 40%) 10%, hsl(0, 0%, 20%) 15%, hsl(0, 0%, 40%) 20%, hsl(0, 0%, 20%) 25%, hsl(0, 0%, 40%) 40%, hsl(0, 0%, 35%) 48%, hsl(0, 0%, 35%) 52%, hsl(0, 0%, 40%) 60%, hsl(0, 0%, 20%) 75%, hsl(0, 0%, 40%) 80%, hsl(0, 0%, 20%) 85%, hsl(0, 0%, 40%) 90%, hsl(0, 0%, 20%) 95%, hsl(0, 0%, 40%) 100%);
-  background-image: linear-gradient(left, hsl(0, 0%, 40%) 0%, hsl(0, 0%, 20%) 5%, hsl(0, 0%, 40%) 10%, hsl(0, 0%, 20%) 15%, hsl(0, 0%, 40%) 20%, hsl(0, 0%, 20%) 25%, hsl(0, 0%, 40%) 40%, hsl(0, 0%, 35%) 48%, hsl(0, 0%, 35%) 52%, hsl(0, 0%, 40%) 60%, hsl(0, 0%, 20%) 75%, hsl(0, 0%, 40%) 80%, hsl(0, 0%, 20%) 85%, hsl(0, 0%, 40%) 90%, hsl(0, 0%, 20%) 95%, hsl(0, 0%, 40%) 100%);
-}
-.w .disabled .checkboxswitch-handle {
-  background-image: -webkit-linear-gradient(left, hsl(0, 0%, 90%) 0%, hsl(0, 0%, 45%) 5%, hsl(0, 0%, 90%) 10%, hsl(0, 0%, 45%) 15%, hsl(0, 0%, 90%) 20%, hsl(0, 0%, 45%) 25%, hsl(0, 0%, 90%) 40%, hsl(0, 0%, 75%) 48%, hsl(0, 0%, 75%) 52%, hsl(0, 0%, 90%) 60%, hsl(0, 0%, 45%) 75%, hsl(0, 0%, 90%) 80%, hsl(0, 0%, 45%) 85%, hsl(0, 0%, 90%) 90%, hsl(0, 0%, 45%) 95%, hsl(0, 0%, 90%) 100%);
-  background-image: -moz-linear-gradient(left, hsl(0, 0%, 90%) 0%, hsl(0, 0%, 45%) 5%, hsl(0, 0%, 90%) 10%, hsl(0, 0%, 45%) 15%, hsl(0, 0%, 90%) 20%, hsl(0, 0%, 45%) 25%, hsl(0, 0%, 90%) 40%, hsl(0, 0%, 75%) 48%, hsl(0, 0%, 75%) 52%, hsl(0, 0%, 90%) 60%, hsl(0, 0%, 45%) 75%, hsl(0, 0%, 90%) 80%, hsl(0, 0%, 45%) 85%, hsl(0, 0%, 90%) 90%, hsl(0, 0%, 45%) 95%, hsl(0, 0%, 90%) 100%);
-  background-image: -o-linear-gradient(left, hsl(0, 0%, 90%) 0%, hsl(0, 0%, 45%) 5%, hsl(0, 0%, 90%) 10%, hsl(0, 0%, 45%) 15%, hsl(0, 0%, 90%) 20%, hsl(0, 0%, 45%) 25%, hsl(0, 0%, 90%) 40%, hsl(0, 0%, 75%) 48%, hsl(0, 0%, 75%) 52%, hsl(0, 0%, 90%) 60%, hsl(0, 0%, 45%) 75%, hsl(0, 0%, 90%) 80%, hsl(0, 0%, 45%) 85%, hsl(0, 0%, 90%) 90%, hsl(0, 0%, 45%) 95%, hsl(0, 0%, 90%) 100%);
-  background-image: -ms-linear-gradient(left, hsl(0, 0%, 90%) 0%, hsl(0, 0%, 45%) 5%, hsl(0, 0%, 90%) 10%, hsl(0, 0%, 45%) 15%, hsl(0, 0%, 90%) 20%, hsl(0, 0%, 45%) 25%, hsl(0, 0%, 90%) 40%, hsl(0, 0%, 75%) 48%, hsl(0, 0%, 75%) 52%, hsl(0, 0%, 90%) 60%, hsl(0, 0%, 45%) 75%, hsl(0, 0%, 90%) 80%, hsl(0, 0%, 45%) 85%, hsl(0, 0%, 90%) 90%, hsl(0, 0%, 45%) 95%, hsl(0, 0%, 90%) 100%);
-  background-image: linear-gradient(left, hsl(0, 0%, 90%) 0%, hsl(0, 0%, 45%) 5%, hsl(0, 0%, 90%) 10%, hsl(0, 0%, 45%) 15%, hsl(0, 0%, 90%) 20%, hsl(0, 0%, 45%) 25%, hsl(0, 0%, 90%) 40%, hsl(0, 0%, 75%) 48%, hsl(0, 0%, 75%) 52%, hsl(0, 0%, 90%) 60%, hsl(0, 0%, 45%) 75%, hsl(0, 0%, 90%) 80%, hsl(0, 0%, 45%) 85%, hsl(0, 0%, 90%) 90%, hsl(0, 0%, 45%) 95%, hsl(0, 0%, 90%) 100%);
-}
-
-.checkboxswitch-handle.checkboxswitch-down {
-  -webkit-box-shadow: 0 1px 1px hsl(0, 0%, 10%), 0 0 7px -3px hsla(0, 0%, 0%, 0.7);
-  -moz-box-shadow: 0 1px 1px hsl(0, 0%, 10%), 0 0 7px -3px hsla(0, 0%, 0%, 0.7);
-  box-shadow: 0 1px 1px hsl(0, 0%, 10%), 0 0 7px -3px hsla(0, 0%, 0%, 0.7);
-}
-.w .checkboxswitch-handle.checkboxswitch-down {
-  -webkit-box-shadow: 0 1px 1px hsl(0, 0%, 10%), 0 0 7px -3px hsla(0, 0%, 0%, 0.7);
-  -moz-box-shadow: 0 1px 1px hsl(0, 0%, 10%), 0 0 7px -3px hsla(0, 0%, 0%, 0.7);
-  box-shadow: 0 1px 1px hsl(0, 0%, 10%), 0 0 7px -3px hsla(0, 0%, 0%, 0.7);
-}
 
 
-/*
- * Vertical slider switch
- *
- */
-.checkboxswitchV .checkboxswitch-outer {
-  border-radius: 10px ~"/" 6px;
-  width: @sliderMinSize !important;
-  height: (@sliderMaxSize - @sliderHandleSize)/2 + @sliderHandleSize !important;
-}
-.checkboxswitchV .switch-dragging,
-.checkboxswitchV .checkboxswitch-handle.checkboxswitch-down {
-  cursor: n-resize;
-}
-
-.checkboxswitchV .checkboxswitch {
-  width: 20px;
-  height: 110px;
-  background-image: -webkit-linear-gradient(top, hsl(56, 40%, 32%) 0%, hsl(56, 40%, 32%) 50%, hsl(0, 0%, 23%) 50%, hsl(0, 0%, 23%) 100%);
-  background-image: -moz-linear-gradient(top, hsl(56, 40%, 32%) 0%, hsl(56, 40%, 32%) 50%, hsl(0, 0%, 23%) 50%, hsl(0, 0%, 23%) 100%);
-  background-image: -o-linear-gradient(top, hsl(56, 40%, 32%) 0%, hsl(56, 40%, 32%) 50%, hsl(0, 0%, 23%) 50%, hsl(0, 0%, 23%) 100%);
-  background-image: -ms-linear-gradient(top, hsl(56, 40%, 32%) 0%, hsl(56, 40%, 32%) 50%, hsl(0, 0%, 23%) 50%, hsl(0, 0%, 23%) 100%);
-  background-image: linear-gradient(top, hsl(56, 40%, 32%) 0%, hsl(56, 40%, 32%) 50%, hsl(0, 0%, 23%) 50%, hsl(0, 0%, 23%) 100%);
-}
-.w .checkboxswitchV .checkboxswitch {
-  background-image: -webkit-linear-gradient(top, hsl(55, 55%, 75%) 0%, hsl(55, 55%, 75%) 50%, hsl(0, 0%, 87%) 50%, hsl(0, 0%, 87%) 100%);
-  background-image: -moz-linear-gradient(top, hsl(55, 55%, 75%) 0%, hsl(55, 55%, 75%) 50%, hsl(0, 0%, 87%) 50%, hsl(0, 0%, 87%) 100%);
-  background-image: -o-linear-gradient(top, hsl(55, 55%, 75%) 0%, hsl(55, 55%, 75%) 50%, hsl(0, 0%, 87%) 50%, hsl(0, 0%, 87%) 100%);
-  background-image: -ms-linear-gradient(top, hsl(55, 55%, 75%) 0%, hsl(55, 55%, 75%) 50%, hsl(0, 0%, 87%) 50%, hsl(0, 0%, 87%) 100%);
-  background-image: linear-gradient(top, hsl(55, 55%, 75%) 0%, hsl(55, 55%, 75%) 50%, hsl(0, 0%, 87%) 50%, hsl(0, 0%, 87%) 100%);
-}
-
-.checkboxswitchV .checkboxswitch:before,
-.checkboxswitchV .checkboxswitch:after {
-  font-size: 9px;
-}
-
-.checkboxswitchV .checkboxswitch:before {
-  left: 2px;
-  top: 8px;
-}
-
-.checkboxswitchV .checkboxswitch:after {
-  right: auto;
-  bottom: 6px;
-}
-
-.checkboxswitchV .checkboxswitch-handle {
-  top: -40px; /* place the handle in the middle of the switch slider */
-  width: 24px;
-  height: 40px;
-  background-image: -webkit-linear-gradient(top, hsl(0, 0%, 40%) 0%, hsl(0, 0%, 20%) 5%, hsl(0, 0%, 40%) 10%, hsl(0, 0%, 20%) 15%, hsl(0, 0%, 40%) 20%, hsl(0, 0%, 20%) 25%, hsl(0, 0%, 40%) 40%, hsl(0, 0%, 35%) 48%, hsl(55, 40%, 40%) 49%, hsl(55, 40%, 40%) 51%, hsl(0, 0%, 35%) 52%, hsl(0, 0%, 40%) 60%, hsl(0, 0%, 20%) 75%, hsl(0, 0%, 40%) 80%, hsl(0, 0%, 20%) 85%, hsl(0, 0%, 40%) 90%, hsl(0, 0%, 20%) 95%, hsl(0, 0%, 40%) 100%);
-  background-image: -moz-linear-gradient(top, hsl(0, 0%, 40%) 0%, hsl(0, 0%, 20%) 5%, hsl(0, 0%, 40%) 10%, hsl(0, 0%, 20%) 15%, hsl(0, 0%, 40%) 20%, hsl(0, 0%, 20%) 25%, hsl(0, 0%, 40%) 40%, hsl(0, 0%, 35%) 48%, hsl(55, 40%, 40%) 49%, hsl(55, 40%, 40%) 51%, hsl(0, 0%, 35%) 52%, hsl(0, 0%, 40%) 60%, hsl(0, 0%, 20%) 75%, hsl(0, 0%, 40%) 80%, hsl(0, 0%, 20%) 85%, hsl(0, 0%, 40%) 90%, hsl(0, 0%, 20%) 95%, hsl(0, 0%, 40%) 100%);
-  background-image: -o-linear-gradient(top, hsl(0, 0%, 40%) 0%, hsl(0, 0%, 20%) 5%, hsl(0, 0%, 40%) 10%, hsl(0, 0%, 20%) 15%, hsl(0, 0%, 40%) 20%, hsl(0, 0%, 20%) 25%, hsl(0, 0%, 40%) 40%, hsl(0, 0%, 35%) 48%, hsl(55, 40%, 40%) 49%, hsl(55, 40%, 40%) 51%, hsl(0, 0%, 35%) 52%, hsl(0, 0%, 40%) 60%, hsl(0, 0%, 20%) 75%, hsl(0, 0%, 40%) 80%, hsl(0, 0%, 20%) 85%, hsl(0, 0%, 40%) 90%, hsl(0, 0%, 20%) 95%, hsl(0, 0%, 40%) 100%);
-  background-image: -ms-linear-gradient(top, hsl(0, 0%, 40%) 0%, hsl(0, 0%, 20%) 5%, hsl(0, 0%, 40%) 10%, hsl(0, 0%, 20%) 15%, hsl(0, 0%, 40%) 20%, hsl(0, 0%, 20%) 25%, hsl(0, 0%, 40%) 40%, hsl(0, 0%, 35%) 48%, hsl(55, 40%, 40%) 49%, hsl(55, 40%, 40%) 51%, hsl(0, 0%, 35%) 52%, hsl(0, 0%, 40%) 60%, hsl(0, 0%, 20%) 75%, hsl(0, 0%, 40%) 80%, hsl(0, 0%, 20%) 85%, hsl(0, 0%, 40%) 90%, hsl(0, 0%, 20%) 95%, hsl(0, 0%, 40%) 100%);
-  background-image: linear-gradient(top, hsl(0, 0%, 40%) 0%, hsl(0, 0%, 20%) 5%, hsl(0, 0%, 40%) 10%, hsl(0, 0%, 20%) 15%, hsl(0, 0%, 40%) 20%, hsl(0, 0%, 20%) 25%, hsl(0, 0%, 40%) 40%, hsl(0, 0%, 35%) 48%, hsl(55, 40%, 40%) 49%, hsl(55, 40%, 40%) 51%, hsl(0, 0%, 35%) 52%, hsl(0, 0%, 40%) 60%, hsl(0, 0%, 20%) 75%, hsl(0, 0%, 40%) 80%, hsl(0, 0%, 20%) 85%, hsl(0, 0%, 40%) 90%, hsl(0, 0%, 20%) 95%, hsl(0, 0%, 40%) 100%);
-  border-radius: 7px ~"/" 10px;
-}
-.w .checkboxswitchV .checkboxswitch-handle {
-  background-image: -webkit-linear-gradient(top, hsl(0, 0%, 90%) 0%, hsl(0, 0%, 45%) 5%, hsl(0, 0%, 90%) 10%, hsl(0, 0%, 45%) 15%, hsl(0, 0%, 90%) 20%, hsl(0, 0%, 45%) 25%, hsl(0, 0%, 90%) 40%, hsl(0, 0%, 55%) 48%, hsl(55, 55%, 65%) 49%, hsl(55, 55%, 65%) 51%, hsl(0, 0%, 55%) 52%, hsl(0, 0%, 90%) 60%, hsl(0, 0%, 45%) 75%, hsl(0, 0%, 90%) 80%, hsl(0, 0%, 45%) 85%, hsl(0, 0%, 90%) 90%, hsl(0, 0%, 45%) 95%, hsl(0, 0%, 90%) 100%);
-  background-image: -moz-linear-gradient(top, hsl(0, 0%, 90%) 0%, hsl(0, 0%, 45%) 5%, hsl(0, 0%, 90%) 10%, hsl(0, 0%, 45%) 15%, hsl(0, 0%, 90%) 20%, hsl(0, 0%, 45%) 25%, hsl(0, 0%, 90%) 40%, hsl(0, 0%, 55%) 48%, hsl(55, 55%, 65%) 49%, hsl(55, 55%, 65%) 51%, hsl(0, 0%, 55%) 52%, hsl(0, 0%, 90%) 60%, hsl(0, 0%, 45%) 75%, hsl(0, 0%, 90%) 80%, hsl(0, 0%, 45%) 85%, hsl(0, 0%, 90%) 90%, hsl(0, 0%, 45%) 95%, hsl(0, 0%, 90%) 100%);
-  background-image: -o-linear-gradient(top, hsl(0, 0%, 90%) 0%, hsl(0, 0%, 45%) 5%, hsl(0, 0%, 90%) 10%, hsl(0, 0%, 45%) 15%, hsl(0, 0%, 90%) 20%, hsl(0, 0%, 45%) 25%, hsl(0, 0%, 90%) 40%, hsl(0, 0%, 55%) 48%, hsl(55, 55%, 65%) 49%, hsl(55, 55%, 65%) 51%, hsl(0, 0%, 55%) 52%, hsl(0, 0%, 90%) 60%, hsl(0, 0%, 45%) 75%, hsl(0, 0%, 90%) 80%, hsl(0, 0%, 45%) 85%, hsl(0, 0%, 90%) 90%, hsl(0, 0%, 45%) 95%, hsl(0, 0%, 90%) 100%);
-  background-image: -ms-linear-gradient(top, hsl(0, 0%, 90%) 0%, hsl(0, 0%, 45%) 5%, hsl(0, 0%, 90%) 10%, hsl(0, 0%, 45%) 15%, hsl(0, 0%, 90%) 20%, hsl(0, 0%, 45%) 25%, hsl(0, 0%, 90%) 40%, hsl(0, 0%, 55%) 48%, hsl(55, 55%, 65%) 49%, hsl(55, 55%, 65%) 51%, hsl(0, 0%, 55%) 52%, hsl(0, 0%, 90%) 60%, hsl(0, 0%, 45%) 75%, hsl(0, 0%, 90%) 80%, hsl(0, 0%, 45%) 85%, hsl(0, 0%, 90%) 90%, hsl(0, 0%, 45%) 95%, hsl(0, 0%, 90%) 100%);
-  background-image: linear-gradient(top, hsl(0, 0%, 90%) 0%, hsl(0, 0%, 45%) 5%, hsl(0, 0%, 90%) 10%, hsl(0, 0%, 45%) 15%, hsl(0, 0%, 90%) 20%, hsl(0, 0%, 45%) 25%, hsl(0, 0%, 90%) 40%, hsl(0, 0%, 55%) 48%, hsl(55, 55%, 65%) 49%, hsl(55, 55%, 65%) 51%, hsl(0, 0%, 55%) 52%, hsl(0, 0%, 90%) 60%, hsl(0, 0%, 45%) 75%, hsl(0, 0%, 90%) 80%, hsl(0, 0%, 45%) 85%, hsl(0, 0%, 90%) 90%, hsl(0, 0%, 45%) 95%, hsl(0, 0%, 90%) 100%);
-}
-
-/* focusable handle has a slightly lighter yellow line */
-.checkboxswitchV .checkboxswitch-outer:focus + .checkboxswitch-handle {
-  background-image: -webkit-linear-gradient(top, hsl(0, 0%, 40%) 0%, hsl(0, 0%, 20%) 5%, hsl(0, 0%, 40%) 10%, hsl(0, 0%, 20%) 15%, hsl(0, 0%, 40%) 20%, hsl(0, 0%, 20%) 25%, hsl(0, 0%, 40%) 40%, hsl(0, 0%, 35%) 48%, hsl(55, 55%, 50%) 49%, hsl(55, 55%, 50%) 51%, hsl(0, 0%, 35%) 52%, hsl(0, 0%, 40%) 60%, hsl(0, 0%, 20%) 75%, hsl(0, 0%, 40%) 80%, hsl(0, 0%, 20%) 85%, hsl(0, 0%, 40%) 90%, hsl(0, 0%, 20%) 95%, hsl(0, 0%, 40%) 100%);
-  background-image: -moz-linear-gradient(top, hsl(0, 0%, 40%) 0%, hsl(0, 0%, 20%) 5%, hsl(0, 0%, 40%) 10%, hsl(0, 0%, 20%) 15%, hsl(0, 0%, 40%) 20%, hsl(0, 0%, 20%) 25%, hsl(0, 0%, 40%) 40%, hsl(0, 0%, 35%) 48%, hsl(55, 55%, 50%) 49%, hsl(55, 55%, 50%) 51%, hsl(0, 0%, 35%) 52%, hsl(0, 0%, 40%) 60%, hsl(0, 0%, 20%) 75%, hsl(0, 0%, 40%) 80%, hsl(0, 0%, 20%) 85%, hsl(0, 0%, 40%) 90%, hsl(0, 0%, 20%) 95%, hsl(0, 0%, 40%) 100%);
-  background-image: -o-linear-gradient(top, hsl(0, 0%, 40%) 0%, hsl(0, 0%, 20%) 5%, hsl(0, 0%, 40%) 10%, hsl(0, 0%, 20%) 15%, hsl(0, 0%, 40%) 20%, hsl(0, 0%, 20%) 25%, hsl(0, 0%, 40%) 40%, hsl(0, 0%, 35%) 48%, hsl(55, 55%, 50%) 49%, hsl(55, 55%, 50%) 51%, hsl(0, 0%, 35%) 52%, hsl(0, 0%, 40%) 60%, hsl(0, 0%, 20%) 75%, hsl(0, 0%, 40%) 80%, hsl(0, 0%, 20%) 85%, hsl(0, 0%, 40%) 90%, hsl(0, 0%, 20%) 95%, hsl(0, 0%, 40%) 100%);
-  background-image: -ms-linear-gradient(top, hsl(0, 0%, 40%) 0%, hsl(0, 0%, 20%) 5%, hsl(0, 0%, 40%) 10%, hsl(0, 0%, 20%) 15%, hsl(0, 0%, 40%) 20%, hsl(0, 0%, 20%) 25%, hsl(0, 0%, 40%) 40%, hsl(0, 0%, 35%) 48%, hsl(55, 55%, 50%) 49%, hsl(55, 55%, 50%) 51%, hsl(0, 0%, 35%) 52%, hsl(0, 0%, 40%) 60%, hsl(0, 0%, 20%) 75%, hsl(0, 0%, 40%) 80%, hsl(0, 0%, 20%) 85%, hsl(0, 0%, 40%) 90%, hsl(0, 0%, 20%) 95%, hsl(0, 0%, 40%) 100%);
-  background-image: linear-gradient(top, hsl(0, 0%, 40%) 0%, hsl(0, 0%, 20%) 5%, hsl(0, 0%, 40%) 10%, hsl(0, 0%, 20%) 15%, hsl(0, 0%, 40%) 20%, hsl(0, 0%, 20%) 25%, hsl(0, 0%, 40%) 40%, hsl(0, 0%, 35%) 48%, hsl(55, 55%, 50%) 49%, hsl(55, 55%, 50%) 51%, hsl(0, 0%, 35%) 52%, hsl(0, 0%, 40%) 60%, hsl(0, 0%, 20%) 75%, hsl(0, 0%, 40%) 80%, hsl(0, 0%, 20%) 85%, hsl(0, 0%, 40%) 90%, hsl(0, 0%, 20%) 95%, hsl(0, 0%, 40%) 100%);
-}
-
-.w .checkboxswitchV .checkboxswitch-outer:focus + .checkboxswitch-handle {
-  background-image: -webkit-linear-gradient(top, hsl(0, 0%, 90%) 0%, hsl(0, 0%, 45%) 5%, hsl(0, 0%, 90%) 10%, hsl(0, 0%, 45%) 15%, hsl(0, 0%, 90%) 20%, hsl(0, 0%, 45%) 25%, hsl(0, 0%, 90%) 40%, hsl(0, 0%, 55%) 48%, hsl(55, 90%, 65%) 49%, hsl(55, 90%, 65%) 51%, hsl(0, 0%, 55%) 52%, hsl(0, 0%, 90%) 60%, hsl(0, 0%, 45%) 75%, hsl(0, 0%, 90%) 80%, hsl(0, 0%, 45%) 85%, hsl(0, 0%, 90%) 90%, hsl(0, 0%, 45%) 95%, hsl(0, 0%, 90%) 100%);
-  background-image: -moz-linear-gradient(top, hsl(0, 0%, 90%) 0%, hsl(0, 0%, 45%) 5%, hsl(0, 0%, 90%) 10%, hsl(0, 0%, 45%) 15%, hsl(0, 0%, 90%) 20%, hsl(0, 0%, 45%) 25%, hsl(0, 0%, 90%) 40%, hsl(0, 0%, 55%) 48%, hsl(55, 90%, 65%) 49%, hsl(55, 90%, 65%) 51%, hsl(0, 0%, 55%) 52%, hsl(0, 0%, 90%) 60%, hsl(0, 0%, 45%) 75%, hsl(0, 0%, 90%) 80%, hsl(0, 0%, 45%) 85%, hsl(0, 0%, 90%) 90%, hsl(0, 0%, 45%) 95%, hsl(0, 0%, 90%) 100%);
-  background-image: -o-linear-gradient(top, hsl(0, 0%, 90%) 0%, hsl(0, 0%, 45%) 5%, hsl(0, 0%, 90%) 10%, hsl(0, 0%, 45%) 15%, hsl(0, 0%, 90%) 20%, hsl(0, 0%, 45%) 25%, hsl(0, 0%, 90%) 40%, hsl(0, 0%, 55%) 48%, hsl(55, 90%, 65%) 49%, hsl(55, 90%, 65%) 51%, hsl(0, 0%, 55%) 52%, hsl(0, 0%, 90%) 60%, hsl(0, 0%, 45%) 75%, hsl(0, 0%, 90%) 80%, hsl(0, 0%, 45%) 85%, hsl(0, 0%, 90%) 90%, hsl(0, 0%, 45%) 95%, hsl(0, 0%, 90%) 100%);
-  background-image: -ms-linear-gradient(top, hsl(0, 0%, 90%) 0%, hsl(0, 0%, 45%) 5%, hsl(0, 0%, 90%) 10%, hsl(0, 0%, 45%) 15%, hsl(0, 0%, 90%) 20%, hsl(0, 0%, 45%) 25%, hsl(0, 0%, 90%) 40%, hsl(0, 0%, 55%) 48%, hsl(55, 90%, 65%) 49%, hsl(55, 90%, 65%) 51%, hsl(0, 0%, 55%) 52%, hsl(0, 0%, 90%) 60%, hsl(0, 0%, 45%) 75%, hsl(0, 0%, 90%) 80%, hsl(0, 0%, 45%) 85%, hsl(0, 0%, 90%) 90%, hsl(0, 0%, 45%) 95%, hsl(0, 0%, 90%) 100%);
-  background-image: linear-gradient(top, hsl(0, 0%, 90%) 0%, hsl(0, 0%, 45%) 5%, hsl(0, 0%, 90%) 10%, hsl(0, 0%, 45%) 15%, hsl(0, 0%, 90%) 20%, hsl(0, 0%, 45%) 25%, hsl(0, 0%, 90%) 40%, hsl(0, 0%, 55%) 48%, hsl(55, 90%, 65%) 49%, hsl(55, 90%, 65%) 51%, hsl(0, 0%, 55%) 52%, hsl(0, 0%, 90%) 60%, hsl(0, 0%, 45%) 75%, hsl(0, 0%, 90%) 80%, hsl(0, 0%, 45%) 85%, hsl(0, 0%, 90%) 90%, hsl(0, 0%, 45%) 95%, hsl(0, 0%, 90%) 100%);
-}
-
-.disabled.checkboxswitchV .checkboxswitch-handle {
-  background-image: -webkit-linear-gradient(top, hsl(0, 0%, 40%) 0%, hsl(0, 0%, 20%) 5%, hsl(0, 0%, 40%) 10%, hsl(0, 0%, 20%) 15%, hsl(0, 0%, 40%) 20%, hsl(0, 0%, 20%) 25%, hsl(0, 0%, 40%) 40%, hsl(0, 0%, 35%) 48%, hsl(0, 0%, 35%) 52%, hsl(0, 0%, 40%) 60%, hsl(0, 0%, 20%) 75%, hsl(0, 0%, 40%) 80%, hsl(0, 0%, 20%) 85%, hsl(0, 0%, 40%) 90%, hsl(0, 0%, 20%) 95%, hsl(0, 0%, 40%) 100%);
-  background-image: -moz-linear-gradient(top, hsl(0, 0%, 40%) 0%, hsl(0, 0%, 20%) 5%, hsl(0, 0%, 40%) 10%, hsl(0, 0%, 20%) 15%, hsl(0, 0%, 40%) 20%, hsl(0, 0%, 20%) 25%, hsl(0, 0%, 40%) 40%, hsl(0, 0%, 35%) 48%, hsl(0, 0%, 35%) 52%, hsl(0, 0%, 40%) 60%, hsl(0, 0%, 20%) 75%, hsl(0, 0%, 40%) 80%, hsl(0, 0%, 20%) 85%, hsl(0, 0%, 40%) 90%, hsl(0, 0%, 20%) 95%, hsl(0, 0%, 40%) 100%);
-  background-image: -o-linear-gradient(top, hsl(0, 0%, 40%) 0%, hsl(0, 0%, 20%) 5%, hsl(0, 0%, 40%) 10%, hsl(0, 0%, 20%) 15%, hsl(0, 0%, 40%) 20%, hsl(0, 0%, 20%) 25%, hsl(0, 0%, 40%) 40%, hsl(0, 0%, 35%) 48%, hsl(0, 0%, 35%) 52%, hsl(0, 0%, 40%) 60%, hsl(0, 0%, 20%) 75%, hsl(0, 0%, 40%) 80%, hsl(0, 0%, 20%) 85%, hsl(0, 0%, 40%) 90%, hsl(0, 0%, 20%) 95%, hsl(0, 0%, 40%) 100%);
-  background-image: -ms-linear-gradient(top, hsl(0, 0%, 40%) 0%, hsl(0, 0%, 20%) 5%, hsl(0, 0%, 40%) 10%, hsl(0, 0%, 20%) 15%, hsl(0, 0%, 40%) 20%, hsl(0, 0%, 20%) 25%, hsl(0, 0%, 40%) 40%, hsl(0, 0%, 35%) 48%, hsl(0, 0%, 35%) 52%, hsl(0, 0%, 40%) 60%, hsl(0, 0%, 20%) 75%, hsl(0, 0%, 40%) 80%, hsl(0, 0%, 20%) 85%, hsl(0, 0%, 40%) 90%, hsl(0, 0%, 20%) 95%, hsl(0, 0%, 40%) 100%);
-  background-image: linear-gradient(top, hsl(0, 0%, 40%) 0%, hsl(0, 0%, 20%) 5%, hsl(0, 0%, 40%) 10%, hsl(0, 0%, 20%) 15%, hsl(0, 0%, 40%) 20%, hsl(0, 0%, 20%) 25%, hsl(0, 0%, 40%) 40%, hsl(0, 0%, 35%) 48%, hsl(0, 0%, 35%) 52%, hsl(0, 0%, 40%) 60%, hsl(0, 0%, 20%) 75%, hsl(0, 0%, 40%) 80%, hsl(0, 0%, 20%) 85%, hsl(0, 0%, 40%) 90%, hsl(0, 0%, 20%) 95%, hsl(0, 0%, 40%) 100%);
-}
-
-.w .disabled.checkboxswitchV .checkboxswitch-handle {
-  background-image: -webkit-linear-gradient(top, hsl(0, 0%, 90%) 0%, hsl(0, 0%, 45%) 5%, hsl(0, 0%, 90%) 10%, hsl(0, 0%, 45%) 15%, hsl(0, 0%, 90%) 20%, hsl(0, 0%, 45%) 25%, hsl(0, 0%, 90%) 40%, hsl(0, 0%, 75%) 48%, hsl(0, 0%, 75%) 52%, hsl(0, 0%, 90%) 60%, hsl(0, 0%, 45%) 75%, hsl(0, 0%, 90%) 80%, hsl(0, 0%, 45%) 85%, hsl(0, 0%, 90%) 90%, hsl(0, 0%, 45%) 95%, hsl(0, 0%, 90%) 100%);
-  background-image: -moz-linear-gradient(top, hsl(0, 0%, 90%) 0%, hsl(0, 0%, 45%) 5%, hsl(0, 0%, 90%) 10%, hsl(0, 0%, 45%) 15%, hsl(0, 0%, 90%) 20%, hsl(0, 0%, 45%) 25%, hsl(0, 0%, 90%) 40%, hsl(0, 0%, 75%) 48%, hsl(0, 0%, 75%) 52%, hsl(0, 0%, 90%) 60%, hsl(0, 0%, 45%) 75%, hsl(0, 0%, 90%) 80%, hsl(0, 0%, 45%) 85%, hsl(0, 0%, 90%) 90%, hsl(0, 0%, 45%) 95%, hsl(0, 0%, 90%) 100%);
-  background-image: -o-linear-gradient(top, hsl(0, 0%, 90%) 0%, hsl(0, 0%, 45%) 5%, hsl(0, 0%, 90%) 10%, hsl(0, 0%, 45%) 15%, hsl(0, 0%, 90%) 20%, hsl(0, 0%, 45%) 25%, hsl(0, 0%, 90%) 40%, hsl(0, 0%, 75%) 48%, hsl(0, 0%, 75%) 52%, hsl(0, 0%, 90%) 60%, hsl(0, 0%, 45%) 75%, hsl(0, 0%, 90%) 80%, hsl(0, 0%, 45%) 85%, hsl(0, 0%, 90%) 90%, hsl(0, 0%, 45%) 95%, hsl(0, 0%, 90%) 100%);
-  background-image: -ms-linear-gradient(top, hsl(0, 0%, 90%) 0%, hsl(0, 0%, 45%) 5%, hsl(0, 0%, 90%) 10%, hsl(0, 0%, 45%) 15%, hsl(0, 0%, 90%) 20%, hsl(0, 0%, 45%) 25%, hsl(0, 0%, 90%) 40%, hsl(0, 0%, 75%) 48%, hsl(0, 0%, 75%) 52%, hsl(0, 0%, 90%) 60%, hsl(0, 0%, 45%) 75%, hsl(0, 0%, 90%) 80%, hsl(0, 0%, 45%) 85%, hsl(0, 0%, 90%) 90%, hsl(0, 0%, 45%) 95%, hsl(0, 0%, 90%) 100%);
-  background-image: linear-gradient(top, hsl(0, 0%, 90%) 0%, hsl(0, 0%, 45%) 5%, hsl(0, 0%, 90%) 10%, hsl(0, 0%, 45%) 15%, hsl(0, 0%, 90%) 20%, hsl(0, 0%, 45%) 25%, hsl(0, 0%, 90%) 40%, hsl(0, 0%, 75%) 48%, hsl(0, 0%, 75%) 52%, hsl(0, 0%, 90%) 60%, hsl(0, 0%, 45%) 75%, hsl(0, 0%, 90%) 80%, hsl(0, 0%, 45%) 85%, hsl(0, 0%, 90%) 90%, hsl(0, 0%, 45%) 95%, hsl(0, 0%, 90%) 100%);
-}
 
 .btntoggle,
 .btntoggle:focus {
@@ -685,4 +478,120 @@
 }
 .w .btntoggle:focus span.onoff.on:after {
   border-color: hsl(0, 0%, 25%);
+}
+
+
+// mixins
+// ===============
+.padding(@padding) {
+  .padding(@padding, @padding, @padding, @padding);
+}
+
+.padding(@topBottom, @rightLeft) {
+  .padding(@topBottom, @rightLeft, @topBottom, @rightLeft);
+}
+
+.padding(@top, @right, @bottom) {
+  .padding(@top, @right, @bottom, @right);
+}
+
+.padding(@top, @right, @bottom, @left) when(@top = @right) and (@right = @bottom) and (@bottom = @left) {
+  padding: @top;
+}
+
+.padding(@top, @right, @bottom, @left) when (@top = @bottom) and (@right = @left) and not (@top = @right) {
+  padding: @top @right;
+}
+
+.padding(@top, @right, @bottom, @left) when not (@top = @bottom), not (@right = @left) {
+  padding: @top @right @bottom @left;
+}
+
+.margin(@margin) {
+  .margin(@margin, @margin, @margin, @margin);
+}
+
+.margin(@topBottom, @rightLeft) {
+  .margin(@topBottom, @rightLeft, @topBottom, @rightLeft);
+}
+
+.margin(@top, @right, @bottom) {
+  .margin(@top, @right, @bottom, @right);
+}
+
+.margin(@top, @right, @bottom, @left) when (@top = @right) and (@right = @bottom) and (@bottom = @left) {
+  margin: @top;
+}
+
+.margin(@top, @right, @bottom, @left) when (@top = @bottom) and (@right = @left) and not (@top = @right) {
+  margin: @top @right;
+}
+
+.margin(@top, @right, @bottom, @left) when not (@top = @bottom), not (@right = @left) {
+  margin: @top @right @bottom @left;
+}
+
+.lineargradient(@g1, @g2, @g3) {
+  background: -webkit-linear-gradient(@g1, @g2, @g3);
+  background: -moz-linear-gradient(@g1, @g2, @g3);
+  background: -o-linear-gradient(@g1, @g2, @g3);
+  background: -ms-linear-gradient(@g1, @g2, @g3);
+  background: linear-gradient(@g1, @g2, @g3);
+}
+.lineargradient(@g1, @g2, @g3, @g4) {
+  background: -webkit-linear-gradient(@g1, @g2, @g3, @g4);
+  background: -moz-linear-gradient(@g1, @g2, @g3, @g4);
+  background: -o-linear-gradient(@g1, @g2, @g3, @g4);
+  background: -ms-linear-gradient(@g1, @g2, @g3, @g4);
+  background: linear-gradient(@g1, @g2, @g3, @g4);
+}
+.lineargradient(@g1, @g2, @g3, @g4, @g5) {
+  background: -webkit-linear-gradient(@g1, @g2, @g3, @g4, @g5);
+  background: -moz-linear-gradient(@g1, @g2, @g3, @g4, @g5);
+  background: -o-linear-gradient(@g1, @g2, @g3, @g4, @g5);
+  background: -ms-linear-gradient(@g1, @g2, @g3, @g4, @g5);
+  background: linear-gradient(@g1, @g2, @g3, @g4, @g5);
+}
+.lineargradient2grads(@g1, @g2) {
+  background: -webkit-linear-gradient(@g1), -webkit-linear-gradient(@g2);
+  background: -moz-linear-gradient(@g1), -moz-linear-gradient(@g2);
+  background: -o-linear-gradient(@g1), -o-linear-gradient(@g2);
+  background: -ms-linear-gradient(@g1), -ms-linear-gradient(@g2);
+  background: linear-gradient(@g1), linear-gradient(@g2);
+}
+
+
+.border-radius(@radius) {
+  -webkit-border-radius: @radius;
+  -moz-border-radius: @radius;
+  -o-border-radius: @radius;
+  border-radius: @radius;
+}
+
+.box-shadow(@shadow) {
+  -webkit-box-shadow: @shadow;
+  -moz-box-shadow: @shadow;
+  -o-box-shadow: @shadow;
+  box-shadow: @shadow;
+}
+
+.box-shadow(@shadow1, @shadow2) {
+  -webkit-box-shadow: @shadow1, @shadow2;
+  -moz-box-shadow: @shadow1, @shadow2;
+  -o-box-shadow: @shadow1, @shadow2;
+  box-shadow: @shadow1, @shadow2;
+}
+
+.box-shadow(@shadow1, @shadow2, @shadow3) {
+  -webkit-box-shadow: @shadow1, @shadow2, @shadow3;
+  -moz-box-shadow: @shadow1, @shadow2, @shadow3;
+  -o-box-shadow: @shadow1, @shadow2, @shadow3;
+  box-shadow: @shadow1, @shadow2, @shadow3;
+}
+
+.user-select(@s) {
+  -o-user-select: @s;
+  -moz-user-select: @s;
+  -webkit-user-select: @s;
+  user-select: @s;
 }
