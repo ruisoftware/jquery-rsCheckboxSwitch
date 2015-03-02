@@ -4,7 +4,7 @@
 @hokeyPokey: #bab026;
 @colorCaption: @hokeyPokey;
 
-@baseColor: white;
+@baseColor: black;
 
 
 // scalar values
@@ -146,22 +146,27 @@
 
 .switch-dragging,
 .checkboxswitch-handle.checkboxswitch-down {
-  cursor: e-resize;
+  cursor: ew-resize;
+}
+
+.vert.switch-dragging,
+.vert .checkboxswitch-handle.checkboxswitch-down {
+  cursor: ns-resize;
 }
 
 
 
 
-.btntoggle,
-.btntoggle:focus {
+.btntoggle_old,
+.btntoggle_old:focus {
   outline: none;
 }
 
-.btntoggle {
+.btntoggle_old {
   color: hsla(55, 50%, 50%, .6);
   font-size: 16px;
   position: relative;
-  display: inline-block;
+
   padding: 6px 14px 4px;
   border: 2px solid hsl(0,0%,18%); 
   border-top: 3px solid hsl(0,0%,26%);
@@ -181,7 +186,7 @@
   vertical-align: top;
 }
 
-.w .btntoggle {
+.w .btntoggle_old {
   background: hsl(0,0%,80%);
   border-color: hsla(0,0%,45%,.6);
   border-top-color: hsl(0,0%,77%);
@@ -190,21 +195,21 @@
   box-shadow: 0 -2px 1px hsl(0, 0%, 52%);
 }
 
-.btntoggle.frm2,
-.btntoggle.frm3 {
+.btntoggle_old.frm2,
+.btntoggle_old.frm3 {
   border-top: 2px solid hsl(0,0%,26%);
   border-bottom: 3px solid hsl(0,0%,20%);
   color: hsla(55, 50%, 50%, .8);
   text-shadow: 0 -1px 1px hsl(0, 0%, 5%), 0 0 1px hsl(55,50%,50%);
 }
-.w .btntoggle.frm2,
-.w .btntoggle.frm3 {
+.w .btntoggle_old.frm2,
+.w .btntoggle_old.frm3 {
   border-top-color: hsl(0,0%,73%);
   border-bottom-color: hsl(0,0%,75%);
 }
 
-.btntoggle.frm3,
-.btntoggle.frm4 {
+.btntoggle_old.frm3,
+.btntoggle_old.frm4 {
   padding-bottom: 4px;
   margin-top: 0;
   margin-bottom: 2px;
@@ -214,15 +219,15 @@
   -moz-box-shadow: 0 2px hsl(0, 0%, 17%);
   box-shadow: 0 2px hsl(0, 0%, 17%);
 }
-.btntoggle.frm3 {
+.btntoggle_old.frm3 {
   border-bottom-color: hsl(0,0%,25%);
 }
-.btntoggle.frm4 {
+.btntoggle_old.frm4 {
   text-shadow: 0 -1px 1px hsl(0, 0%, 5%), 1px 1px 6px hsla(55,50%,50%,.5), -1px -1px 6px hsla(55,50%,50%,.5);
   color: hsl(55, 50%, 50%);
 }
-.w .btntoggle.frm3,
-.w .btntoggle.frm4 {
+.w .btntoggle_old.frm3,
+.w .btntoggle_old.frm4 {
   border-color: hsla(0,0%,45%,.6);
   border-bottom-color: hsl(0,0%,75%);
   -webkit-box-shadow: 0 2px hsl(0, 0%, 52%);
@@ -230,7 +235,7 @@
   box-shadow: 0 2px hsl(0, 0%, 52%);
 }
 
-.w .btntoggle {
+.w .btntoggle_old {
   color: hsl(60, 100%, 15%);
   text-shadow:
     1px 1px 0px white,
@@ -238,8 +243,8 @@
     1px -1px 0px white,
     -1px 1px 0px white;
 }
-.w .btntoggle.frm3,
-.w .btntoggle.frm4 {
+.w .btntoggle_old.frm3,
+.w .btntoggle_old.frm4 {
   color: hsl(60, 100%, 30%);
   text-shadow:
     1px 1px 1px hsl(60, 100%, 90%),
@@ -248,8 +253,8 @@
     -1px 1px 1px hsl(60, 100%, 90%);
 }
 
-.btntoggle:before,
-.btntoggle:after {
+.btntoggle_old:before,
+.btntoggle_old:after {
   content: '';
   position: absolute;
   -webkit-border-radius: 5px;
@@ -257,7 +262,7 @@
   border-radius: 5px;
 }
 
-.btntoggle:before {
+.btntoggle_old:before {
   top: -8px;
   bottom: -5px;
   left: -5px;
@@ -274,17 +279,17 @@
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#2e2e2e',endColorstr='#525252',GradientType=0);
   z-index: -1;
 }
-.btntoggle.frm2:before {
+.btntoggle_old.frm2:before {
   top: -7px;
   bottom: -6px;
 }
-.btntoggle.frm3:before,
-.btntoggle.frm4:before {
+.btntoggle_old.frm3:before,
+.btntoggle_old.frm4:before {
   top: -5px;
   bottom: -8px;
 }
 
-.w .btntoggle:before {
+.w .btntoggle_old:before {
   background: white;
   background: -webkit-linear-gradient(top, hsl(0, 0%, 70%), hsl(0, 100%, 100%));
   background: -moz-linear-gradient(top, hsl(0, 0%, 70%), hsl(0, 100%, 100%));
@@ -293,13 +298,13 @@
   background: linear-gradient(top, hsl(0, 0%, 70%), hsl(0, 100%, 100%));
 }
 
-.btntoggle:after {
+.btntoggle_old:after {
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
 }
-.btntoggle:after {
+.btntoggle_old:after {
   border: 2px solid hsla(0, 0%, 20%, .5);
   border-top: 1px solid hsl(0, 0%, 30%);
   border-bottom: none;
@@ -309,17 +314,17 @@
   background: -ms-linear-gradient(top, hsla(0, 0%, 17%,.6) 40%, hsla(0, 0%, 32%, .1) 100%);
   background: linear-gradient(top, hsla(0, 0%, 17%,.6) 40%, hsla(0, 0%, 32%, .1) 100%);
 }
-.btntoggle.frm2:after {
+.btntoggle_old.frm2:after {
   -webkit-box-shadow: 0px 4px 8px 0px hsla(0, 0%, 0%, .2);
   -moz-box-shadow: 0px 4px 8px 0px hsla(0, 0%, 0%, .2);
   box-shadow: 0px 4px 8px 0px hsla(0, 0%, 0%, .2);
 }
-.btntoggle.frm2:after,
-.btntoggle.frm3:after {
+.btntoggle_old.frm2:after,
+.btntoggle_old.frm3:after {
   border-top: 1px solid hsl(0, 0%, 31%);
   border-bottom: 1px solid hsl(0, 0%, 31%);
 }
-.btntoggle.frm3:after {
+.btntoggle_old.frm3:after {
   background: -moz-linear-gradient(top, hsla(0, 0%, 17%, .55) 38%, hsla(0, 0%, 30%, .1) 100%);
   background: -webkit-linear-gradient(top, hsla(0, 0%, 17%, .55) 38%, hsla(0, 0%, 30%, .1) 100%);
   background: -o-linear-gradient(top, hsla(0, 0%, 17%, .55) 38%, hsla(0, 0%, 30%, .1) 100%);
@@ -329,7 +334,7 @@
   -moz-box-shadow: 0px 4px 8px 0px hsla(0, 0%, 0%, .3);
   box-shadow: 0px 4px 8px 0px hsla(0, 0%, 0%, .3);
 }
-.btntoggle.frm4:after {
+.btntoggle_old.frm4:after {
   border-bottom: 1px solid hsl(0, 0%, 31%);
   border-top-color: hsl(0, 0%, 25%);
   background: -moz-linear-gradient(top, hsla(0, 0%, 17%, .5) 35%, hsla(0, 0%, 28%, .1) 100%);
@@ -342,7 +347,7 @@
   box-shadow: 0px 7px 8px 0px hsla(0, 0%, 0%, .4);
 }
 
-.w .btntoggle:after {
+.w .btntoggle_old:after {
   border: 2px solid hsla(0, 0%, 64%, .5);
   border-top: 1px solid hsl(0, 0%, 84%);
   border-bottom: none;
@@ -352,14 +357,14 @@
   background: -ms-linear-gradient(top, hsla(0, 0%, 60%, .6) 40%, hsla(0, 0%, 100%, .7) 100%);
   background: linear-gradient(top, hsla(0, 0%, 60%, .6) 40%, hsla(0, 0%, 100%, .7) 100%);
 }
-.w .btntoggle.frm3:after {
+.w .btntoggle_old.frm3:after {
   background: -moz-linear-gradient(top, hsla(0, 0%, 60%, .5) 38%, hsla(0, 0%, 100%, .7) 100%);
   background: -webkit-linear-gradient(top, hsla(0, 0%, 60%, .5) 38%, hsla(0, 0%, 100%, .7) 100%);
   background: -o-linear-gradient(top, hsla(0, 0%, 60%, .5) 38%, hsla(0, 0%, 100%, .7) 100%);
   background: -ms-linear-gradient(top, hsla(0, 0%, 60%, .5) 38%, hsla(0, 0%, 100%, .7) 100%);
   background: linear-gradient(top, hsla(0, 0%, 60%, .5) 38%, hsla(0, 0%, 100%, .7) 100%);
 }
-.w .btntoggle.frm4:after {
+.w .btntoggle_old.frm4:after {
   border-bottom: 1px solid hsl(0, 0%, 70%);
   border-top-color: hsl(0, 0%, 72%);
   background: -moz-linear-gradient(top, hsla(0, 0%, 60%, .35) 35%, hsla(0, 0%, 100%, .7) 100%);
@@ -369,7 +374,7 @@
   background: linear-gradient(top, hsla(0, 0%, 60%, .35) 35%, hsla(0, 0%, 100%, .7) 100%);
 }
 
-.btntoggle span.onoff {
+.btntoggle_old span.onoff {
   position: absolute;
   left: 10%;
   top: 10%;
@@ -378,7 +383,7 @@
 }
 
 /* 1 */
-.btntoggle span.onoff:before {
+.btntoggle_old span.onoff:before {
   content: '';
   display: block;
   margin: 10% auto 0;
@@ -387,18 +392,18 @@
   border: 0 solid hsl(60, 100%, 23%);
   border-left-width: 2px;
 }
-.w .btntoggle span.onoff:before {
+.w .btntoggle_old span.onoff:before {
   border-color: hsl(60, 100%, 15%);
 }
 
 /* 1 selected */
-.btntoggle span.onoff.on:before {
+.btntoggle_old span.onoff.on:before {
   border-color: hsl(60, 100%, 40%);
   -webkit-box-shadow: 0 0 3px 2px hsla(55, 50%, 40%, 0.6);
   -moz-box-shadow: 0 0 3px 2px hsla(55, 50%, 40%, 0.6);
   box-shadow: 0 0 3px 2px hsla(55, 50%, 40%, 0.6);
 }
-.w .btntoggle span.onoff.on:before {
+.w .btntoggle_old span.onoff.on:before {
   border-color: hsl(60, 100%, 55%);
   -webkit-box-shadow: 0px 0px 2px hsla(60, 100%, 30%, .3);
   -moz-box-shadow: 0px 0px 2px hsla(60, 100%, 30%, .3);
@@ -406,20 +411,20 @@
 
 }
 /* 1 unselected focused */
-.btntoggle:focus span.onoff:before {
+.btntoggle_old:focus span.onoff:before {
   border-color: hsl(60, 100%, 26%);
 }
-.w .btntoggle:focus span.onoff:before {
+.w .btntoggle_old:focus span.onoff:before {
   border-color: hsl(60, 100%, 10%);
 }
 /* 1 selected focused */
-.btntoggle:focus span.onoff.on:before {
+.btntoggle_old:focus span.onoff.on:before {
   border-color: hsl(60, 100%, 46%);
   -webkit-box-shadow: 0 0 3px 2px hsla(55, 50%, 40%, 0.85);
   -moz-box-shadow: 0 0 3px 2px hsla(55, 50%, 40%, 0.85);
   box-shadow: 0 0 3px 2px hsla(55, 50%, 40%, 0.85);
 }
-.w .btntoggle:focus span.onoff.on:before {
+.w .btntoggle_old:focus span.onoff.on:before {
   border-color: hsl(60, 100%, 50%);
   -webkit-box-shadow: 0px 0px 3px 2px hsla(60, 100%, 30%, .3);
   -moz-box-shadow: 0px 0px 3px 2px hsla(60, 100%, 30%, .3);
@@ -427,7 +432,7 @@
 }
 
 /* 0 selected */
-.btntoggle span.onoff:after {
+.btntoggle_old span.onoff:after {
   content: '';
   display: block;
   margin: 35% auto 0;
@@ -439,7 +444,7 @@
   -moz-box-shadow: 0 0 3px 2px hsla(55, 50%, 30%, 0.6), inset 0 0 1px hsla(55, 50%, 30%, 0.6);
   box-shadow: 0 0 3px 2px hsla(55, 50%, 30%, 0.6), inset 0 0 1px hsla(55, 50%, 30%, 0.6);
 }
-.w .btntoggle span.onoff:after {
+.w .btntoggle_old span.onoff:after {
   border-color: hsl(60, 100%, 45%);
   -webkit-box-shadow: 0 0 2px 1px hsla(60, 100%, 25%, .75), inset 0 0 2px 0px black;
   -moz-box-shadow: 0 0 2px 1px hsla(60, 100%, 25%, .75), inset 0 0 2px 0px black;
@@ -447,36 +452,36 @@
 }
 
 /* 0 selected focused */
-.btntoggle:focus span.onoff:after {
+.btntoggle_old:focus span.onoff:after {
   border-color: hsl(60, 100%, 35%);
   -webkit-box-shadow: 0 0 3px 2px hsla(55, 50%, 40%, 0.6), inset 0 0 1px hsla(55, 50%, 40%, 0.6);
   -moz-box-shadow: 0 0 3px 2px hsla(55, 50%, 40%, 0.6), inset 0 0 1px hsla(55, 50%, 40%, 0.6);
   box-shadow: 0 0 3px 2px hsla(55, 50%, 40%, 0.6), inset 0 0 1px hsla(55, 50%, 40%, 0.6);
 }
-.w .btntoggle:focus span.onoff:after {
+.w .btntoggle_old:focus span.onoff:after {
   border-color: hsl(60, 100%, 40%);
   -webkit-box-shadow: 0 0 3px 2px hsla(60, 100%, 25%, .75), inset 0 0 2px 0px black;
   -moz-box-shadow: 0 0 3px 2px hsla(60, 100%, 25%, .75), inset 0 0 2px 0px black;
   box-shadow: 0 0 3px 2px hsla(60, 100%, 25%, .75), inset 0 0 2px 0px black;
 }
 /* 0 unselected */
-.btntoggle span.onoff.on:after {
+.btntoggle_old span.onoff.on:after {
   border-color: hsl(60, 100%, 23%);
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   box-shadow: none;
 }
-.w .btntoggle span.onoff.on:after {
+.w .btntoggle_old span.onoff.on:after {
   border-color: hsl(60, 100%, 8%);
 }
 /* 0 unselected focused */
-.btntoggle:focus span.onoff.on:after {
+.btntoggle_old:focus span.onoff.on:after {
   border-color: hsl(60, 100%, 26%);
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   box-shadow: none;
 }
-.w .btntoggle:focus span.onoff.on:after {
+.w .btntoggle_old:focus span.onoff.on:after {
   border-color: hsl(0, 0%, 25%);
 }
 

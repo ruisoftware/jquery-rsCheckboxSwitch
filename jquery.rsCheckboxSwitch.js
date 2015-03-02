@@ -141,16 +141,10 @@
                     sizeInner = opts.slidingType.horizontal ? $sliderBar.width() : $sliderBar.height();
                     size = opts.slidingType.horizontal ? $switch.width() : $switch.height();
                 } else {
-                    $switch.wrap("<div />").parent().css('display', 'inline-block').css(getCssPos($elem));
-                    if (elemCssPos !== "static") {
-                        $switch.css({
-                            'position': 'relative',
-                            'top': 0,
-                            'right': 0,
-                            'bottom': 0,
-                            'left': 0
-                        }).parent().css('position', elemCssPos);
+                    if (elemCssPos === "static") {
+                        $switch.css('position', 'relative');
                     }
+                    $switch.css('display', 'inline-block');
                     if (opts.enabled) {
                         $switch.bind('mousedown.rsCheckboxSwitch', onmousedown).bind('mouseup.rsCheckboxSwitch', onmouseup);
                     } else {
