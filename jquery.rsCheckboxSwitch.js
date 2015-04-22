@@ -298,7 +298,12 @@
             },
             toggleClassOnOff = function (isOn) {
                 if ($onoffSpan) {
-                    $onoffSpan.removeClass(isOn ? null : "on").addClass(isOn ? "on" : null);
+                    $onoffSpan.removeClass(isOn ? "off" : "on").addClass(isOn ? "on" : "off");
+                }
+            },
+            resetToggleClasses = function () {
+                if ($onoffSpan) {
+                    $onoffSpan.removeClass("on off");
                 }
             },
             triggerOn = function (fireEvents) {
@@ -321,6 +326,7 @@
             },
             on = function(anim, fireEvents) {
                 var state = isOnInput();
+                resetToggleClasses();
                 doOn(anim === undefined ? true : anim, function() {
                     if (fireEvents === undefined) {
                         if (state != isOnSwitch()) {
@@ -333,6 +339,7 @@
             },
             off = function(anim, fireEvents) {
                 var state = isOffInput();
+                resetToggleClasses();
                 doOff(anim === undefined ? true : anim, function() {
                     if (fireEvents === undefined) {
                         if (state != isOffSwitch()) {
@@ -348,7 +355,6 @@
                 onmousedown(e);
             },
             onmousedown = function (e) {
-                console.log('onmousedown')
                 e.preventDefault();
                 mouseIsDown = true;
                 if ($animObj) { // is some animation going on?
@@ -533,34 +539,13 @@
                         $elem.removeAttr(attr);
                     }
                 };
-                $elem.
-                    unbind('getter.rsCheckboxSwitch', onGetter).
-                    unbind('setter.rsCheckboxSwitch', onSetter).
-                    unbind('refresh.rsCheckboxSwitch', onRefresh).
-                    unbind('toggle.rsCheckboxSwitch', onToggle).
-                    unbind('rollback.rsCheckboxSwitch', onRollback).
-                    unbind('commit.rsCheckboxSwitch', onCommit).
-                    unbind('onChange.rsCheckboxSwitch', onChange).
-                    unbind('onChangeOn.rsCheckboxSwitch', onChangeOn).
-                    unbind('onChangeOff.rsCheckboxSwitch', onChangeOff).
-                    unbind('destroy.rsCheckboxSwitch', onDestroy).
-                    unbind('on.rsCheckboxSwitch', onOn).
-                    unbind('off.rsCheckboxSwitch', onOff);
-
-                $switch.
-                    unbind('mousedown.rsCheckboxSwitch', onmousedown).
-                    unbind('mouseup.rsCheckboxSwitch', onmouseup).
-                    unbind('focus.rsCheckboxSwitch', gotFocus).
-                    unbind('blur.rsCheckboxSwitch', loseFocus);
-
-                $(document).
-                    unbind('mouseup.rsCheckboxSwitch', onmouseup).
-                    unbind('mousemove.rsCheckboxSwitch', onmousemove).
-                    unbind('keydown.rsCheckboxSwitch', onKeydown);
+                $elem.unbind('.rsCheckboxSwitch');
+                $switch.unbind('.rsCheckboxSwitch');
+                $(document).unbind('.rsCheckboxSwitch');
                 
                 if (isSlidingType) {
-                    $sliderBar.unbind('mousedown.rsCheckboxSwitch', onmousedown);
-                    $sliderHandle.unbind('mousedown.rsCheckboxSwitch', onmousedownHandle);
+                    $sliderBar.unbind('.rsCheckboxSwitch');
+                    $sliderHandle.unbind('.rsCheckboxSwitch');
     
                     if (!$elem.is("input") && tabIndex !== undefined) {
                         $elem.attr('tabindex', tabIndex);

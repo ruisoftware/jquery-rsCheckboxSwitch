@@ -4,516 +4,279 @@
  */
 .checkboxswitch-outer {
   outline: none;
-  border-radius: 6px / 10px;
-  -webkit-box-shadow: -1px -1px 1px 1px hsl(0, 0%, 18%), 1px 1px 1px 1px hsl(0, 0%, 32%);
-  -moz-box-shadow: -1px -1px 1px 1px hsl(0, 0%, 18%), 1px 1px 1px 1px hsl(0, 0%, 32%);
-  box-shadow: -1px -1px 1px 1px hsl(0, 0%, 18%), 1px 1px 1px 1px hsl(0, 0%, 32%);
+  border-radius: 1.95vw;
+  -webkit-box-shadow: -0.09375vw -0.09375vw 0.09375vw 0.09375vw #262626, 0.09375vw 0.09375vw 0.09375vw 0.09375vw #646464;
+  -moz-box-shadow: -0.09375vw -0.09375vw 0.09375vw 0.09375vw #262626, 0.09375vw 0.09375vw 0.09375vw 0.09375vw #646464;
+  -o-box-shadow: -0.09375vw -0.09375vw 0.09375vw 0.09375vw #262626, 0.09375vw 0.09375vw 0.09375vw 0.09375vw #646464;
+  box-shadow: -0.09375vw -0.09375vw 0.09375vw 0.09375vw #262626, 0.09375vw 0.09375vw 0.09375vw 0.09375vw #646464;
+  width: 6vw !important;
+  height: 1.95vw !important;
+  /*
+   * Vertical slider switch
+   *
+   */
 }
-
+.checkboxswitch-outer > .checkboxswitch {
+  width: 9vw;
+  height: 1.95vw;
+  background: -webkit-linear-gradient(left, #9c9420 0%, #9c9420 50%, #2b2b2b 50%, #2b2b2b 100%);
+  background: -moz-linear-gradient(left, #9c9420 0%, #9c9420 50%, #2b2b2b 50%, #2b2b2b 100%);
+  background: -o-linear-gradient(left, #9c9420 0%, #9c9420 50%, #2b2b2b 50%, #2b2b2b 100%);
+  background: -ms-linear-gradient(left, #9c9420 0%, #9c9420 50%, #2b2b2b 50%, #2b2b2b 100%);
+  background: linear-gradient(left, #9c9420 0%, #9c9420 50%, #2b2b2b 50%, #2b2b2b 100%);
+}
+.checkboxswitch-outer > .checkboxswitch:before,
+.checkboxswitch-outer > .checkboxswitch:after {
+  position: absolute;
+  font-size: 1.125vw;
+  font-weight: bold;
+  line-height: 1.95vw;
+}
+.checkboxswitch-outer > .checkboxswitch:before {
+  content: 'ON';
+  color: #454545;
+  left: 0.84375vw;
+}
+.checkboxswitch-outer > .checkboxswitch:after {
+  content: 'OFF';
+  color: #454545;
+  right: 0.5625vw;
+}
+.checkboxswitch-outer > .checkboxswitch .checkboxswitch-handle {
+  width: 3vw;
+  height: 1.95vw;
+  top: 0;
+  left: 3vw;
+  background-color: #454545;
+  border-radius: 1.95vw;
+  -webkit-box-shadow: inset -0.09375vw -0.09375vw 0.09375vw 0.09375vw #262626, inset 0.09375vw 0.09375vw 0.09375vw 0.09375vw #646464;
+  -moz-box-shadow: inset -0.09375vw -0.09375vw 0.09375vw 0.09375vw #262626, inset 0.09375vw 0.09375vw 0.09375vw 0.09375vw #646464;
+  -o-box-shadow: inset -0.09375vw -0.09375vw 0.09375vw 0.09375vw #262626, inset 0.09375vw 0.09375vw 0.09375vw 0.09375vw #646464;
+  box-shadow: inset -0.09375vw -0.09375vw 0.09375vw 0.09375vw #262626, inset 0.09375vw 0.09375vw 0.09375vw 0.09375vw #646464;
+  background: -webkit-linear-gradient(left, #454545 20%, #262626 43%, transparent 47%, transparent 53%, #262626 57%, #454545 80%), -webkit-linear-gradient(top, #4f4f4f 20%, #646464 38%, #787878 50%, #646464 62%, #4f4f4f 80%);
+  background: -moz-linear-gradient(left, #454545 20%, #262626 43%, transparent 47%, transparent 53%, #262626 57%, #454545 80%), -moz-linear-gradient(top, #4f4f4f 20%, #646464 38%, #787878 50%, #646464 62%, #4f4f4f 80%);
+  background: -o-linear-gradient(left, #454545 20%, #262626 43%, transparent 47%, transparent 53%, #262626 57%, #454545 80%), -o-linear-gradient(top, #4f4f4f 20%, #646464 38%, #787878 50%, #646464 62%, #4f4f4f 80%);
+  background: -ms-linear-gradient(left, #454545 20%, #262626 43%, transparent 47%, transparent 53%, #262626 57%, #454545 80%), -ms-linear-gradient(top, #4f4f4f 20%, #646464 38%, #787878 50%, #646464 62%, #4f4f4f 80%);
+  background: linear-gradient(left, #454545 20%, #262626 43%, transparent 47%, transparent 53%, #262626 57%, #454545 80%), linear-gradient(top, #4f4f4f 20%, #646464 38%, #787878 50%, #646464 62%, #4f4f4f 80%);
+}
+.checkboxswitch-outer > .checkboxswitch .checkboxswitch-handle.checkboxswitch-down {
+  -webkit-box-shadow: inset -0.09375vw -0.09375vw 0.09375vw 0.09375vw #262626, inset 0.09375vw 0.09375vw 0.09375vw 0.09375vw #5e5e5e;
+  -moz-box-shadow: inset -0.09375vw -0.09375vw 0.09375vw 0.09375vw #262626, inset 0.09375vw 0.09375vw 0.09375vw 0.09375vw #5e5e5e;
+  -o-box-shadow: inset -0.09375vw -0.09375vw 0.09375vw 0.09375vw #262626, inset 0.09375vw 0.09375vw 0.09375vw 0.09375vw #5e5e5e;
+  box-shadow: inset -0.09375vw -0.09375vw 0.09375vw 0.09375vw #262626, inset 0.09375vw 0.09375vw 0.09375vw 0.09375vw #5e5e5e;
+}
+.checkboxswitch-outer.vert {
+  width: 1.95vw !important;
+  height: 6vw !important;
+}
+.checkboxswitch-outer.vert > .checkboxswitch {
+  width: 1.95vw;
+  height: 9vw;
+  background: -webkit-linear-gradient(top, #9c9420 0%, #9c9420 50%, #2b2b2b 50%, #2b2b2b 100%);
+  background: -moz-linear-gradient(top, #9c9420 0%, #9c9420 50%, #2b2b2b 50%, #2b2b2b 100%);
+  background: -o-linear-gradient(top, #9c9420 0%, #9c9420 50%, #2b2b2b 50%, #2b2b2b 100%);
+  background: -ms-linear-gradient(top, #9c9420 0%, #9c9420 50%, #2b2b2b 50%, #2b2b2b 100%);
+  background: linear-gradient(top, #9c9420 0%, #9c9420 50%, #2b2b2b 50%, #2b2b2b 100%);
+}
+.checkboxswitch-outer.vert > .checkboxswitch:before,
+.checkboxswitch-outer.vert > .checkboxswitch:after {
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 0.75vw;
+}
+.checkboxswitch-outer.vert > .checkboxswitch:before {
+  content: 'ON';
+  color: #454545;
+  top: 0.84375vw;
+}
+.checkboxswitch-outer.vert > .checkboxswitch:after {
+  content: 'OFF';
+  color: #454545;
+  bottom: 0.5625vw;
+}
+.checkboxswitch-outer.vert > .checkboxswitch .checkboxswitch-handle {
+  width: 1.95vw;
+  height: 3vw;
+  left: 0;
+  top: 3vw;
+  background: -webkit-linear-gradient(top, #454545 20%, #262626 43%, transparent 47%, transparent 53%, #262626 57%, #454545 80%), -webkit-linear-gradient(left, #4f4f4f 20%, #646464 38%, #787878 50%, #646464 62%, #4f4f4f 80%);
+  background: -moz-linear-gradient(top, #454545 20%, #262626 43%, transparent 47%, transparent 53%, #262626 57%, #454545 80%), -moz-linear-gradient(left, #4f4f4f 20%, #646464 38%, #787878 50%, #646464 62%, #4f4f4f 80%);
+  background: -o-linear-gradient(top, #454545 20%, #262626 43%, transparent 47%, transparent 53%, #262626 57%, #454545 80%), -o-linear-gradient(left, #4f4f4f 20%, #646464 38%, #787878 50%, #646464 62%, #4f4f4f 80%);
+  background: -ms-linear-gradient(top, #454545 20%, #262626 43%, transparent 47%, transparent 53%, #262626 57%, #454545 80%), -ms-linear-gradient(left, #4f4f4f 20%, #646464 38%, #787878 50%, #646464 62%, #4f4f4f 80%);
+  background: linear-gradient(top, #454545 20%, #262626 43%, transparent 47%, transparent 53%, #262626 57%, #454545 80%), linear-gradient(left, #4f4f4f 20%, #646464 38%, #787878 50%, #646464 62%, #4f4f4f 80%);
+}
 .checkboxswitch-outer,
 .checkboxswitch-handle {
   cursor: pointer;
 }
-
-.disabled > .checkboxswitch-outer,
-.disabled > .checkboxswitch-handle {
+.disabled.checkboxswitch-outer,
+.disabled.checkboxswitch-outer > .checkboxswitch,
+.disabled.checkboxswitch-outer .checkboxswitch-handle {
   cursor: default;
 }
-
-
 .switch-dragging,
 .checkboxswitch-handle.checkboxswitch-down {
-  cursor: e-resize;
+  cursor: ew-resize;
 }
-
-.w .checkboxswitch-outer {
-  -webkit-box-shadow: -1px -1px 1px 1px hsl(0, 0%, 65%), 1px 1px 1px 1px hsl(0, 100%, 100%);
-  -moz-box-shadow: -1px -1px 1px 1px hsl(0, 0%, 65%), 1px 1px 1px 1px hsl(0, 100%, 100%);
-  box-shadow: -1px -1px 1px 1px hsl(0, 0%, 65%), 1px 1px 1px 1px hsl(0, 100%, 100%);
+.vert.switch-dragging,
+.vert .checkboxswitch-handle.checkboxswitch-down {
+  cursor: ns-resize;
 }
-
-.checkboxswitch {
-  width: 110px; /* 35 (ON) + 40 (handle) + 35 (OFF) */
-  height: 20px;
-  background-image: -webkit-linear-gradient(left, hsl(56, 40%, 32%) 0%, hsl(56, 40%, 32%) 50%, hsl(0, 0%, 23%) 50%, hsl(0, 0%, 23%) 100%);
-  background-image: -moz-linear-gradient(left, hsl(56, 40%, 32%) 0%, hsl(56, 40%, 32%) 50%, hsl(0, 0%, 23%) 50%, hsl(0, 0%, 23%) 100%);
-  background-image: -o-linear-gradient(left, hsl(56, 40%, 32%) 0%, hsl(56, 40%, 32%) 50%, hsl(0, 0%, 23%) 50%, hsl(0, 0%, 23%) 100%);
-  background-image: -ms-linear-gradient(left, hsl(56, 40%, 32%) 0%, hsl(56, 40%, 32%) 50%, hsl(0, 0%, 23%) 50%, hsl(0, 0%, 23%) 100%);
-  background-image: linear-gradient(left, hsl(56, 40%, 32%) 0%, hsl(56, 40%, 32%) 50%, hsl(0, 0%, 23%) 50%, hsl(0, 0%, 23%) 100%);
-}
-.w .checkboxswitch {
-  background-image: -webkit-linear-gradient(left, hsl(55, 55%, 75%) 0%, hsl(55, 55%, 75%) 50%, hsl(0, 0%, 87%) 50%, hsl(0, 0%, 87%) 100%);
-  background-image: -moz-linear-gradient(left, hsl(55, 55%, 75%) 0%, hsl(55, 55%, 75%) 50%, hsl(0, 0%, 87%) 50%, hsl(0, 0%, 87%) 100%);
-  background-image: -o-linear-gradient(left, hsl(55, 55%, 75%) 0%, hsl(55, 55%, 75%) 50%, hsl(0, 0%, 87%) 50%, hsl(0, 0%, 87%) 100%);
-  background-image: -ms-linear-gradient(left, hsl(55, 55%, 75%) 0%, hsl(55, 55%, 75%) 50%, hsl(0, 0%, 87%) 50%, hsl(0, 0%, 87%) 100%);
-  background-image: linear-gradient(left, hsl(55, 55%, 75%) 0%, hsl(55, 55%, 75%) 50%, hsl(0, 0%, 87%) 50%, hsl(0, 0%, 87%) 100%);
-}
-
-.checkboxswitch:before,
-.checkboxswitch:after {
-  position: absolute;
-  font-size: 12px;
-  font-weight: bold;
-  line-height: 20px;
-}
-
-.checkboxswitch:before {
-  content: 'ON';
-  color: hsl(0, 0%, 27%);
-  left: 9px;
-}
-
-.checkboxswitch:after {
-  content: 'OFF';
-  color: hsl(0, 0%, 32%);
-  right: 6px;
-}
-.w .checkboxswitch:before,
-.w .checkboxswitch:after {
-  color: hsl(0, 0%, 45%);
-}
-
-.checkboxswitch-handle {
-  width: 40px;
-  height: 24px;
-  background-image: -webkit-linear-gradient(left, hsl(0, 0%, 40%) 0%, hsl(0, 0%, 20%) 5%, hsl(0, 0%, 40%) 10%, hsl(0, 0%, 20%) 15%, hsl(0, 0%, 40%) 20%, hsl(0, 0%, 20%) 25%, hsl(0, 0%, 40%) 40%, hsl(0, 0%, 35%) 48%, hsl(55, 40%, 40%) 49%, hsl(55, 40%, 40%) 51%, hsl(0, 0%, 35%) 52%, hsl(0, 0%, 40%) 60%, hsl(0, 0%, 20%) 75%, hsl(0, 0%, 40%) 80%, hsl(0, 0%, 20%) 85%, hsl(0, 0%, 40%) 90%, hsl(0, 0%, 20%) 95%, hsl(0, 0%, 40%) 100%);
-  background-image: -moz-linear-gradient(left, hsl(0, 0%, 40%) 0%, hsl(0, 0%, 20%) 5%, hsl(0, 0%, 40%) 10%, hsl(0, 0%, 20%) 15%, hsl(0, 0%, 40%) 20%, hsl(0, 0%, 20%) 25%, hsl(0, 0%, 40%) 40%, hsl(0, 0%, 35%) 48%, hsl(55, 40%, 40%) 49%, hsl(55, 40%, 40%) 51%, hsl(0, 0%, 35%) 52%, hsl(0, 0%, 40%) 60%, hsl(0, 0%, 20%) 75%, hsl(0, 0%, 40%) 80%, hsl(0, 0%, 20%) 85%, hsl(0, 0%, 40%) 90%, hsl(0, 0%, 20%) 95%, hsl(0, 0%, 40%) 100%);
-  background-image: -o-linear-gradient(left, hsl(0, 0%, 40%) 0%, hsl(0, 0%, 20%) 5%, hsl(0, 0%, 40%) 10%, hsl(0, 0%, 20%) 15%, hsl(0, 0%, 40%) 20%, hsl(0, 0%, 20%) 25%, hsl(0, 0%, 40%) 40%, hsl(0, 0%, 35%) 48%, hsl(55, 40%, 40%) 49%, hsl(55, 40%, 40%) 51%, hsl(0, 0%, 35%) 52%, hsl(0, 0%, 40%) 60%, hsl(0, 0%, 20%) 75%, hsl(0, 0%, 40%) 80%, hsl(0, 0%, 20%) 85%, hsl(0, 0%, 40%) 90%, hsl(0, 0%, 20%) 95%, hsl(0, 0%, 40%) 100%);
-  background-image: -ms-linear-gradient(left, hsl(0, 0%, 40%) 0%, hsl(0, 0%, 20%) 5%, hsl(0, 0%, 40%) 10%, hsl(0, 0%, 20%) 15%, hsl(0, 0%, 40%) 20%, hsl(0, 0%, 20%) 25%, hsl(0, 0%, 40%) 40%, hsl(0, 0%, 35%) 48%, hsl(55, 40%, 40%) 49%, hsl(55, 40%, 40%) 51%, hsl(0, 0%, 35%) 52%, hsl(0, 0%, 40%) 60%, hsl(0, 0%, 20%) 75%, hsl(0, 0%, 40%) 80%, hsl(0, 0%, 20%) 85%, hsl(0, 0%, 40%) 90%, hsl(0, 0%, 20%) 95%, hsl(0, 0%, 40%) 100%);
-  background-image: linear-gradient(left, hsl(0, 0%, 40%) 0%, hsl(0, 0%, 20%) 5%, hsl(0, 0%, 40%) 10%, hsl(0, 0%, 20%) 15%, hsl(0, 0%, 40%) 20%, hsl(0, 0%, 20%) 25%, hsl(0, 0%, 40%) 40%, hsl(0, 0%, 35%) 48%, hsl(55, 40%, 40%) 49%, hsl(55, 40%, 40%) 51%, hsl(0, 0%, 35%) 52%, hsl(0, 0%, 40%) 60%, hsl(0, 0%, 20%) 75%, hsl(0, 0%, 40%) 80%, hsl(0, 0%, 20%) 85%, hsl(0, 0%, 40%) 90%, hsl(0, 0%, 20%) 95%, hsl(0, 0%, 40%) 100%);
-  border: 1px hsl(0, 0%, 32%) solid;
-  border-radius: 10px / 7px;
-  -webkit-box-shadow: 0 1px 1px black, 0 0 1px hsl(0, 0%, 10%), 0 4px 7px -3px hsla(0, 0%, 0%, 0.7);
-  -moz-box-shadow: 0 1px 1px black, 0 0 1px hsl(0, 0%, 10%), 0 4px 7px -3px hsla(0, 0%, 0%, 0.7);
-  box-shadow: 0 1px 1px black, 0 0 1px hsl(0, 0%, 10%), 0 4px 7px -3px hsla(0, 0%, 0%, 0.7);
-}
-
-.w .checkboxswitch-handle {
-  background-image: -webkit-linear-gradient(left, hsl(0, 0%, 90%) 0%, hsl(0, 0%, 45%) 5%, hsl(0, 0%, 90%) 10%, hsl(0, 0%, 45%) 15%, hsl(0, 0%, 90%) 20%, hsl(0, 0%, 45%) 25%, hsl(0, 0%, 90%) 40%, hsl(0, 0%, 55%) 48%, hsl(55, 55%, 65%) 49%, hsl(55, 55%, 65%) 51%, hsl(0, 0%, 55%) 52%, hsl(0, 0%, 90%) 60%, hsl(0, 0%, 45%) 75%, hsl(0, 0%, 90%) 80%, hsl(0, 0%, 45%) 85%, hsl(0, 0%, 90%) 90%, hsl(0, 0%, 45%) 95%, hsl(0, 0%, 90%) 100%);
-  background-image: -moz-linear-gradient(left, hsl(0, 0%, 90%) 0%, hsl(0, 0%, 45%) 5%, hsl(0, 0%, 90%) 10%, hsl(0, 0%, 45%) 15%, hsl(0, 0%, 90%) 20%, hsl(0, 0%, 45%) 25%, hsl(0, 0%, 90%) 40%, hsl(0, 0%, 55%) 48%, hsl(55, 55%, 65%) 49%, hsl(55, 55%, 65%) 51%, hsl(0, 0%, 55%) 52%, hsl(0, 0%, 90%) 60%, hsl(0, 0%, 45%) 75%, hsl(0, 0%, 90%) 80%, hsl(0, 0%, 45%) 85%, hsl(0, 0%, 90%) 90%, hsl(0, 0%, 45%) 95%, hsl(0, 0%, 90%) 100%);
-  background-image: -o-linear-gradient(left, hsl(0, 0%, 90%) 0%, hsl(0, 0%, 45%) 5%, hsl(0, 0%, 90%) 10%, hsl(0, 0%, 45%) 15%, hsl(0, 0%, 90%) 20%, hsl(0, 0%, 45%) 25%, hsl(0, 0%, 90%) 40%, hsl(0, 0%, 55%) 48%, hsl(55, 55%, 65%) 49%, hsl(55, 55%, 65%) 51%, hsl(0, 0%, 55%) 52%, hsl(0, 0%, 90%) 60%, hsl(0, 0%, 45%) 75%, hsl(0, 0%, 90%) 80%, hsl(0, 0%, 45%) 85%, hsl(0, 0%, 90%) 90%, hsl(0, 0%, 45%) 95%, hsl(0, 0%, 90%) 100%);
-  background-image: -ms-linear-gradient(left, hsl(0, 0%, 90%) 0%, hsl(0, 0%, 45%) 5%, hsl(0, 0%, 90%) 10%, hsl(0, 0%, 45%) 15%, hsl(0, 0%, 90%) 20%, hsl(0, 0%, 45%) 25%, hsl(0, 0%, 90%) 40%, hsl(0, 0%, 55%) 48%, hsl(55, 55%, 65%) 49%, hsl(55, 55%, 65%) 51%, hsl(0, 0%, 55%) 52%, hsl(0, 0%, 90%) 60%, hsl(0, 0%, 45%) 75%, hsl(0, 0%, 90%) 80%, hsl(0, 0%, 45%) 85%, hsl(0, 0%, 90%) 90%, hsl(0, 0%, 45%) 95%, hsl(0, 0%, 90%) 100%);
-  background-image: linear-gradient(left, hsl(0, 0%, 90%) 0%, hsl(0, 0%, 45%) 5%, hsl(0, 0%, 90%) 10%, hsl(0, 0%, 45%) 15%, hsl(0, 0%, 90%) 20%, hsl(0, 0%, 45%) 25%, hsl(0, 0%, 90%) 40%, hsl(0, 0%, 55%) 48%, hsl(55, 55%, 65%) 49%, hsl(55, 55%, 65%) 51%, hsl(0, 0%, 55%) 52%, hsl(0, 0%, 90%) 60%, hsl(0, 0%, 45%) 75%, hsl(0, 0%, 90%) 80%, hsl(0, 0%, 45%) 85%, hsl(0, 0%, 90%) 90%, hsl(0, 0%, 45%) 95%, hsl(0, 0%, 90%) 100%);
-  border-color: hsl(0, 0%, 60%);
-  -webkit-box-shadow: 0 1px 1px hsl(0, 0%, 10%), 0 4px 7px -3px hsla(0, 0%, 0%, 0.7);
-  -moz-box-shadow: 0 1px 1px hsl(0, 0%, 10%), 0 4px 7px -3px hsla(0, 0%, 0%, 0.7);
-  box-shadow: 0 1px 1px hsl(0, 0%, 10%), 0 4px 7px -3px hsla(0, 0%, 0%, 0.7);
-}
-
-.checkboxswitch-outer:focus + .checkboxswitch-handle {
-  background-image: -webkit-linear-gradient(left, hsl(0, 0%, 40%) 0%, hsl(0, 0%, 20%) 5%, hsl(0, 0%, 40%) 10%, hsl(0, 0%, 20%) 15%, hsl(0, 0%, 40%) 20%, hsl(0, 0%, 20%) 25%, hsl(0, 0%, 40%) 40%, hsl(0, 0%, 35%) 48%, hsl(55, 55%, 50%) 49%, hsl(55, 55%, 50%) 51%, hsl(0, 0%, 35%) 52%, hsl(0, 0%, 40%) 60%, hsl(0, 0%, 20%) 75%, hsl(0, 0%, 40%) 80%, hsl(0, 0%, 20%) 85%, hsl(0, 0%, 40%) 90%, hsl(0, 0%, 20%) 95%, hsl(0, 0%, 40%) 100%);
-  background-image: -moz-linear-gradient(left, hsl(0, 0%, 40%) 0%, hsl(0, 0%, 20%) 5%, hsl(0, 0%, 40%) 10%, hsl(0, 0%, 20%) 15%, hsl(0, 0%, 40%) 20%, hsl(0, 0%, 20%) 25%, hsl(0, 0%, 40%) 40%, hsl(0, 0%, 35%) 48%, hsl(55, 55%, 50%) 49%, hsl(55, 55%, 50%) 51%, hsl(0, 0%, 35%) 52%, hsl(0, 0%, 40%) 60%, hsl(0, 0%, 20%) 75%, hsl(0, 0%, 40%) 80%, hsl(0, 0%, 20%) 85%, hsl(0, 0%, 40%) 90%, hsl(0, 0%, 20%) 95%, hsl(0, 0%, 40%) 100%);
-  background-image: -o-linear-gradient(left, hsl(0, 0%, 40%) 0%, hsl(0, 0%, 20%) 5%, hsl(0, 0%, 40%) 10%, hsl(0, 0%, 20%) 15%, hsl(0, 0%, 40%) 20%, hsl(0, 0%, 20%) 25%, hsl(0, 0%, 40%) 40%, hsl(0, 0%, 35%) 48%, hsl(55, 55%, 50%) 49%, hsl(55, 55%, 50%) 51%, hsl(0, 0%, 35%) 52%, hsl(0, 0%, 40%) 60%, hsl(0, 0%, 20%) 75%, hsl(0, 0%, 40%) 80%, hsl(0, 0%, 20%) 85%, hsl(0, 0%, 40%) 90%, hsl(0, 0%, 20%) 95%, hsl(0, 0%, 40%) 100%);
-  background-image: -ms-linear-gradient(left, hsl(0, 0%, 40%) 0%, hsl(0, 0%, 20%) 5%, hsl(0, 0%, 40%) 10%, hsl(0, 0%, 20%) 15%, hsl(0, 0%, 40%) 20%, hsl(0, 0%, 20%) 25%, hsl(0, 0%, 40%) 40%, hsl(0, 0%, 35%) 48%, hsl(55, 55%, 50%) 49%, hsl(55, 55%, 50%) 51%, hsl(0, 0%, 35%) 52%, hsl(0, 0%, 40%) 60%, hsl(0, 0%, 20%) 75%, hsl(0, 0%, 40%) 80%, hsl(0, 0%, 20%) 85%, hsl(0, 0%, 40%) 90%, hsl(0, 0%, 20%) 95%, hsl(0, 0%, 40%) 100%);
-  background-image: linear-gradient(left, hsl(0, 0%, 40%) 0%, hsl(0, 0%, 20%) 5%, hsl(0, 0%, 40%) 10%, hsl(0, 0%, 20%) 15%, hsl(0, 0%, 40%) 20%, hsl(0, 0%, 20%) 25%, hsl(0, 0%, 40%) 40%, hsl(0, 0%, 35%) 48%, hsl(55, 55%, 50%) 49%, hsl(55, 55%, 50%) 51%, hsl(0, 0%, 35%) 52%, hsl(0, 0%, 40%) 60%, hsl(0, 0%, 20%) 75%, hsl(0, 0%, 40%) 80%, hsl(0, 0%, 20%) 85%, hsl(0, 0%, 40%) 90%, hsl(0, 0%, 20%) 95%, hsl(0, 0%, 40%) 100%);
-}
-
-.w .checkboxswitch-outer:focus + .checkboxswitch-handle {
-  background-image: -webkit-linear-gradient(left, hsl(0, 0%, 90%) 0%, hsl(0, 0%, 45%) 5%, hsl(0, 0%, 90%) 10%, hsl(0, 0%, 45%) 15%, hsl(0, 0%, 90%) 20%, hsl(0, 0%, 45%) 25%, hsl(0, 0%, 90%) 40%, hsl(0, 0%, 55%) 48%, hsl(55, 90%, 65%) 49%, hsl(55, 90%, 65%) 51%, hsl(0, 0%, 55%) 52%, hsl(0, 0%, 90%) 60%, hsl(0, 0%, 45%) 75%, hsl(0, 0%, 90%) 80%, hsl(0, 0%, 45%) 85%, hsl(0, 0%, 90%) 90%, hsl(0, 0%, 45%) 95%, hsl(0, 0%, 90%) 100%);
-  background-image: -moz-linear-gradient(left, hsl(0, 0%, 90%) 0%, hsl(0, 0%, 45%) 5%, hsl(0, 0%, 90%) 10%, hsl(0, 0%, 45%) 15%, hsl(0, 0%, 90%) 20%, hsl(0, 0%, 45%) 25%, hsl(0, 0%, 90%) 40%, hsl(0, 0%, 55%) 48%, hsl(55, 90%, 65%) 49%, hsl(55, 90%, 65%) 51%, hsl(0, 0%, 55%) 52%, hsl(0, 0%, 90%) 60%, hsl(0, 0%, 45%) 75%, hsl(0, 0%, 90%) 80%, hsl(0, 0%, 45%) 85%, hsl(0, 0%, 90%) 90%, hsl(0, 0%, 45%) 95%, hsl(0, 0%, 90%) 100%);
-  background-image: -o-linear-gradient(left, hsl(0, 0%, 90%) 0%, hsl(0, 0%, 45%) 5%, hsl(0, 0%, 90%) 10%, hsl(0, 0%, 45%) 15%, hsl(0, 0%, 90%) 20%, hsl(0, 0%, 45%) 25%, hsl(0, 0%, 90%) 40%, hsl(0, 0%, 55%) 48%, hsl(55, 90%, 65%) 49%, hsl(55, 90%, 65%) 51%, hsl(0, 0%, 55%) 52%, hsl(0, 0%, 90%) 60%, hsl(0, 0%, 45%) 75%, hsl(0, 0%, 90%) 80%, hsl(0, 0%, 45%) 85%, hsl(0, 0%, 90%) 90%, hsl(0, 0%, 45%) 95%, hsl(0, 0%, 90%) 100%);
-  background-image: -ms-linear-gradient(left, hsl(0, 0%, 90%) 0%, hsl(0, 0%, 45%) 5%, hsl(0, 0%, 90%) 10%, hsl(0, 0%, 45%) 15%, hsl(0, 0%, 90%) 20%, hsl(0, 0%, 45%) 25%, hsl(0, 0%, 90%) 40%, hsl(0, 0%, 55%) 48%, hsl(55, 90%, 65%) 49%, hsl(55, 90%, 65%) 51%, hsl(0, 0%, 55%) 52%, hsl(0, 0%, 90%) 60%, hsl(0, 0%, 45%) 75%, hsl(0, 0%, 90%) 80%, hsl(0, 0%, 45%) 85%, hsl(0, 0%, 90%) 90%, hsl(0, 0%, 45%) 95%, hsl(0, 0%, 90%) 100%);
-  background-image: linear-gradient(left, hsl(0, 0%, 90%) 0%, hsl(0, 0%, 45%) 5%, hsl(0, 0%, 90%) 10%, hsl(0, 0%, 45%) 15%, hsl(0, 0%, 90%) 20%, hsl(0, 0%, 45%) 25%, hsl(0, 0%, 90%) 40%, hsl(0, 0%, 55%) 48%, hsl(55, 90%, 65%) 49%, hsl(55, 90%, 65%) 51%, hsl(0, 0%, 55%) 52%, hsl(0, 0%, 90%) 60%, hsl(0, 0%, 45%) 75%, hsl(0, 0%, 90%) 80%, hsl(0, 0%, 45%) 85%, hsl(0, 0%, 90%) 90%, hsl(0, 0%, 45%) 95%, hsl(0, 0%, 90%) 100%);
-}
-
-.disabled .checkboxswitch-handle {
-  background-image: -webkit-linear-gradient(left, hsl(0, 0%, 40%) 0%, hsl(0, 0%, 20%) 5%, hsl(0, 0%, 40%) 10%, hsl(0, 0%, 20%) 15%, hsl(0, 0%, 40%) 20%, hsl(0, 0%, 20%) 25%, hsl(0, 0%, 40%) 40%, hsl(0, 0%, 35%) 48%, hsl(0, 0%, 35%) 52%, hsl(0, 0%, 40%) 60%, hsl(0, 0%, 20%) 75%, hsl(0, 0%, 40%) 80%, hsl(0, 0%, 20%) 85%, hsl(0, 0%, 40%) 90%, hsl(0, 0%, 20%) 95%, hsl(0, 0%, 40%) 100%);
-  background-image: -moz-linear-gradient(left, hsl(0, 0%, 40%) 0%, hsl(0, 0%, 20%) 5%, hsl(0, 0%, 40%) 10%, hsl(0, 0%, 20%) 15%, hsl(0, 0%, 40%) 20%, hsl(0, 0%, 20%) 25%, hsl(0, 0%, 40%) 40%, hsl(0, 0%, 35%) 48%, hsl(0, 0%, 35%) 52%, hsl(0, 0%, 40%) 60%, hsl(0, 0%, 20%) 75%, hsl(0, 0%, 40%) 80%, hsl(0, 0%, 20%) 85%, hsl(0, 0%, 40%) 90%, hsl(0, 0%, 20%) 95%, hsl(0, 0%, 40%) 100%);
-  background-image: -o-linear-gradient(left, hsl(0, 0%, 40%) 0%, hsl(0, 0%, 20%) 5%, hsl(0, 0%, 40%) 10%, hsl(0, 0%, 20%) 15%, hsl(0, 0%, 40%) 20%, hsl(0, 0%, 20%) 25%, hsl(0, 0%, 40%) 40%, hsl(0, 0%, 35%) 48%, hsl(0, 0%, 35%) 52%, hsl(0, 0%, 40%) 60%, hsl(0, 0%, 20%) 75%, hsl(0, 0%, 40%) 80%, hsl(0, 0%, 20%) 85%, hsl(0, 0%, 40%) 90%, hsl(0, 0%, 20%) 95%, hsl(0, 0%, 40%) 100%);
-  background-image: -ms-linear-gradient(left, hsl(0, 0%, 40%) 0%, hsl(0, 0%, 20%) 5%, hsl(0, 0%, 40%) 10%, hsl(0, 0%, 20%) 15%, hsl(0, 0%, 40%) 20%, hsl(0, 0%, 20%) 25%, hsl(0, 0%, 40%) 40%, hsl(0, 0%, 35%) 48%, hsl(0, 0%, 35%) 52%, hsl(0, 0%, 40%) 60%, hsl(0, 0%, 20%) 75%, hsl(0, 0%, 40%) 80%, hsl(0, 0%, 20%) 85%, hsl(0, 0%, 40%) 90%, hsl(0, 0%, 20%) 95%, hsl(0, 0%, 40%) 100%);
-  background-image: linear-gradient(left, hsl(0, 0%, 40%) 0%, hsl(0, 0%, 20%) 5%, hsl(0, 0%, 40%) 10%, hsl(0, 0%, 20%) 15%, hsl(0, 0%, 40%) 20%, hsl(0, 0%, 20%) 25%, hsl(0, 0%, 40%) 40%, hsl(0, 0%, 35%) 48%, hsl(0, 0%, 35%) 52%, hsl(0, 0%, 40%) 60%, hsl(0, 0%, 20%) 75%, hsl(0, 0%, 40%) 80%, hsl(0, 0%, 20%) 85%, hsl(0, 0%, 40%) 90%, hsl(0, 0%, 20%) 95%, hsl(0, 0%, 40%) 100%);
-}
-.w .disabled .checkboxswitch-handle {
-  background-image: -webkit-linear-gradient(left, hsl(0, 0%, 90%) 0%, hsl(0, 0%, 45%) 5%, hsl(0, 0%, 90%) 10%, hsl(0, 0%, 45%) 15%, hsl(0, 0%, 90%) 20%, hsl(0, 0%, 45%) 25%, hsl(0, 0%, 90%) 40%, hsl(0, 0%, 75%) 48%, hsl(0, 0%, 75%) 52%, hsl(0, 0%, 90%) 60%, hsl(0, 0%, 45%) 75%, hsl(0, 0%, 90%) 80%, hsl(0, 0%, 45%) 85%, hsl(0, 0%, 90%) 90%, hsl(0, 0%, 45%) 95%, hsl(0, 0%, 90%) 100%);
-  background-image: -moz-linear-gradient(left, hsl(0, 0%, 90%) 0%, hsl(0, 0%, 45%) 5%, hsl(0, 0%, 90%) 10%, hsl(0, 0%, 45%) 15%, hsl(0, 0%, 90%) 20%, hsl(0, 0%, 45%) 25%, hsl(0, 0%, 90%) 40%, hsl(0, 0%, 75%) 48%, hsl(0, 0%, 75%) 52%, hsl(0, 0%, 90%) 60%, hsl(0, 0%, 45%) 75%, hsl(0, 0%, 90%) 80%, hsl(0, 0%, 45%) 85%, hsl(0, 0%, 90%) 90%, hsl(0, 0%, 45%) 95%, hsl(0, 0%, 90%) 100%);
-  background-image: -o-linear-gradient(left, hsl(0, 0%, 90%) 0%, hsl(0, 0%, 45%) 5%, hsl(0, 0%, 90%) 10%, hsl(0, 0%, 45%) 15%, hsl(0, 0%, 90%) 20%, hsl(0, 0%, 45%) 25%, hsl(0, 0%, 90%) 40%, hsl(0, 0%, 75%) 48%, hsl(0, 0%, 75%) 52%, hsl(0, 0%, 90%) 60%, hsl(0, 0%, 45%) 75%, hsl(0, 0%, 90%) 80%, hsl(0, 0%, 45%) 85%, hsl(0, 0%, 90%) 90%, hsl(0, 0%, 45%) 95%, hsl(0, 0%, 90%) 100%);
-  background-image: -ms-linear-gradient(left, hsl(0, 0%, 90%) 0%, hsl(0, 0%, 45%) 5%, hsl(0, 0%, 90%) 10%, hsl(0, 0%, 45%) 15%, hsl(0, 0%, 90%) 20%, hsl(0, 0%, 45%) 25%, hsl(0, 0%, 90%) 40%, hsl(0, 0%, 75%) 48%, hsl(0, 0%, 75%) 52%, hsl(0, 0%, 90%) 60%, hsl(0, 0%, 45%) 75%, hsl(0, 0%, 90%) 80%, hsl(0, 0%, 45%) 85%, hsl(0, 0%, 90%) 90%, hsl(0, 0%, 45%) 95%, hsl(0, 0%, 90%) 100%);
-  background-image: linear-gradient(left, hsl(0, 0%, 90%) 0%, hsl(0, 0%, 45%) 5%, hsl(0, 0%, 90%) 10%, hsl(0, 0%, 45%) 15%, hsl(0, 0%, 90%) 20%, hsl(0, 0%, 45%) 25%, hsl(0, 0%, 90%) 40%, hsl(0, 0%, 75%) 48%, hsl(0, 0%, 75%) 52%, hsl(0, 0%, 90%) 60%, hsl(0, 0%, 45%) 75%, hsl(0, 0%, 90%) 80%, hsl(0, 0%, 45%) 85%, hsl(0, 0%, 90%) 90%, hsl(0, 0%, 45%) 95%, hsl(0, 0%, 90%) 100%);
-}
-
-.checkboxswitch-handle.checkboxswitch-down {
-  -webkit-box-shadow: 0 1px 1px hsl(0, 0%, 10%), 0 0 7px -3px hsla(0, 0%, 0%, 0.7);
-  -moz-box-shadow: 0 1px 1px hsl(0, 0%, 10%), 0 0 7px -3px hsla(0, 0%, 0%, 0.7);
-  box-shadow: 0 1px 1px hsl(0, 0%, 10%), 0 0 7px -3px hsla(0, 0%, 0%, 0.7);
-}
-.w .checkboxswitch-handle.checkboxswitch-down {
-  -webkit-box-shadow: 0 1px 1px hsl(0, 0%, 10%), 0 0 7px -3px hsla(0, 0%, 0%, 0.7);
-  -moz-box-shadow: 0 1px 1px hsl(0, 0%, 10%), 0 0 7px -3px hsla(0, 0%, 0%, 0.7);
-  box-shadow: 0 1px 1px hsl(0, 0%, 10%), 0 0 7px -3px hsla(0, 0%, 0%, 0.7);
-}
-
-
-/*
- * Vertical slider switch
- *
- */
-.checkboxswitchV .checkboxswitch-outer {
-  border-radius: 10px / 6px;
-}
-.checkboxswitchV .switch-dragging,
-.checkboxswitchV .checkboxswitch-handle.checkboxswitch-down {
-  cursor: n-resize;
-}
-
-.checkboxswitchV .checkboxswitch {
-  width: 20px;
-  height: 110px;
-  background-image: -webkit-linear-gradient(top, hsl(56, 40%, 32%) 0%, hsl(56, 40%, 32%) 50%, hsl(0, 0%, 23%) 50%, hsl(0, 0%, 23%) 100%);
-  background-image: -moz-linear-gradient(top, hsl(56, 40%, 32%) 0%, hsl(56, 40%, 32%) 50%, hsl(0, 0%, 23%) 50%, hsl(0, 0%, 23%) 100%);
-  background-image: -o-linear-gradient(top, hsl(56, 40%, 32%) 0%, hsl(56, 40%, 32%) 50%, hsl(0, 0%, 23%) 50%, hsl(0, 0%, 23%) 100%);
-  background-image: -ms-linear-gradient(top, hsl(56, 40%, 32%) 0%, hsl(56, 40%, 32%) 50%, hsl(0, 0%, 23%) 50%, hsl(0, 0%, 23%) 100%);
-  background-image: linear-gradient(top, hsl(56, 40%, 32%) 0%, hsl(56, 40%, 32%) 50%, hsl(0, 0%, 23%) 50%, hsl(0, 0%, 23%) 100%);
-}
-.w .checkboxswitchV .checkboxswitch {
-  background-image: -webkit-linear-gradient(top, hsl(55, 55%, 75%) 0%, hsl(55, 55%, 75%) 50%, hsl(0, 0%, 87%) 50%, hsl(0, 0%, 87%) 100%);
-  background-image: -moz-linear-gradient(top, hsl(55, 55%, 75%) 0%, hsl(55, 55%, 75%) 50%, hsl(0, 0%, 87%) 50%, hsl(0, 0%, 87%) 100%);
-  background-image: -o-linear-gradient(top, hsl(55, 55%, 75%) 0%, hsl(55, 55%, 75%) 50%, hsl(0, 0%, 87%) 50%, hsl(0, 0%, 87%) 100%);
-  background-image: -ms-linear-gradient(top, hsl(55, 55%, 75%) 0%, hsl(55, 55%, 75%) 50%, hsl(0, 0%, 87%) 50%, hsl(0, 0%, 87%) 100%);
-  background-image: linear-gradient(top, hsl(55, 55%, 75%) 0%, hsl(55, 55%, 75%) 50%, hsl(0, 0%, 87%) 50%, hsl(0, 0%, 87%) 100%);
-}
-
-.checkboxswitchV .checkboxswitch:before,
-.checkboxswitchV .checkboxswitch:after {
-  font-size: 9px;
-}
-
-.checkboxswitchV .checkboxswitch:before {
-  left: 2px;
-  top: 8px;
-}
-
-.checkboxswitchV .checkboxswitch:after {
-  right: auto;
-  bottom: 6px;
-}
-
-.checkboxswitchV .checkboxswitch-handle {
-  top: -40px; /* place the handle in the middle of the switch slider */
-  width: 24px;
-  height: 40px;
-  background-image: -webkit-linear-gradient(top, hsl(0, 0%, 40%) 0%, hsl(0, 0%, 20%) 5%, hsl(0, 0%, 40%) 10%, hsl(0, 0%, 20%) 15%, hsl(0, 0%, 40%) 20%, hsl(0, 0%, 20%) 25%, hsl(0, 0%, 40%) 40%, hsl(0, 0%, 35%) 48%, hsl(55, 40%, 40%) 49%, hsl(55, 40%, 40%) 51%, hsl(0, 0%, 35%) 52%, hsl(0, 0%, 40%) 60%, hsl(0, 0%, 20%) 75%, hsl(0, 0%, 40%) 80%, hsl(0, 0%, 20%) 85%, hsl(0, 0%, 40%) 90%, hsl(0, 0%, 20%) 95%, hsl(0, 0%, 40%) 100%);
-  background-image: -moz-linear-gradient(top, hsl(0, 0%, 40%) 0%, hsl(0, 0%, 20%) 5%, hsl(0, 0%, 40%) 10%, hsl(0, 0%, 20%) 15%, hsl(0, 0%, 40%) 20%, hsl(0, 0%, 20%) 25%, hsl(0, 0%, 40%) 40%, hsl(0, 0%, 35%) 48%, hsl(55, 40%, 40%) 49%, hsl(55, 40%, 40%) 51%, hsl(0, 0%, 35%) 52%, hsl(0, 0%, 40%) 60%, hsl(0, 0%, 20%) 75%, hsl(0, 0%, 40%) 80%, hsl(0, 0%, 20%) 85%, hsl(0, 0%, 40%) 90%, hsl(0, 0%, 20%) 95%, hsl(0, 0%, 40%) 100%);
-  background-image: -o-linear-gradient(top, hsl(0, 0%, 40%) 0%, hsl(0, 0%, 20%) 5%, hsl(0, 0%, 40%) 10%, hsl(0, 0%, 20%) 15%, hsl(0, 0%, 40%) 20%, hsl(0, 0%, 20%) 25%, hsl(0, 0%, 40%) 40%, hsl(0, 0%, 35%) 48%, hsl(55, 40%, 40%) 49%, hsl(55, 40%, 40%) 51%, hsl(0, 0%, 35%) 52%, hsl(0, 0%, 40%) 60%, hsl(0, 0%, 20%) 75%, hsl(0, 0%, 40%) 80%, hsl(0, 0%, 20%) 85%, hsl(0, 0%, 40%) 90%, hsl(0, 0%, 20%) 95%, hsl(0, 0%, 40%) 100%);
-  background-image: -ms-linear-gradient(top, hsl(0, 0%, 40%) 0%, hsl(0, 0%, 20%) 5%, hsl(0, 0%, 40%) 10%, hsl(0, 0%, 20%) 15%, hsl(0, 0%, 40%) 20%, hsl(0, 0%, 20%) 25%, hsl(0, 0%, 40%) 40%, hsl(0, 0%, 35%) 48%, hsl(55, 40%, 40%) 49%, hsl(55, 40%, 40%) 51%, hsl(0, 0%, 35%) 52%, hsl(0, 0%, 40%) 60%, hsl(0, 0%, 20%) 75%, hsl(0, 0%, 40%) 80%, hsl(0, 0%, 20%) 85%, hsl(0, 0%, 40%) 90%, hsl(0, 0%, 20%) 95%, hsl(0, 0%, 40%) 100%);
-  background-image: linear-gradient(top, hsl(0, 0%, 40%) 0%, hsl(0, 0%, 20%) 5%, hsl(0, 0%, 40%) 10%, hsl(0, 0%, 20%) 15%, hsl(0, 0%, 40%) 20%, hsl(0, 0%, 20%) 25%, hsl(0, 0%, 40%) 40%, hsl(0, 0%, 35%) 48%, hsl(55, 40%, 40%) 49%, hsl(55, 40%, 40%) 51%, hsl(0, 0%, 35%) 52%, hsl(0, 0%, 40%) 60%, hsl(0, 0%, 20%) 75%, hsl(0, 0%, 40%) 80%, hsl(0, 0%, 20%) 85%, hsl(0, 0%, 40%) 90%, hsl(0, 0%, 20%) 95%, hsl(0, 0%, 40%) 100%);
-  border-radius: 7px / 10px;
-}
-.w .checkboxswitchV .checkboxswitch-handle {
-  background-image: -webkit-linear-gradient(top, hsl(0, 0%, 90%) 0%, hsl(0, 0%, 45%) 5%, hsl(0, 0%, 90%) 10%, hsl(0, 0%, 45%) 15%, hsl(0, 0%, 90%) 20%, hsl(0, 0%, 45%) 25%, hsl(0, 0%, 90%) 40%, hsl(0, 0%, 55%) 48%, hsl(55, 55%, 65%) 49%, hsl(55, 55%, 65%) 51%, hsl(0, 0%, 55%) 52%, hsl(0, 0%, 90%) 60%, hsl(0, 0%, 45%) 75%, hsl(0, 0%, 90%) 80%, hsl(0, 0%, 45%) 85%, hsl(0, 0%, 90%) 90%, hsl(0, 0%, 45%) 95%, hsl(0, 0%, 90%) 100%);
-  background-image: -moz-linear-gradient(top, hsl(0, 0%, 90%) 0%, hsl(0, 0%, 45%) 5%, hsl(0, 0%, 90%) 10%, hsl(0, 0%, 45%) 15%, hsl(0, 0%, 90%) 20%, hsl(0, 0%, 45%) 25%, hsl(0, 0%, 90%) 40%, hsl(0, 0%, 55%) 48%, hsl(55, 55%, 65%) 49%, hsl(55, 55%, 65%) 51%, hsl(0, 0%, 55%) 52%, hsl(0, 0%, 90%) 60%, hsl(0, 0%, 45%) 75%, hsl(0, 0%, 90%) 80%, hsl(0, 0%, 45%) 85%, hsl(0, 0%, 90%) 90%, hsl(0, 0%, 45%) 95%, hsl(0, 0%, 90%) 100%);
-  background-image: -o-linear-gradient(top, hsl(0, 0%, 90%) 0%, hsl(0, 0%, 45%) 5%, hsl(0, 0%, 90%) 10%, hsl(0, 0%, 45%) 15%, hsl(0, 0%, 90%) 20%, hsl(0, 0%, 45%) 25%, hsl(0, 0%, 90%) 40%, hsl(0, 0%, 55%) 48%, hsl(55, 55%, 65%) 49%, hsl(55, 55%, 65%) 51%, hsl(0, 0%, 55%) 52%, hsl(0, 0%, 90%) 60%, hsl(0, 0%, 45%) 75%, hsl(0, 0%, 90%) 80%, hsl(0, 0%, 45%) 85%, hsl(0, 0%, 90%) 90%, hsl(0, 0%, 45%) 95%, hsl(0, 0%, 90%) 100%);
-  background-image: -ms-linear-gradient(top, hsl(0, 0%, 90%) 0%, hsl(0, 0%, 45%) 5%, hsl(0, 0%, 90%) 10%, hsl(0, 0%, 45%) 15%, hsl(0, 0%, 90%) 20%, hsl(0, 0%, 45%) 25%, hsl(0, 0%, 90%) 40%, hsl(0, 0%, 55%) 48%, hsl(55, 55%, 65%) 49%, hsl(55, 55%, 65%) 51%, hsl(0, 0%, 55%) 52%, hsl(0, 0%, 90%) 60%, hsl(0, 0%, 45%) 75%, hsl(0, 0%, 90%) 80%, hsl(0, 0%, 45%) 85%, hsl(0, 0%, 90%) 90%, hsl(0, 0%, 45%) 95%, hsl(0, 0%, 90%) 100%);
-  background-image: linear-gradient(top, hsl(0, 0%, 90%) 0%, hsl(0, 0%, 45%) 5%, hsl(0, 0%, 90%) 10%, hsl(0, 0%, 45%) 15%, hsl(0, 0%, 90%) 20%, hsl(0, 0%, 45%) 25%, hsl(0, 0%, 90%) 40%, hsl(0, 0%, 55%) 48%, hsl(55, 55%, 65%) 49%, hsl(55, 55%, 65%) 51%, hsl(0, 0%, 55%) 52%, hsl(0, 0%, 90%) 60%, hsl(0, 0%, 45%) 75%, hsl(0, 0%, 90%) 80%, hsl(0, 0%, 45%) 85%, hsl(0, 0%, 90%) 90%, hsl(0, 0%, 45%) 95%, hsl(0, 0%, 90%) 100%);
-}
-
-/* focusable handle has a slightly lighter yellow line */
-.checkboxswitchV .checkboxswitch-outer:focus + .checkboxswitch-handle {
-  background-image: -webkit-linear-gradient(top, hsl(0, 0%, 40%) 0%, hsl(0, 0%, 20%) 5%, hsl(0, 0%, 40%) 10%, hsl(0, 0%, 20%) 15%, hsl(0, 0%, 40%) 20%, hsl(0, 0%, 20%) 25%, hsl(0, 0%, 40%) 40%, hsl(0, 0%, 35%) 48%, hsl(55, 55%, 50%) 49%, hsl(55, 55%, 50%) 51%, hsl(0, 0%, 35%) 52%, hsl(0, 0%, 40%) 60%, hsl(0, 0%, 20%) 75%, hsl(0, 0%, 40%) 80%, hsl(0, 0%, 20%) 85%, hsl(0, 0%, 40%) 90%, hsl(0, 0%, 20%) 95%, hsl(0, 0%, 40%) 100%);
-  background-image: -moz-linear-gradient(top, hsl(0, 0%, 40%) 0%, hsl(0, 0%, 20%) 5%, hsl(0, 0%, 40%) 10%, hsl(0, 0%, 20%) 15%, hsl(0, 0%, 40%) 20%, hsl(0, 0%, 20%) 25%, hsl(0, 0%, 40%) 40%, hsl(0, 0%, 35%) 48%, hsl(55, 55%, 50%) 49%, hsl(55, 55%, 50%) 51%, hsl(0, 0%, 35%) 52%, hsl(0, 0%, 40%) 60%, hsl(0, 0%, 20%) 75%, hsl(0, 0%, 40%) 80%, hsl(0, 0%, 20%) 85%, hsl(0, 0%, 40%) 90%, hsl(0, 0%, 20%) 95%, hsl(0, 0%, 40%) 100%);
-  background-image: -o-linear-gradient(top, hsl(0, 0%, 40%) 0%, hsl(0, 0%, 20%) 5%, hsl(0, 0%, 40%) 10%, hsl(0, 0%, 20%) 15%, hsl(0, 0%, 40%) 20%, hsl(0, 0%, 20%) 25%, hsl(0, 0%, 40%) 40%, hsl(0, 0%, 35%) 48%, hsl(55, 55%, 50%) 49%, hsl(55, 55%, 50%) 51%, hsl(0, 0%, 35%) 52%, hsl(0, 0%, 40%) 60%, hsl(0, 0%, 20%) 75%, hsl(0, 0%, 40%) 80%, hsl(0, 0%, 20%) 85%, hsl(0, 0%, 40%) 90%, hsl(0, 0%, 20%) 95%, hsl(0, 0%, 40%) 100%);
-  background-image: -ms-linear-gradient(top, hsl(0, 0%, 40%) 0%, hsl(0, 0%, 20%) 5%, hsl(0, 0%, 40%) 10%, hsl(0, 0%, 20%) 15%, hsl(0, 0%, 40%) 20%, hsl(0, 0%, 20%) 25%, hsl(0, 0%, 40%) 40%, hsl(0, 0%, 35%) 48%, hsl(55, 55%, 50%) 49%, hsl(55, 55%, 50%) 51%, hsl(0, 0%, 35%) 52%, hsl(0, 0%, 40%) 60%, hsl(0, 0%, 20%) 75%, hsl(0, 0%, 40%) 80%, hsl(0, 0%, 20%) 85%, hsl(0, 0%, 40%) 90%, hsl(0, 0%, 20%) 95%, hsl(0, 0%, 40%) 100%);
-  background-image: linear-gradient(top, hsl(0, 0%, 40%) 0%, hsl(0, 0%, 20%) 5%, hsl(0, 0%, 40%) 10%, hsl(0, 0%, 20%) 15%, hsl(0, 0%, 40%) 20%, hsl(0, 0%, 20%) 25%, hsl(0, 0%, 40%) 40%, hsl(0, 0%, 35%) 48%, hsl(55, 55%, 50%) 49%, hsl(55, 55%, 50%) 51%, hsl(0, 0%, 35%) 52%, hsl(0, 0%, 40%) 60%, hsl(0, 0%, 20%) 75%, hsl(0, 0%, 40%) 80%, hsl(0, 0%, 20%) 85%, hsl(0, 0%, 40%) 90%, hsl(0, 0%, 20%) 95%, hsl(0, 0%, 40%) 100%);
-}
-
-.w .checkboxswitchV .checkboxswitch-outer:focus + .checkboxswitch-handle {
-  background-image: -webkit-linear-gradient(top, hsl(0, 0%, 90%) 0%, hsl(0, 0%, 45%) 5%, hsl(0, 0%, 90%) 10%, hsl(0, 0%, 45%) 15%, hsl(0, 0%, 90%) 20%, hsl(0, 0%, 45%) 25%, hsl(0, 0%, 90%) 40%, hsl(0, 0%, 55%) 48%, hsl(55, 90%, 65%) 49%, hsl(55, 90%, 65%) 51%, hsl(0, 0%, 55%) 52%, hsl(0, 0%, 90%) 60%, hsl(0, 0%, 45%) 75%, hsl(0, 0%, 90%) 80%, hsl(0, 0%, 45%) 85%, hsl(0, 0%, 90%) 90%, hsl(0, 0%, 45%) 95%, hsl(0, 0%, 90%) 100%);
-  background-image: -moz-linear-gradient(top, hsl(0, 0%, 90%) 0%, hsl(0, 0%, 45%) 5%, hsl(0, 0%, 90%) 10%, hsl(0, 0%, 45%) 15%, hsl(0, 0%, 90%) 20%, hsl(0, 0%, 45%) 25%, hsl(0, 0%, 90%) 40%, hsl(0, 0%, 55%) 48%, hsl(55, 90%, 65%) 49%, hsl(55, 90%, 65%) 51%, hsl(0, 0%, 55%) 52%, hsl(0, 0%, 90%) 60%, hsl(0, 0%, 45%) 75%, hsl(0, 0%, 90%) 80%, hsl(0, 0%, 45%) 85%, hsl(0, 0%, 90%) 90%, hsl(0, 0%, 45%) 95%, hsl(0, 0%, 90%) 100%);
-  background-image: -o-linear-gradient(top, hsl(0, 0%, 90%) 0%, hsl(0, 0%, 45%) 5%, hsl(0, 0%, 90%) 10%, hsl(0, 0%, 45%) 15%, hsl(0, 0%, 90%) 20%, hsl(0, 0%, 45%) 25%, hsl(0, 0%, 90%) 40%, hsl(0, 0%, 55%) 48%, hsl(55, 90%, 65%) 49%, hsl(55, 90%, 65%) 51%, hsl(0, 0%, 55%) 52%, hsl(0, 0%, 90%) 60%, hsl(0, 0%, 45%) 75%, hsl(0, 0%, 90%) 80%, hsl(0, 0%, 45%) 85%, hsl(0, 0%, 90%) 90%, hsl(0, 0%, 45%) 95%, hsl(0, 0%, 90%) 100%);
-  background-image: -ms-linear-gradient(top, hsl(0, 0%, 90%) 0%, hsl(0, 0%, 45%) 5%, hsl(0, 0%, 90%) 10%, hsl(0, 0%, 45%) 15%, hsl(0, 0%, 90%) 20%, hsl(0, 0%, 45%) 25%, hsl(0, 0%, 90%) 40%, hsl(0, 0%, 55%) 48%, hsl(55, 90%, 65%) 49%, hsl(55, 90%, 65%) 51%, hsl(0, 0%, 55%) 52%, hsl(0, 0%, 90%) 60%, hsl(0, 0%, 45%) 75%, hsl(0, 0%, 90%) 80%, hsl(0, 0%, 45%) 85%, hsl(0, 0%, 90%) 90%, hsl(0, 0%, 45%) 95%, hsl(0, 0%, 90%) 100%);
-  background-image: linear-gradient(top, hsl(0, 0%, 90%) 0%, hsl(0, 0%, 45%) 5%, hsl(0, 0%, 90%) 10%, hsl(0, 0%, 45%) 15%, hsl(0, 0%, 90%) 20%, hsl(0, 0%, 45%) 25%, hsl(0, 0%, 90%) 40%, hsl(0, 0%, 55%) 48%, hsl(55, 90%, 65%) 49%, hsl(55, 90%, 65%) 51%, hsl(0, 0%, 55%) 52%, hsl(0, 0%, 90%) 60%, hsl(0, 0%, 45%) 75%, hsl(0, 0%, 90%) 80%, hsl(0, 0%, 45%) 85%, hsl(0, 0%, 90%) 90%, hsl(0, 0%, 45%) 95%, hsl(0, 0%, 90%) 100%);
-}
-
-.disabled.checkboxswitchV .checkboxswitch-handle {
-  background-image: -webkit-linear-gradient(top, hsl(0, 0%, 40%) 0%, hsl(0, 0%, 20%) 5%, hsl(0, 0%, 40%) 10%, hsl(0, 0%, 20%) 15%, hsl(0, 0%, 40%) 20%, hsl(0, 0%, 20%) 25%, hsl(0, 0%, 40%) 40%, hsl(0, 0%, 35%) 48%, hsl(0, 0%, 35%) 52%, hsl(0, 0%, 40%) 60%, hsl(0, 0%, 20%) 75%, hsl(0, 0%, 40%) 80%, hsl(0, 0%, 20%) 85%, hsl(0, 0%, 40%) 90%, hsl(0, 0%, 20%) 95%, hsl(0, 0%, 40%) 100%);
-  background-image: -moz-linear-gradient(top, hsl(0, 0%, 40%) 0%, hsl(0, 0%, 20%) 5%, hsl(0, 0%, 40%) 10%, hsl(0, 0%, 20%) 15%, hsl(0, 0%, 40%) 20%, hsl(0, 0%, 20%) 25%, hsl(0, 0%, 40%) 40%, hsl(0, 0%, 35%) 48%, hsl(0, 0%, 35%) 52%, hsl(0, 0%, 40%) 60%, hsl(0, 0%, 20%) 75%, hsl(0, 0%, 40%) 80%, hsl(0, 0%, 20%) 85%, hsl(0, 0%, 40%) 90%, hsl(0, 0%, 20%) 95%, hsl(0, 0%, 40%) 100%);
-  background-image: -o-linear-gradient(top, hsl(0, 0%, 40%) 0%, hsl(0, 0%, 20%) 5%, hsl(0, 0%, 40%) 10%, hsl(0, 0%, 20%) 15%, hsl(0, 0%, 40%) 20%, hsl(0, 0%, 20%) 25%, hsl(0, 0%, 40%) 40%, hsl(0, 0%, 35%) 48%, hsl(0, 0%, 35%) 52%, hsl(0, 0%, 40%) 60%, hsl(0, 0%, 20%) 75%, hsl(0, 0%, 40%) 80%, hsl(0, 0%, 20%) 85%, hsl(0, 0%, 40%) 90%, hsl(0, 0%, 20%) 95%, hsl(0, 0%, 40%) 100%);
-  background-image: -ms-linear-gradient(top, hsl(0, 0%, 40%) 0%, hsl(0, 0%, 20%) 5%, hsl(0, 0%, 40%) 10%, hsl(0, 0%, 20%) 15%, hsl(0, 0%, 40%) 20%, hsl(0, 0%, 20%) 25%, hsl(0, 0%, 40%) 40%, hsl(0, 0%, 35%) 48%, hsl(0, 0%, 35%) 52%, hsl(0, 0%, 40%) 60%, hsl(0, 0%, 20%) 75%, hsl(0, 0%, 40%) 80%, hsl(0, 0%, 20%) 85%, hsl(0, 0%, 40%) 90%, hsl(0, 0%, 20%) 95%, hsl(0, 0%, 40%) 100%);
-  background-image: linear-gradient(top, hsl(0, 0%, 40%) 0%, hsl(0, 0%, 20%) 5%, hsl(0, 0%, 40%) 10%, hsl(0, 0%, 20%) 15%, hsl(0, 0%, 40%) 20%, hsl(0, 0%, 20%) 25%, hsl(0, 0%, 40%) 40%, hsl(0, 0%, 35%) 48%, hsl(0, 0%, 35%) 52%, hsl(0, 0%, 40%) 60%, hsl(0, 0%, 20%) 75%, hsl(0, 0%, 40%) 80%, hsl(0, 0%, 20%) 85%, hsl(0, 0%, 40%) 90%, hsl(0, 0%, 20%) 95%, hsl(0, 0%, 40%) 100%);
-}
-
-.w .disabled.checkboxswitchV .checkboxswitch-handle {
-  background-image: -webkit-linear-gradient(top, hsl(0, 0%, 90%) 0%, hsl(0, 0%, 45%) 5%, hsl(0, 0%, 90%) 10%, hsl(0, 0%, 45%) 15%, hsl(0, 0%, 90%) 20%, hsl(0, 0%, 45%) 25%, hsl(0, 0%, 90%) 40%, hsl(0, 0%, 75%) 48%, hsl(0, 0%, 75%) 52%, hsl(0, 0%, 90%) 60%, hsl(0, 0%, 45%) 75%, hsl(0, 0%, 90%) 80%, hsl(0, 0%, 45%) 85%, hsl(0, 0%, 90%) 90%, hsl(0, 0%, 45%) 95%, hsl(0, 0%, 90%) 100%);
-  background-image: -moz-linear-gradient(top, hsl(0, 0%, 90%) 0%, hsl(0, 0%, 45%) 5%, hsl(0, 0%, 90%) 10%, hsl(0, 0%, 45%) 15%, hsl(0, 0%, 90%) 20%, hsl(0, 0%, 45%) 25%, hsl(0, 0%, 90%) 40%, hsl(0, 0%, 75%) 48%, hsl(0, 0%, 75%) 52%, hsl(0, 0%, 90%) 60%, hsl(0, 0%, 45%) 75%, hsl(0, 0%, 90%) 80%, hsl(0, 0%, 45%) 85%, hsl(0, 0%, 90%) 90%, hsl(0, 0%, 45%) 95%, hsl(0, 0%, 90%) 100%);
-  background-image: -o-linear-gradient(top, hsl(0, 0%, 90%) 0%, hsl(0, 0%, 45%) 5%, hsl(0, 0%, 90%) 10%, hsl(0, 0%, 45%) 15%, hsl(0, 0%, 90%) 20%, hsl(0, 0%, 45%) 25%, hsl(0, 0%, 90%) 40%, hsl(0, 0%, 75%) 48%, hsl(0, 0%, 75%) 52%, hsl(0, 0%, 90%) 60%, hsl(0, 0%, 45%) 75%, hsl(0, 0%, 90%) 80%, hsl(0, 0%, 45%) 85%, hsl(0, 0%, 90%) 90%, hsl(0, 0%, 45%) 95%, hsl(0, 0%, 90%) 100%);
-  background-image: -ms-linear-gradient(top, hsl(0, 0%, 90%) 0%, hsl(0, 0%, 45%) 5%, hsl(0, 0%, 90%) 10%, hsl(0, 0%, 45%) 15%, hsl(0, 0%, 90%) 20%, hsl(0, 0%, 45%) 25%, hsl(0, 0%, 90%) 40%, hsl(0, 0%, 75%) 48%, hsl(0, 0%, 75%) 52%, hsl(0, 0%, 90%) 60%, hsl(0, 0%, 45%) 75%, hsl(0, 0%, 90%) 80%, hsl(0, 0%, 45%) 85%, hsl(0, 0%, 90%) 90%, hsl(0, 0%, 45%) 95%, hsl(0, 0%, 90%) 100%);
-  background-image: linear-gradient(top, hsl(0, 0%, 90%) 0%, hsl(0, 0%, 45%) 5%, hsl(0, 0%, 90%) 10%, hsl(0, 0%, 45%) 15%, hsl(0, 0%, 90%) 20%, hsl(0, 0%, 45%) 25%, hsl(0, 0%, 90%) 40%, hsl(0, 0%, 75%) 48%, hsl(0, 0%, 75%) 52%, hsl(0, 0%, 90%) 60%, hsl(0, 0%, 45%) 75%, hsl(0, 0%, 90%) 80%, hsl(0, 0%, 45%) 85%, hsl(0, 0%, 90%) 90%, hsl(0, 0%, 45%) 95%, hsl(0, 0%, 90%) 100%);
-}
-
-.btntoggle,
-.btntoggle:focus {
-  outline: none;
-}
-
+/* Toggle button */
 .btntoggle {
-  color: hsla(55, 50%, 50%, .6);
-  font-size: 16px;
+  min-height: 2.4vw;
+  color: #bab026;
+  font-size: 1.5vw;
   position: relative;
-  display: inline-block;
-  padding: 6px 14px 4px;
-  border: 2px solid hsl(0,0%,18%); 
-  border-top: 3px solid hsl(0,0%,26%);
-  -webkit-border-radius: 6px;
-  -moz-border-radius: 6px;
-  border-radius: 6px;
+  padding: 0.5625vw 1.3125vw 0.375vw;
+  border: 0.1875vw solid #262626;
+  border-top: 0.28125vw solid #4a4a4a;
+  border-radius: 0.5625vw;
   cursor: pointer;
-  background: hsl(0,0%,28%);
-  -webkit-box-shadow: 0 -2px 1px hsl(0, 0%, 17%);
-  -moz-box-shadow: 0 -2px 1px hsl(0, 0%, 17%);
-  box-shadow: 0 -2px 1px hsl(0, 0%, 17%);
+  background: #454545;
+  -webkit-box-shadow: 0 -0.1875vw 0.09375vw #262626;
+  -moz-box-shadow: 0 -0.1875vw 0.09375vw #262626;
+  -o-box-shadow: 0 -0.1875vw 0.09375vw #262626;
+  box-shadow: 0 -0.1875vw 0.09375vw #262626;
   -o-user-select: none;
   -moz-user-select: none;
   -webkit-user-select: none;
   user-select: none;
-  margin-top: 2px;
+  margin-top: 0.1875vw;
   vertical-align: top;
+  outline: none;
 }
-
-.w .btntoggle {
-  background: hsl(0,0%,80%);
-  border-color: hsla(0,0%,45%,.6);
-  border-top-color: hsl(0,0%,77%);
-  -webkit-box-shadow: 0 -2px 1px hsl(0, 0%, 52%);
-  -moz-box-shadow: 0 -2px 1px hsl(0, 0%, 52%);
-  box-shadow: 0 -2px 1px hsl(0, 0%, 52%);
-}
-
 .btntoggle.frm2,
 .btntoggle.frm3 {
-  border-top: 2px solid hsl(0,0%,26%);
-  border-bottom: 3px solid hsl(0,0%,20%);
-  color: hsla(55, 50%, 50%, .8);
-  text-shadow: 0 -1px 1px hsl(0, 0%, 5%), 0 0 1px hsl(55,50%,50%);
+  border-top-width: 0.1875vw;
+  border-bottom: 0.28125vw solid #262626;
+  color: rgba(191, 181, 64, 0.8);
+  text-shadow: 0 -0.09375vw 0.09375vw #212121, 0 0 0.09375vw #bfb540;
 }
-.w .btntoggle.frm2,
-.w .btntoggle.frm3 {
-  border-top-color: hsl(0,0%,73%);
-  border-bottom-color: hsl(0,0%,75%);
-}
-
 .btntoggle.frm3,
 .btntoggle.frm4 {
-  padding-bottom: 4px;
+  padding-bottom: 0.375vw;
   margin-top: 0;
-  margin-bottom: 2px;
-  border: 2px solid hsl(0,0%,18%); 
-  border-bottom: 3px solid hsl(0,0%,24%);
-  -webkit-box-shadow: 0 2px hsl(0, 0%, 17%);
-  -moz-box-shadow: 0 2px hsl(0, 0%, 17%);
-  box-shadow: 0 2px hsl(0, 0%, 17%);
-}
-.btntoggle.frm3 {
-  border-bottom-color: hsl(0,0%,25%);
+  margin-bottom: 0.1875vw;
+  border: 0.1875vw solid #262626;
+  border-bottom: 0.28125vw solid #333333;
+  -webkit-box-shadow: 0 0.1875vw #262626;
+  -moz-box-shadow: 0 0.1875vw #262626;
+  -o-box-shadow: 0 0.1875vw #262626;
+  box-shadow: 0 0.1875vw #262626;
 }
 .btntoggle.frm4 {
-  text-shadow: 0 -1px 1px hsl(0, 0%, 5%), 1px 1px 6px hsla(55,50%,50%,.5), -1px -1px 6px hsla(55,50%,50%,.5);
-  color: hsl(55, 50%, 50%);
+  text-shadow: 0 -0.09375vw 0.09375vw #212121, 0.09375vw 0.09375vw 0.5625vw rgba(191, 181, 64, 0.5), -0.09375vw -0.09375vw 0.5625vw rgba(191, 181, 64, 0.5);
+  color: #bfb540;
 }
-.w .btntoggle.frm3,
-.w .btntoggle.frm4 {
-  border-color: hsla(0,0%,45%,.6);
-  border-bottom-color: hsl(0,0%,75%);
-  -webkit-box-shadow: 0 2px hsl(0, 0%, 52%);
-  -moz-box-shadow: 0 2px hsl(0, 0%, 52%);
-  box-shadow: 0 2px hsl(0, 0%, 52%);
-}
-
-.w .btntoggle {
-  color: hsl(60, 100%, 15%);
-  text-shadow:
-    1px 1px 0px white,
-    -1px -1px 0px white,
-    1px -1px 0px white,
-    -1px 1px 0px white;
-}
-.w .btntoggle.frm3,
-.w .btntoggle.frm4 {
-  color: hsl(60, 100%, 30%);
-  text-shadow:
-    1px 1px 1px hsl(60, 100%, 90%),
-    -1px -1px 1px hsl(60, 100%, 90%),
-    1px -1px 1px hsl(60, 100%, 90%),
-    -1px 1px 1px hsl(60, 100%, 90%);
-}
-
 .btntoggle:before,
 .btntoggle:after {
   content: '';
   position: absolute;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
+  border-radius: 0.46875vw;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
 }
-
 .btntoggle:before {
-  top: -8px;
-  bottom: -5px;
-  left: -5px;
-  right: -5px;
-  -webkit-border-radius: 8px;
-  -moz-border-radius: 8px;
-  border-radius: 8px;
-  background: hsl(0, 0%, 20%);
-  background: -webkit-linear-gradient(top, hsl(0, 0%, 18%), hsl(0, 0%, 32%));
-  background: -moz-linear-gradient(top, hsl(0, 0%, 18%), hsl(0, 0%, 32%));
-  background: -o-linear-gradient(top, hsl(0, 0%, 18%), hsl(0, 0%, 32%));
-  background: -ms-linear-gradient(top, hsl(0, 0%, 18%), hsl(0, 0%, 32%));
-  background: linear-gradient(top, hsl(0, 0%, 18%), hsl(0, 0%, 32%));
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#2e2e2e',endColorstr='#525252',GradientType=0);
+  top: -0.75vw;
+  right: -0.46875vw;
+  bottom: -0.46875vw;
+  left: -0.46875vw;
+  border-radius: 0.75vw;
+  background: #454545;
+  background: -webkit-linear-gradient(top, #262626, #646464);
+  background: -moz-linear-gradient(top, #262626, #646464);
+  background: -o-linear-gradient(top, #262626, #646464);
+  background: -ms-linear-gradient(top, #262626, #646464);
+  background: linear-gradient(top, #262626, #646464);
   z-index: -1;
 }
 .btntoggle.frm2:before {
-  top: -7px;
-  bottom: -6px;
+  top: -0.65625vw;
+  bottom: -0.5625vw;
 }
 .btntoggle.frm3:before,
 .btntoggle.frm4:before {
-  top: -5px;
-  bottom: -8px;
-}
-
-.w .btntoggle:before {
-  background: white;
-  background: -webkit-linear-gradient(top, hsl(0, 0%, 70%), hsl(0, 100%, 100%));
-  background: -moz-linear-gradient(top, hsl(0, 0%, 70%), hsl(0, 100%, 100%));
-  background: -o-linear-gradient(top, hsl(0, 0%, 70%), hsl(0, 100%, 100%));
-  background: -ms-linear-gradient(top, hsl(0, 0%, 70%), hsl(0, 100%, 100%));
-  background: linear-gradient(top, hsl(0, 0%, 70%), hsl(0, 100%, 100%));
-}
-
-.btntoggle:after {
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  top: -0.46875vw;
+  bottom: -0.75vw;
 }
 .btntoggle:after {
-  border: 2px solid hsla(0, 0%, 20%, .5);
-  border-top: 1px solid hsl(0, 0%, 30%);
+  border: 0.1875vw solid rgba(38, 38, 38, 0.25);
+  border-top: 0.09375vw solid #5e5e5e;
   border-bottom: none;
-  background: -moz-linear-gradient(top, hsla(0, 0%, 17%,.6) 40%, hsla(0, 0%, 32%, .1) 100%);
-  background: -webkit-linear-gradient(top, hsla(0, 0%, 17%,.6) 40%, hsla(0, 0%, 32%, .1) 100%);
-  background: -o-linear-gradient(top, hsla(0, 0%, 17%,.6) 40%, hsla(0, 0%, 32%, .1) 100%);
-  background: -ms-linear-gradient(top, hsla(0, 0%, 17%,.6) 40%, hsla(0, 0%, 32%, .1) 100%);
-  background: linear-gradient(top, hsla(0, 0%, 17%,.6) 40%, hsla(0, 0%, 32%, .1) 100%);
+  background: -webkit-linear-gradient(top, rgba(33, 33, 33, 0.5) 45%, rgba(100, 100, 100, 0.5) 100%);
+  background: -moz-linear-gradient(top, rgba(33, 33, 33, 0.5) 45%, rgba(100, 100, 100, 0.5) 100%);
+  background: -o-linear-gradient(top, rgba(33, 33, 33, 0.5) 45%, rgba(100, 100, 100, 0.5) 100%);
+  background: -ms-linear-gradient(top, rgba(33, 33, 33, 0.5) 45%, rgba(100, 100, 100, 0.5) 100%);
+  background: linear-gradient(top, rgba(33, 33, 33, 0.5) 45%, rgba(100, 100, 100, 0.5) 100%);
 }
 .btntoggle.frm2:after {
-  -webkit-box-shadow: 0px 4px 8px 0px hsla(0, 0%, 0%, .2);
-  -moz-box-shadow: 0px 4px 8px 0px hsla(0, 0%, 0%, .2);
-  box-shadow: 0px 4px 8px 0px hsla(0, 0%, 0%, .2);
+  border-top-color: #575757;
+  -webkit-box-shadow: 0 0.375vw 0.75vw 0 rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0 0.375vw 0.75vw 0 rgba(0, 0, 0, 0.2);
+  -o-box-shadow: 0 0.375vw 0.75vw 0 rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0.375vw 0.75vw 0 rgba(0, 0, 0, 0.2);
+  background: -webkit-linear-gradient(top, rgba(36, 36, 36, 0.5) 43%, rgba(102, 102, 102, 0.5) 100%);
+  background: -moz-linear-gradient(top, rgba(36, 36, 36, 0.5) 43%, rgba(102, 102, 102, 0.5) 100%);
+  background: -o-linear-gradient(top, rgba(36, 36, 36, 0.5) 43%, rgba(102, 102, 102, 0.5) 100%);
+  background: -ms-linear-gradient(top, rgba(36, 36, 36, 0.5) 43%, rgba(102, 102, 102, 0.5) 100%);
+  background: linear-gradient(top, rgba(36, 36, 36, 0.5) 43%, rgba(102, 102, 102, 0.5) 100%);
 }
-.btntoggle.frm2:after,
 .btntoggle.frm3:after {
-  border-top: 1px solid hsl(0, 0%, 31%);
-  border-bottom: 1px solid hsl(0, 0%, 31%);
-}
-.btntoggle.frm3:after {
-  background: -moz-linear-gradient(top, hsla(0, 0%, 17%, .55) 38%, hsla(0, 0%, 30%, .1) 100%);
-  background: -webkit-linear-gradient(top, hsla(0, 0%, 17%, .55) 38%, hsla(0, 0%, 30%, .1) 100%);
-  background: -o-linear-gradient(top, hsla(0, 0%, 17%, .55) 38%, hsla(0, 0%, 30%, .1) 100%);
-  background: -ms-linear-gradient(top, hsla(0, 0%, 17%, .55) 38%, hsla(0, 0%, 30%, .1) 100%);
-  background: linear-gradient(top, hsla(0, 0%, 17%, .55) 38%, hsla(0, 0%, 30%, .1) 100%);
-  -webkit-box-shadow: 0px 4px 8px 0px hsla(0, 0%, 0%, .3);
-  -moz-box-shadow: 0px 4px 8px 0px hsla(0, 0%, 0%, .3);
-  box-shadow: 0px 4px 8px 0px hsla(0, 0%, 0%, .3);
+  border-top-color: #4f4f4f;
+  border-top-width: 0.1875vw;
+  -webkit-box-shadow: 0 0.515625vw 0.75vw 0 rgba(0, 0, 0, 0.4);
+  -moz-box-shadow: 0 0.515625vw 0.75vw 0 rgba(0, 0, 0, 0.4);
+  -o-box-shadow: 0 0.515625vw 0.75vw 0 rgba(0, 0, 0, 0.4);
+  box-shadow: 0 0.515625vw 0.75vw 0 rgba(0, 0, 0, 0.4);
+  background: -webkit-linear-gradient(top, rgba(38, 38, 38, 0.5) 40%, rgba(105, 105, 105, 0.5) 100%);
+  background: -moz-linear-gradient(top, rgba(38, 38, 38, 0.5) 40%, rgba(105, 105, 105, 0.5) 100%);
+  background: -o-linear-gradient(top, rgba(38, 38, 38, 0.5) 40%, rgba(105, 105, 105, 0.5) 100%);
+  background: -ms-linear-gradient(top, rgba(38, 38, 38, 0.5) 40%, rgba(105, 105, 105, 0.5) 100%);
+  background: linear-gradient(top, rgba(38, 38, 38, 0.5) 40%, rgba(105, 105, 105, 0.5) 100%);
 }
 .btntoggle.frm4:after {
-  border-bottom: 1px solid hsl(0, 0%, 31%);
-  border-top-color: hsl(0, 0%, 25%);
-  background: -moz-linear-gradient(top, hsla(0, 0%, 17%, .5) 35%, hsla(0, 0%, 28%, .1) 100%);
-  background: -webkit-linear-gradient(top, hsla(0, 0%, 17%, .5) 35%, hsla(0, 0%, 28%, .1) 100%);
-  background: -o-linear-gradient(top, hsla(0, 0%, 17%, .5) 35%, hsla(0, 0%, 28%, .1) 100%);
-  background: -ms-linear-gradient(top, hsla(0, 0%, 17%, .5) 35%, hsla(0, 0%, 28%, .1) 100%);
-  background: linear-gradient(top, hsla(0, 0%, 17%, .5) 35%, hsla(0, 0%, 28%, .1) 100%);
-  -webkit-box-shadow: 0px 7px 8px 0px hsla(0, 0%, 0%, .4);
-  -moz-box-shadow: 0px 7px 8px 0px hsla(0, 0%, 0%, .4);
-  box-shadow: 0px 7px 8px 0px hsla(0, 0%, 0%, .4);
+  border-top-color: #3d3d3d;
+  -webkit-box-shadow: 0 0.65625vw 0.75vw 0 rgba(0, 0, 0, 0.4);
+  -moz-box-shadow: 0 0.65625vw 0.75vw 0 rgba(0, 0, 0, 0.4);
+  -o-box-shadow: 0 0.65625vw 0.75vw 0 rgba(0, 0, 0, 0.4);
+  box-shadow: 0 0.65625vw 0.75vw 0 rgba(0, 0, 0, 0.4);
+  background: -webkit-linear-gradient(top, rgba(41, 41, 41, 0.5) 38%, rgba(107, 107, 107, 0.5) 100%);
+  background: -moz-linear-gradient(top, rgba(41, 41, 41, 0.5) 38%, rgba(107, 107, 107, 0.5) 100%);
+  background: -o-linear-gradient(top, rgba(41, 41, 41, 0.5) 38%, rgba(107, 107, 107, 0.5) 100%);
+  background: -ms-linear-gradient(top, rgba(41, 41, 41, 0.5) 38%, rgba(107, 107, 107, 0.5) 100%);
+  background: linear-gradient(top, rgba(41, 41, 41, 0.5) 38%, rgba(107, 107, 107, 0.5) 100%);
 }
-
-.w .btntoggle:after {
-  border: 2px solid hsla(0, 0%, 64%, .5);
-  border-top: 1px solid hsl(0, 0%, 84%);
-  border-bottom: none;
-  background: -moz-linear-gradient(top, hsla(0, 0%, 60%, .6) 40%, hsla(0, 0%, 100%, .7) 100%);
-  background: -webkit-linear-gradient(top, hsla(0, 0%, 60%, .6) 40%, hsla(0, 0%, 100%, .7) 100%);
-  background: -o-linear-gradient(top, hsla(0, 0%, 60%, .6) 40%, hsla(0, 0%, 100%, .7) 100%);
-  background: -ms-linear-gradient(top, hsla(0, 0%, 60%, .6) 40%, hsla(0, 0%, 100%, .7) 100%);
-  background: linear-gradient(top, hsla(0, 0%, 60%, .6) 40%, hsla(0, 0%, 100%, .7) 100%);
-}
-.w .btntoggle.frm3:after {
-  background: -moz-linear-gradient(top, hsla(0, 0%, 60%, .5) 38%, hsla(0, 0%, 100%, .7) 100%);
-  background: -webkit-linear-gradient(top, hsla(0, 0%, 60%, .5) 38%, hsla(0, 0%, 100%, .7) 100%);
-  background: -o-linear-gradient(top, hsla(0, 0%, 60%, .5) 38%, hsla(0, 0%, 100%, .7) 100%);
-  background: -ms-linear-gradient(top, hsla(0, 0%, 60%, .5) 38%, hsla(0, 0%, 100%, .7) 100%);
-  background: linear-gradient(top, hsla(0, 0%, 60%, .5) 38%, hsla(0, 0%, 100%, .7) 100%);
-}
-.w .btntoggle.frm4:after {
-  border-bottom: 1px solid hsl(0, 0%, 70%);
-  border-top-color: hsl(0, 0%, 72%);
-  background: -moz-linear-gradient(top, hsla(0, 0%, 60%, .35) 35%, hsla(0, 0%, 100%, .7) 100%);
-  background: -webkit-linear-gradient(top, hsla(0, 0%, 60%, .35) 35%, hsla(0, 0%, 100%, .7) 100%);
-  background: -o-linear-gradient(top, hsla(0, 0%, 60%, .35) 35%, hsla(0, 0%, 100%, .7) 100%);
-  background: -ms-linear-gradient(top, hsla(0, 0%, 60%, .35) 35%, hsla(0, 0%, 100%, .7) 100%);
-  background: linear-gradient(top, hsla(0, 0%, 60%, .35) 35%, hsla(0, 0%, 100%, .7) 100%);
-}
-
 .btntoggle span.onoff {
   position: absolute;
   left: 10%;
   top: 10%;
   bottom: 10%;
   right: 10%;
+  /* 1 */
+  /* 1 selected */
+  /* 0 */
+  /* 0 selected */
 }
-
-/* 1 */
 .btntoggle span.onoff:before {
   content: '';
   display: block;
   margin: 10% auto 0;
   width: 0;
   height: 25%;
-  border: 0 solid hsl(60, 100%, 23%);
-  border-left-width: 2px;
+  border: 0 solid #757500;
+  border-left-width: 0.1875vw;
 }
-.w .btntoggle span.onoff:before {
-  border-color: hsl(60, 100%, 15%);
-}
-
-/* 1 selected */
 .btntoggle span.onoff.on:before {
-  border-color: hsl(60, 100%, 40%);
-  -webkit-box-shadow: 0 0 3px 2px hsla(55, 50%, 40%, 0.6);
-  -moz-box-shadow: 0 0 3px 2px hsla(55, 50%, 40%, 0.6);
-  box-shadow: 0 0 3px 2px hsla(55, 50%, 40%, 0.6);
+  border-color: #cccc00;
+  -webkit-box-shadow: 0 0 0.28125vw 0.1875vw rgba(153, 145, 51, 0.6);
+  -moz-box-shadow: 0 0 0.28125vw 0.1875vw rgba(153, 145, 51, 0.6);
+  -o-box-shadow: 0 0 0.28125vw 0.1875vw rgba(153, 145, 51, 0.6);
+  box-shadow: 0 0 0.28125vw 0.1875vw rgba(153, 145, 51, 0.6);
 }
-.w .btntoggle span.onoff.on:before {
-  border-color: hsl(60, 100%, 55%);
-  -webkit-box-shadow: 0px 0px 2px hsla(60, 100%, 30%, .3);
-  -moz-box-shadow: 0px 0px 2px hsla(60, 100%, 30%, .3);
-  box-shadow: 0px 0px 2px hsla(60, 100%, 30%, .3);
-
-}
-/* 1 unselected focused */
-.btntoggle:focus span.onoff:before {
-  border-color: hsl(60, 100%, 26%);
-}
-.w .btntoggle:focus span.onoff:before {
-  border-color: hsl(60, 100%, 10%);
-}
-/* 1 selected focused */
-.btntoggle:focus span.onoff.on:before {
-  border-color: hsl(60, 100%, 46%);
-  -webkit-box-shadow: 0 0 3px 2px hsla(55, 50%, 40%, 0.85);
-  -moz-box-shadow: 0 0 3px 2px hsla(55, 50%, 40%, 0.85);
-  box-shadow: 0 0 3px 2px hsla(55, 50%, 40%, 0.85);
-}
-.w .btntoggle:focus span.onoff.on:before {
-  border-color: hsl(60, 100%, 50%);
-  -webkit-box-shadow: 0px 0px 3px 2px hsla(60, 100%, 30%, .3);
-  -moz-box-shadow: 0px 0px 3px 2px hsla(60, 100%, 30%, .3);
-  box-shadow: 0px 0px 3px 2px hsla(60, 100%, 30%, .3);
-}
-
-/* 0 selected */
 .btntoggle span.onoff:after {
   content: '';
   display: block;
@@ -521,48 +284,35 @@
   width: 10%;
   height: 20%;
   border-radius: 50%;
-  border: 2px solid hsl(60, 100%, 32%);
-  -webkit-box-shadow: 0 0 3px 2px hsla(55, 50%, 30%, 0.6), inset 0 0 1px hsla(55, 50%, 30%, 0.6);
-  -moz-box-shadow: 0 0 3px 2px hsla(55, 50%, 30%, 0.6), inset 0 0 1px hsla(55, 50%, 30%, 0.6);
-  box-shadow: 0 0 3px 2px hsla(55, 50%, 30%, 0.6), inset 0 0 1px hsla(55, 50%, 30%, 0.6);
+  border: 0.1875vw solid #757500;
 }
-.w .btntoggle span.onoff:after {
-  border-color: hsl(60, 100%, 45%);
-  -webkit-box-shadow: 0 0 2px 1px hsla(60, 100%, 25%, .75), inset 0 0 2px 0px black;
-  -moz-box-shadow: 0 0 2px 1px hsla(60, 100%, 25%, .75), inset 0 0 2px 0px black;
-  box-shadow: 0 0 2px 1px hsla(60, 100%, 25%, .75), inset 0 0 2px 0px black;
+.btntoggle span.onoff.off:after {
+  border-color: #a3a300;
+  -webkit-box-shadow: 0 0 0.28125vw 0.1875vw rgba(115, 108, 38, 0.6), inset 0 0 0.09375vw rgba(115, 108, 38, 0.6);
+  -moz-box-shadow: 0 0 0.28125vw 0.1875vw rgba(115, 108, 38, 0.6), inset 0 0 0.09375vw rgba(115, 108, 38, 0.6);
+  -o-box-shadow: 0 0 0.28125vw 0.1875vw rgba(115, 108, 38, 0.6), inset 0 0 0.09375vw rgba(115, 108, 38, 0.6);
+  box-shadow: 0 0 0.28125vw 0.1875vw rgba(115, 108, 38, 0.6), inset 0 0 0.09375vw rgba(115, 108, 38, 0.6);
 }
-
-/* 0 selected focused */
+.btntoggle:focus span.onoff {
+  /* 1 selected focused */
+  /* 0 selected focused */
+}
+.btntoggle:focus span.onoff:before,
 .btntoggle:focus span.onoff:after {
-  border-color: hsl(60, 100%, 35%);
-  -webkit-box-shadow: 0 0 3px 2px hsla(55, 50%, 40%, 0.6), inset 0 0 1px hsla(55, 50%, 40%, 0.6);
-  -moz-box-shadow: 0 0 3px 2px hsla(55, 50%, 40%, 0.6), inset 0 0 1px hsla(55, 50%, 40%, 0.6);
-  box-shadow: 0 0 3px 2px hsla(55, 50%, 40%, 0.6), inset 0 0 1px hsla(55, 50%, 40%, 0.6);
+  /* 0 unselected focused */
+  border-color: #858500;
 }
-.w .btntoggle:focus span.onoff:after {
-  border-color: hsl(60, 100%, 40%);
-  -webkit-box-shadow: 0 0 3px 2px hsla(60, 100%, 25%, .75), inset 0 0 2px 0px black;
-  -moz-box-shadow: 0 0 3px 2px hsla(60, 100%, 25%, .75), inset 0 0 2px 0px black;
-  box-shadow: 0 0 3px 2px hsla(60, 100%, 25%, .75), inset 0 0 2px 0px black;
+.btntoggle:focus span.onoff.on:before {
+  border-color: #ebeb00;
+  -webkit-box-shadow: 0 0 0.28125vw 0.1875vw rgba(153, 145, 51, 0.85);
+  -moz-box-shadow: 0 0 0.28125vw 0.1875vw rgba(153, 145, 51, 0.85);
+  -o-box-shadow: 0 0 0.28125vw 0.1875vw rgba(153, 145, 51, 0.85);
+  box-shadow: 0 0 0.28125vw 0.1875vw rgba(153, 145, 51, 0.85);
 }
-/* 0 unselected */
-.btntoggle span.onoff.on:after {
-  border-color: hsl(60, 100%, 23%);
-  -webkit-box-shadow: none;
-  -moz-box-shadow: none;
-  box-shadow: none;
-}
-.w .btntoggle span.onoff.on:after {
-  border-color: hsl(60, 100%, 8%);
-}
-/* 0 unselected focused */
-.btntoggle:focus span.onoff.on:after {
-  border-color: hsl(60, 100%, 26%);
-  -webkit-box-shadow: none;
-  -moz-box-shadow: none;
-  box-shadow: none;
-}
-.w .btntoggle:focus span.onoff.on:after {
-  border-color: hsl(0, 0%, 25%);
+.btntoggle:focus span.onoff.off:after {
+  border-color: #b2b300;
+  -webkit-box-shadow: 0 0 0.28125vw 0.1875vw rgba(153, 145, 51, 0.6), inset 0 0 0.09375vw rgba(153, 145, 51, 0.6);
+  -moz-box-shadow: 0 0 0.28125vw 0.1875vw rgba(153, 145, 51, 0.6), inset 0 0 0.09375vw rgba(153, 145, 51, 0.6);
+  -o-box-shadow: 0 0 0.28125vw 0.1875vw rgba(153, 145, 51, 0.6), inset 0 0 0.09375vw rgba(153, 145, 51, 0.6);
+  box-shadow: 0 0 0.28125vw 0.1875vw rgba(153, 145, 51, 0.6), inset 0 0 0.09375vw rgba(153, 145, 51, 0.6);
 }
