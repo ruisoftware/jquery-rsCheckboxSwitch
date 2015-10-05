@@ -1,4 +1,15 @@
-(function ($, undefined) {
+/**
+* jQuery Checkbox Switch - Toggle control with animation capabilities.
+* ====================================================================
+*
+* Licensed under The MIT License
+* 
+* @version   1
+* @author    Jose Rui Santos
+*
+* For info, please scroll to the bottom.
+*/(function ($, undefined) {
+    'use strict';
     var SwitchClass = function ($elem, opts) {
         var $switch = null,
             initialValue = false,
@@ -16,7 +27,8 @@
             startPos = 0,
             startPosSwitch = false,
             dragged = false,
-            originalClass = originalStyle = null,
+            originalClass = null,
+            originalStyle = null,
             size = 0,      // width of the outer element if opts.slidingType.horizontal is true, height otherwise
             sizeInner = 0, // width of the inner element if opts.slidingType.horizontal is true, height otherwise. sizeInner should always be greater than size.
             
@@ -24,13 +36,13 @@
             currFrame = 1,
             $onoffSpan = null,
             isInlineElement = function($e) {
-                if ($e.html() !== "") {
+                if ($e.html() !== '') {
                     return false;
                 }
-                var $testDummy = $("<div style='display:none'></div>");
+                var $testDummy = $('<div style=\'display:none\'></div>');
                 $e.append($testDummy);
                 try {
-                    return $e.html() === "";
+                    return $e.html() === '';
                 } finally {
                     $testDummy.remove();
                 }
@@ -39,7 +51,7 @@
                 var json = {},
                     checkProperty = function(prop) {
                         var value = $e.css(prop);
-                        if (value !== "auto") {
+                        if (value !== 'auto') {
                             json[prop] = value;
                         }
                     },
@@ -60,19 +72,19 @@
             },
             getCheckedAttrName,
             init = function() {
-                if ($elem.is("input[type=checkbox]")) {
+                if ($elem.is('input[type=checkbox]')) {
                     getCheckedAttrName = function() {
                         return 'checked';
-                    }
+                    };
                 } else {
                     getCheckedAttrName = function() {
                         return 'data-checked';
-                    }
+                    };
                 }
                 isSlidingType = opts.type === 'sliding';
                 tabIndex = $elem.attr('tabindex');
                 // input elements are focusable, even if there is no tabindex attribute
-                if ($elem.is("input") && tabIndex === undefined) {
+                if ($elem.is('input') && tabIndex === undefined) {
                     tabIndex = 0;
                 }
                 var elemCssPos = $elem.css('position'),
@@ -80,7 +92,7 @@
                 originalClass = $elem.attr('class');
                 originalStyle = $elem.attr('style');
                 if (isSlidingType || isInline) {
-                    $switch = $elem.wrap($("<div />").addClass(isSlidingType ? opts.slidingType.outerClass : null)).hide().parent();
+                    $switch = $elem.wrap($('<div />').addClass(isSlidingType ? opts.slidingType.outerClass : null)).hide().parent();
                     if (isInline) {
                         $switch.addClass($elem.attr('class')).css('position', elemCssPos);
                         if (isSlidingType) {
@@ -96,10 +108,10 @@
                     $switch = $elem;
                 }
                 if (isSlidingType) {
-                    $sliderBar = $("<div />").addClass(opts.slidingType.sliderClass).css('position', 'relative');
+                    $sliderBar = $('<div />').addClass(opts.slidingType.sliderClass).css('position', 'relative');
                     $switch.append($sliderBar);
                     // need to retrieve the $sliderHandle height or width, so add it temporarily as hidden to the DOM
-                    $sliderHandle = $("<div />").hide().addClass(opts.slidingType.handleClass);
+                    $sliderHandle = $('<div />').hide().addClass(opts.slidingType.handleClass);
                     $sliderBar.append($sliderHandle);
 
                     if (elemCssPos === 'static') {
@@ -141,10 +153,10 @@
                     sizeInner = opts.slidingType.horizontal ? $sliderBar.width() : $sliderBar.height();
                     size = opts.slidingType.horizontal ? $switch.width() : $switch.height();
                 } else {
-                    if (elemCssPos === "static") {
+                    if (elemCssPos === 'static') {
                         $switch.css('position', 'relative');
                     }
-                    $switch.css('display', 'inline-block');
+                    $switch.css('display', 'inline-block').addClass(opts.toggleType.outerClass);
                     if (opts.enabled) {
                         $switch.bind('mousedown.rsCheckboxSwitch', onmousedown).bind('mouseup.rsCheckboxSwitch', onmouseup);
                     } else {
@@ -166,7 +178,8 @@
                 if (!opts.enabled && tabIndex !== undefined) {
                     $switch.removeAttr('tabindex');
                 }
-                initialValue = isOnInput(); 
+                initialValue = isOnInput();
+                /*jshint -W030 */
                 initialValue? doOn(false, null) : doOff(false, null);
                 toggleClassOnOff(initialValue);
                 $elem.
@@ -250,8 +263,8 @@
                         prevFrame = 0,
                         doStep = function (now) {
                             var frame = Math.round(now);
-                            if (prevFrame == 0 || frame != prevFrame) {
-                                $switch.removeClass(opts.toggleType.frameClasses[(prevFrame == 0 ? currFrame : prevFrame) - 1]).addClass(opts.toggleType.frameClasses[frame - 1]);
+                            if (prevFrame === 0 || frame !== prevFrame) {
+                                $switch.removeClass(opts.toggleType.frameClasses[(prevFrame === 0 ? currFrame : prevFrame) - 1]).addClass(opts.toggleType.frameClasses[frame - 1]);
                                 prevFrame = currFrame = frame;
                             }
                          },
@@ -298,12 +311,12 @@
             },
             toggleClassOnOff = function (isOn) {
                 if ($onoffSpan) {
-                    $onoffSpan.removeClass(isOn ? "off" : "on").addClass(isOn ? "on" : "off");
+                    $onoffSpan.removeClass(isOn ? 'off' : 'on').addClass(isOn ? 'on' : 'off');
                 }
             },
             resetToggleClasses = function () {
                 if ($onoffSpan) {
-                    $onoffSpan.removeClass("on off");
+                    $onoffSpan.removeClass('on off');
                 }
             },
             triggerOn = function (fireEvents) {
@@ -393,6 +406,7 @@
                         if (!dragged) {
                             onToggle();
                         } else {
+                            /*jshint -W030 */
                             startPosSwitch ? off() : on();
                         }
                     } else {
@@ -460,13 +474,15 @@
                 return $(this);
             },
             updateTo = function(value, anim, fireEvents) {
+                /*jshint -W030 */
                 value ? on(anim, fireEvents) : off(anim, fireEvents);
                 return $(this);
             },
             onRefresh = function (event, fireEvents) {
                 return updateTo(isOnInput(), false, fireEvents);
             },
-            onToggle = function (event) {
+            onToggle = function () {
+                /*jshint -W030 */
                 isOnSwitch() ? off() : on();
                 return $(this);
             },
@@ -482,7 +498,7 @@
                 }
                 return $(this);
             },
-            onCommit = function (event) {
+            onCommit = function () {
                 initialValue = isOnInput();
                 return $(this);
             },
@@ -532,7 +548,7 @@
                     }
                 }
             },
-            onDestroy = function (event) {
+            onDestroy = function () {
                 var setAttr = function(attr, value) {
                     $elem.attr(attr, value ? value : '');
                     if ($elem.attr(attr) === '') {
@@ -547,7 +563,7 @@
                     $sliderBar.unbind('.rsCheckboxSwitch');
                     $sliderHandle.unbind('.rsCheckboxSwitch');
     
-                    if (!$elem.is("input") && tabIndex !== undefined) {
+                    if (!$elem.is('input') && tabIndex !== undefined) {
                         $elem.attr('tabindex', tabIndex);
                     }
                     $elem.unwrap();
@@ -571,22 +587,18 @@
                 setAttr('style', originalStyle);
                 setAttr('class', originalClass);
             },
-            gotFocus = function (event) {
+            gotFocus = function () {
                 if (!isDocumentKeyEventsBound) {
                     $(document).bind('keydown.rsCheckboxSwitch', onKeydown);
                     isDocumentKeyEventsBound = true;
                 }
             },
-            loseFocus = function (event) {
+            loseFocus = function () {
                 $(document).unbind('keydown.rsCheckboxSwitch', onKeydown);
                 isDocumentKeyEventsBound = false;
                 if (opts.keyboard.commitOnBlur) {
                     onCommit();
                 }
-            },
-            toInt = function (str) {
-                var value = !str || str == 'auto' || str == '' ? 0 : parseInt(str, 10);
-                return isNaN(value) ? 0 : value;
             };
             
         init();
@@ -596,28 +608,28 @@
         var refresh = function (options) {
                 return options === undefined ? this.trigger('refresh.rsCheckboxSwitch') : this.trigger('refresh.rsCheckboxSwitch', [options === true]);
             },
-            toggle = function (options) {
+            toggle = function () {
                 return this.trigger('toggle.rsCheckboxSwitch');
             },
             on = function (options, anim) {
-                return options === undefined || options.length == 0 ? this.trigger('on.rsCheckboxSwitch', [anim]) : this.trigger('on.rsCheckboxSwitch', [anim, options.length == 1 && options[0] === true]);
+                return options === undefined || options.length === 0 ? this.trigger('on.rsCheckboxSwitch', [anim]) : this.trigger('on.rsCheckboxSwitch', [anim, options.length === 1 && options[0] === true]);
             },
             off = function (options, anim) {
-                return options === undefined || options.length == 0 ? this.trigger('off.rsCheckboxSwitch', [anim]) : this.trigger('off.rsCheckboxSwitch', [anim, options.length == 1 && options[0] === true]);
+                return options === undefined || options.length === 0 ? this.trigger('off.rsCheckboxSwitch', [anim]) : this.trigger('off.rsCheckboxSwitch', [anim, options.length === 1 && options[0] === true]);
             },
             rollback = function (options) {
                 return options === undefined ? this.trigger('rollback.rsCheckboxSwitch') : this.trigger('rollback.rsCheckboxSwitch', [options === true]);
             },
-            commit = function (options) {
+            commit = function () {
                 return this.trigger('commit.rsCheckboxSwitch');
             },
-            destroy = function (options) {
+            destroy = function () {
                 return this.trigger('destroy.rsCheckboxSwitch');
             },
-            option = function (options) {
+            option = function () {
                 if (typeof arguments[0] == 'string') {
                     var op = arguments.length == 1 ? 'getter' : (arguments.length == 2 ? 'setter' : null);
-                    if (op != null) {
+                    if (op !== null) {
                         return this.eq(0).triggerHandler(op + '.rsCheckboxSwitch', arguments);
                     }
                 }
@@ -647,7 +659,7 @@
         return this.each(function () {
             var $elem = $(this),
                 allOpts = $.extend(true, {}, opts);
-            if ($elem.is("input[type=checkbox]")) {
+            if ($elem.is('input[type=checkbox]')) {
                 var attrValue = $elem.attr('disabled');
                 if (attrValue !== undefined) {
                     allOpts = $.extend({}, allOpts, { enabled: false });
@@ -660,33 +672,35 @@
     // public access to the default input parameters
     $.fn.rsCheckboxSwitch.defaults = {
         type: 'sliding', // Determines whether this is a sliding switch or a toggle switch. Type: 'sliding' or 'toggle' string.
-                         // A sliding switch only shows one part (ON or OFF) while the other part is hidden. This means, that the switch is longer than the container, which clips the switch. 
-                         // A toggle switch always shows the same size. Instead of having a sliding motion, a toggle switch remains in the same location and transitions ON to OFF (or vice-versa) might be animated. 
+                         // A sliding switch only shows one half (ON or OFF) while the other half is hidden. This means, that the switch must be longer than the container in order to clip the switch.
+                         // A toggle switch always shows the same size. Instead of having a sliding motion, a toggle switch remains in the same location and transitions ON to OFF (or vice-versa) might be animated.
         
         // slidingType is only meaningful if type is 'sliding'
         slidingType: { 
             outerClass: 'checkboxswitch-outer',   // Classes for the outer container. Type: string.
-            sliderClass: 'checkboxswitch',        // Classes for the element that slides inside the outer element. Type: string.
-            handleClass: 'checkboxswitch-handle', // Classes for the handle usually located in the middle of the slider element. Type: string.
-            pushdownClass: 'checkboxswitch-down', // Classes for the handle when mouse is applied to it. Type: string.
+            sliderClass: 'switch',                // Classes for the element that slides inside the outer element. Type: string.
+            handleClass: 'handle',                // Classes for the handle usually located in the middle of the slider element. Type: string.
+            pushdownClass: 'down',                // Classes for the handle when mouse is applied to it. Type: string.
             draggingClass: 'switch-dragging',     // Classes used during the time user is moving the switch with the mouse. Type: string.
             verticalClass: 'vert',                // Classes applied to the topmost element for vertical sliders (when horizontal is false). 
             flipped: false,     // Determines the location of the on and off. Type: boolean.
                                 // When flipped is false, the switch is ON--OFF (for horizontal switches) or ON on the top and OFF on the bottom (for vertical switches)
                                 // When flipped is true, the switch is OFF--ON (for horizontal switches) or OFF on the top and ON on the bottom (for vertical switches) 
             horizontal: true    // Determines the switch orientation, either horizontal or vertical. Type: boolean.
-        },        
+        },
 
         // toggleType is only meaningful if type is 'toggle' (or other value other than 'sliding')
         toggleType: {
-            showOnOff: true,
-            onOffClass: "onoff",
+            outerClass: 'toggle',   // Classes for the container. Type: string.
+            showOnOff: true,        // Determines whether a span child is used to display 0 or 1 (you can change CSS to display something else). Type: boolean.
+            onOffClass: 'onoff',    // Class added to the span created when showOnOff is true. Type: String.
             caption: null,  // Specifies the text caption that appears in toogle switches. If null, then uses the text from the markup. 
                             // If the plugin is not bounded to an <input type=checkbox> element, this caption is appended to the existing markup text (if any). Type: String.
-            frameClasses: ['checkboxswitch1', 'checkboxswitch2'] // Each class represents a frame in the animation that runs from OFF to ON position. Type: array of String.
-                                                                 // The first class is used for the OFF image, the last for the ON image. Optional frames in the middle can be used to create a more realistic animation.
-                                                                 // For ON to OFF animations, the plug-in simply iterates from the last to the first class.
-        },        
+            frameClasses: ['frm1', 'frm2', 'frm3', 'frm4']
+                // Each class represents a frame in the animation that runs from OFF to ON position. Type: array of String.
+                // The first class is used for the OFF image, the last for the ON image. Optional frames in the middle can be used to create a more realistic animation.
+                // For ON to OFF animations, the plug-in simply iterates from the last to the first class.
+        },
         keyboard: {
             allowed: ['enter', 'esc', 'space'], // Allowed keys on focusable switches. Type: String array.
                                                 // Key events are ignored for non focusable switches.
@@ -720,10 +734,11 @@
     /*  Method      Description
         ----------------------------------------------------------------------------------------------------------------------------------------
         'refresh'   Updates the switch according to the markup value. Typically used after the markup is manually changed.
-                    Example: The markup <input type="checkbox"> is changed to <input type="checkbox" checked>. The plugin does not know about this change, so still shows the off value. By calling 'refresh', the plugin will read the markup value and update itself accordingly.
+                    Example: The markup <input type="checkbox"> is changed to <input type="checkbox" checked>.
+                             The plugin does not know about this change, so still shows the off value. By calling 'refresh', the plugin will read the markup value and update itself accordingly.
                     Usage:  $e.rsCheckboxSwitch('refresh')         Switch updates its state according to markup state. Change events (onChange, onChangeOn, onChangeOff) are fired only if there is a change in value.
-                            $e.rsCheckboxSwitch('refresh', false)  Switch updates its state according to markup state. Change events are never fired 
-                            $e.rsCheckboxSwitch('refresh', true)   Switch updates its state according to markup state. Change events are always fired
+                            $e.rsCheckboxSwitch('refresh', false)  Switch updates its state according to markup state. Change events are never fired.
+                            $e.rsCheckboxSwitch('refresh', true)   Switch updates its state according to markup state. Change events are always fired.
 
         'toggle'    Toggles the current value. The related markup is updated. Change events are fired.
                     Usage:  $e.rsCheckboxSwitch('toggle')
@@ -779,7 +794,6 @@
 
         'enabled'       Retuns true if switch can be changed by the user, false otherwise.
                         Usage:  var isEnabled = $e.rsCheckboxSwitch('option', 'enabled');
-        
 
 
         Setter      Description
@@ -797,5 +811,4 @@
                         Usage:  $e.rsCheckboxSwitch('option', 'enabled', true);     Enable the plugin
                                 $e.rsCheckboxSwitch('option', 'enabled', false);    Disable the plugin
     */
-
 })(jQuery);
