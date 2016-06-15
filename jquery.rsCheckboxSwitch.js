@@ -35,17 +35,8 @@
             // Toggle type related data
             currFrame = 1,
             $onoffSpan = null,
-            isInlineElement = function($e) {
-                if ($e.html() !== '') {
-                    return false;
-                }
-                var $testDummy = $('<div style=\'display:none\'></div>');
-                $e.append($testDummy);
-                try {
-                    return $e.html() === '';
-                } finally {
-                    $testDummy.remove();
-                }
+            isSelfClosing = function($e) {
+                return /^(?:area|br|col|embed|hr|img|input|link|meta|param)$/i.test($e[0].tagName);
             },
             getCssPos = function($e) {
                 var json = {},
@@ -88,7 +79,7 @@
                     tabIndex = 0;
                 }
                 var elemCssPos = $elem.css('position'),
-                    isInline = isInlineElement($elem);
+                    isInline = isSelfClosing($elem);
                 originalClass = $elem.attr('class');
                 originalStyle = $elem.attr('style');
                 if (isSlidingType || isInline) {
@@ -628,9 +619,14 @@
             },
             option = function () {
                 if (typeof arguments[0] == 'string') {
-                    var op = arguments.length == 1 ? 'getter' : (arguments.length == 2 ? 'setter' : null);
-                    if (op !== null) {
-                        return this.eq(0).triggerHandler(op + '.rsCheckboxSwitch', arguments);
+                    switch (arguments.length) {
+                        case 1:
+                            return this.eq(0).triggerHandler('getter.rsCheckboxSwitch', arguments);
+                        case 2:
+                            for (var last = this.length - 1; last > -1; --last) {
+                                this.eq(last).triggerHandler('setter.rsCheckboxSwitch', arguments);
+                            }
+                            return this;
                     }
                 }
             };
