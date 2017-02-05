@@ -192,7 +192,7 @@
                     bind('blur.rsCheckboxSwitch', loseFocus);
             },
             isOnInput = function() {
-                return $elem.attr(getCheckedAttrName()) == 'checked'; 
+                return $elem.attr(getCheckedAttrName()) === 'checked'; 
             },
             isOffInput = function() {
                 return !isOnInput();
@@ -294,7 +294,7 @@
                 doOnOff(anim, false, onFinish);
             },
             checkChangedClass = function () {
-                if (initialValue == isOnInput()) {
+                if (initialValue === isOnInput()) {
                     $switch.removeClass(opts.changedClass);
                 } else {
                     $switch.addClass(opts.changedClass);
@@ -333,7 +333,7 @@
                 resetToggleClasses();
                 doOn(anim === undefined ? true : anim, function() {
                     if (fireEvents === undefined) {
-                        if (state != isOnSwitch()) {
+                        if (state !== isOnSwitch()) {
                             triggerOn(true);
                         }
                     } else {
@@ -346,7 +346,7 @@
                 resetToggleClasses();
                 doOff(anim === undefined ? true : anim, function() {
                     if (fireEvents === undefined) {
-                        if (state != isOffSwitch()) {
+                        if (state !== isOffSwitch()) {
                             triggerOff(true);
                         }
                     } else {
@@ -410,7 +410,7 @@
                     case 'onChange': return opts.onChange;
                     case 'onChangeOn': return opts.onChangeOn;
                     case 'onChangeOff': return opts.onChangeOff;
-                    case 'changed': return initialValue != isOnInput();
+                    case 'changed': return initialValue !== isOnInput();
                     case 'value': return isOnInput();
                     case 'enabled': return opts.enabled;
                 }
@@ -484,7 +484,7 @@
                 return updateTo(false, anim, fireEvents);
             },
             onRollback = function (event, fireEvents) {
-                if (initialValue != isOnInput()) {
+                if (initialValue !== isOnInput()) {
                     updateTo(initialValue, true, fireEvents);
                 }
                 return $(this);
@@ -618,7 +618,7 @@
                 return this.trigger('destroy.rsCheckboxSwitch');
             },
             option = function () {
-                if (typeof arguments[0] == 'string') {
+                if (typeof arguments[0] === 'string') {
                     switch (arguments.length) {
                         case 1:
                             return this.eq(0).triggerHandler('getter.rsCheckboxSwitch', arguments);
@@ -631,7 +631,7 @@
                 }
             };
             
-        if (typeof options == 'string') {
+        if (typeof options === 'string') {
             var otherArgs = Array.prototype.slice.call(arguments, 1);
             switch (options) {
                 case 'refresh':     return refresh.apply(this, otherArgs);
@@ -672,10 +672,16 @@
                          // A toggle switch always shows the same size. Instead of having a sliding motion, a toggle switch remains in the same location and transitions ON to OFF (or vice-versa) might be animated.
         
         // slidingType is only meaningful if type is 'sliding'
-        slidingType: { 
-            outerClass: 'checkboxswitch-outer',   // Classes for the outer container. Type: string.
+        slidingType: { // multiple classes are separated by a space
+            outerClass: 'checkboxswitch-outer corners-rounded', // Classes for the outer container. Type: string.
+                                                                // Add:
+                                                                // - corners-rounded for full rounded corners;
+                                                                // - corners-halfrounded for 50% rounded corners;
+                                                                // - corners-quarterrounded for 25% rounded corners;
+                                                                // - corners-sharp for no rounded corners;
+                                                                // If none of the above three are specified, corners-rounded is used. 
             sliderClass: 'switch',                // Classes for the element that slides inside the outer element. Type: string.
-            handleClass: 'handle',                // Classes for the handle usually located in the middle of the slider element. Type: string.
+            handleClass: 'handleflat',            // Classes for the handle usually located in the middle of the slider element. Type: string.
             pushdownClass: 'down',                // Classes for the handle when mouse is applied to it. Type: string.
             draggingClass: 'switch-dragging',     // Classes used during the time user is moving the switch with the mouse. Type: string.
             verticalClass: 'vert',                // Classes applied to the topmost element for vertical sliders (when horizontal is false). 
@@ -687,7 +693,13 @@
 
         // toggleType is only meaningful if type is 'toggle' (or other value other than 'sliding')
         toggleType: {
-            outerClass: 'toggle',   // Classes for the container. Type: string.
+            outerClass: 'toggle corners-rounded',   // Classes for the container. Type: string.
+                                                    // Add:
+                                                    // - corners-rounded for full rounded corners;
+                                                    // - corners-halfrounded for 50% rounded corners;
+                                                    // - corners-quarterrounded for 25% rounded corners;
+                                                    // - corners-sharp for no rounded corners;
+                                                    // If none of the above three are specified, corners-rounded is used. 
             showOnOff: true,        // Determines whether a span child is used to display 0 or 1 (you can change CSS to display something else). Type: boolean.
             onOffClass: 'onoff',    // Class added to the span created when showOnOff is true. Type: String.
             caption: null,  // Specifies the text caption that appears in toogle switches. If null, then uses the text from the markup. 

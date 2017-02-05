@@ -5,7 +5,7 @@
 
 // scalar values
 // ===============
-@refScale: 1.5vw;   // Allowed units are: px, pt (for fixed layout) or em, rem, vw, vh, vmin, vmax (for elastic layout).
+@refScale: 1em;   // Allowed units are: px, pt (for fixed layout) or em, rem, vw, vh, vmin, vmax (for elastic layout).
                   // To try other sizes, you only need to change this line. All the rest will resize according to this @refScale
                   // 1em corresponds to 16px in most browsers, which is the default font size.
                   // However, some users might define another default font size for accessibility reasons.
@@ -22,7 +22,14 @@
 @sliderMaxSize: @refScale*6;
 @sliderMinSize: @refScale*1.3;
 @sliderHandleSize: @refScale*2;
-@border-radius: @sliderMinSize;
+
+@textoff: @fromGradientOuter;
+@texton: desaturate(@text, lightness(@background)/1.8);
+
+
+body {
+    background: @background;
+}
 
 /*
  * Horizontal and Vertical slider switch
@@ -30,17 +37,16 @@
  */
 .checkboxswitch-outer {
     outline: none;
-    border-radius: @border-radius;
     @offset: @refScale*.0625;
     .box-shadow(-@offset -@offset @offset @offset @fromGradientOuter, @offset @offset @offset @offset @toGradientOuter);
     width: (@sliderMaxSize + @sliderHandleSize)/2 !important;
     height: @sliderMinSize !important;
 
+    @onBackground: darken(@texton, 7%);
+    @offBackground: lighten(@textoff, 4%);
     > .switch {
         width: @sliderMaxSize;
         height: @sliderMinSize;
-        @onBackground: darken(@text, 7%);
-        @offBackground: lighten(@fromGradientOuter, 2%);
         .lineargradient(left, @onBackground 0%, @onBackground 50%, @offBackground 50%, @offBackground 100%);
 
         &:before,
@@ -48,35 +54,38 @@
             position: absolute;
             font-size: @refScale*0.75;
             font-weight: bold;
-            line-height: @sliderMinSize;
+            top: 50%;
+            color: @background;
         }
         &:before {
             content: 'ON';
-            color: @background;
-            left: @refScale*0.5625;
+            left: 17%;
+            .transform(translateX(-50%) translateY(-50%));
         }
         &:after {
             content: 'OFF';
-            color: @background;
-            right: @refScale*0.375;
+            right: 17%;
+            .transform(translateX(50%) translateY(-50%));
         }
 
-        .handle {
+        .handleflat,
+        .handleraised {
             width: @sliderHandleSize;
             height: @sliderMinSize;
             top: 0;
             left: (@sliderMaxSize - @sliderHandleSize)/2;
             background-color: @background;
-            border-radius: @border-radius;
-            .box-shadow(inset -@offset -@offset @offset @offset @fromGradientOuter, inset @offset @offset @offset @offset @toGradientOuter);
+            .box-shadow(0 0 @offset*2 @offset*2 @offBackground, inset -@offset -@offset @offset @offset @fromGradientOuter, inset @offset @offset @offset @offset @toGradientOuter);
+            &.down {
+                .box-shadow(0 0 @offset*2 @offset*2 @offBackground, inset -@offset -@offset @offset @offset @fromGradientOuter, inset @offset @offset @offset @offset darken(@toGradientOuter, 2%));
+            }
+        }
+        .handleraised {
             @handle: lighten(@background, 4%);
             @handleHighlight: lighten(@handle, 8%);
             @handleHighlight2: lighten(@handleHighlight, 8%);
             .lineargradient2grads(~'left, @{background} 20%, @{fromGradientOuter} 43%, transparent 47%, transparent 53%, @{fromGradientOuter} 57%, @{background} 80%',
                                   ~'top, @{handle} 20%, @{handleHighlight} 38%, @{handleHighlight2} 50%, @{handleHighlight} 62%, @{handle} 80%');
-            &.down {
-                .box-shadow(inset -@offset -@offset @offset @offset @fromGradientOuter, inset @offset @offset @offset @offset darken(@toGradientOuter, 2%));
-            }
         }
     }
 
@@ -91,33 +100,36 @@
         > .switch {
             width: @sliderMinSize;
             height: @sliderMaxSize;
-            @onBackground: darken(@text, 7%);
-            @offBackground: lighten(@fromGradientOuter, 2%);
             .lineargradient(top, @onBackground 0%, @onBackground 50%, @offBackground 50%, @offBackground 100%);
+            text-align: center;
 
             &:before,
             &:after {
                 left: 0;
                 right: 0;
-                text-align: center;
-                font-size: @refScale*0.5;
+                font-size: @refScale*.5;
+                display: inline-block;
             }
             &:before {
                 content: 'ON';
-                color: @background;
-                top: @refScale*0.5625;
+                top: 15%;
+                .transform(translateY(-50%));
             }
             &:after {
                 content: 'OFF';
-                color: @background;
-                bottom: @refScale*0.375;
+                top: auto;
+                bottom: 15%;
+                .transform(translateY(50%));
             }
 
-            .handle {
+            .handleflat,
+            .handleraised {
                 width: @sliderMinSize;
                 height: @sliderHandleSize;
                 left: 0;
                 top: (@sliderMaxSize - @sliderHandleSize)/2;
+            }
+            .handleraised {
                 @handle: lighten(@background, 4%);
                 @handleHighlight: lighten(@handle, 8%);
                 @handleHighlight2: lighten(@handleHighlight, 8%);
@@ -126,29 +138,67 @@
             }
         }
     }
+
+    border-radius: @refScale;
+    > .switch {
+        .handleflat,
+        .handleraised {
+            border-radius: @refScale;
+        }
+    }
+    &.corners-halfrounded {
+        border-radius: @refScale/2;
+        > .switch {
+            .handleflat,
+            .handleraised {
+                border-radius: @refScale/2;
+            }
+        }
+    }
+    &.corners-quarterrounded {
+        border-radius: @refScale/4;
+        > .switch {
+            .handleflat,
+            .handleraised {
+                border-radius: @refScale/4;
+            }
+        }
+    }
+    &.corners-sharp {
+        border-radius: 0;
+        > .switch {
+            .handleflat,
+            .handleraised {
+                border-radius: 0;
+            }
+        }
+    }
 }
 
 .checkboxswitch-outer,
-.handle {
+.handleflat,
+.handleraised {
     cursor: pointer;
 }
 
 .disabled.checkboxswitch-outer,
 .disabled.checkboxswitch-outer > .switch,
-.disabled.checkboxswitch-outer .handle {
+.disabled.checkboxswitch-outer .handleflat,
+.disabled.checkboxswitch-outer .handleraised {
     cursor: default;
 }
 
 .switch-dragging,
-.handle.down {
+.handleflat.down,
+.handleraised.down {
     cursor: ew-resize;
 }
 
 .vert.switch-dragging,
-.vert .handle.down {
+.vert .handleflat.down,
+.vert .handleraised.down {
     cursor: ns-resize;
 }
-
 
 
 /* Toggle button */
@@ -158,9 +208,8 @@
     font-size: @refScale;
     position: relative;
     padding: @refScale*.375 @refScale*.875 @refScale*.25;
-    border: @refScale*.125 solid @fromGradientOuter;            //@toGradientInner; 
+    border: @refScale*.125 solid @fromGradientOuter; 
     border-top: @refScale*.1875 solid @fromGradientInner;
-    border-radius: @refScale*.375;
     cursor: pointer;
     background: @background;
     .box-shadow(0 -@refScale*.125 @refScale*.0625 @fromGradientOuter);
@@ -196,7 +245,6 @@
     &:after {
         content: '';
         position: absolute;
-        border-radius: @refScale*.3125;
         top: 0;
         right: 0;
         bottom: 0;
@@ -208,7 +256,6 @@
         right: -@refScale*.3125;
         bottom: -@refScale*.3125;
         left: -@refScale*.3125;
-        border-radius: @refScale*.5;
         background: @background;
         .lineargradient(top, @fromGradientOuter, @toGradientOuter);
         z-index: -1;
@@ -229,23 +276,23 @@
         border: @refScale*.125 solid fade(@fromGradientOuter, 25%);
         border-top: @refScale*.0625 solid darken(@toGradientOuter, 2%);
         border-bottom: none;
-        .lineargradient(top, @after-gradient-from 45%, @after-gradient-to 100%);
+        .lineargradient(top, @after-gradient-from 65%, @after-gradient-to 100%);
     }
     &.frm2:after {
         border-top-color: darken(@toGradientOuter, 5%);
         .box-shadow(0 @refScale*.25 @refScale*.5 0 hsla(0, 0%, 0%, .2));
-        .lineargradient(top, lighten(@after-gradient-from, 1%) 43%, lighten(@after-gradient-to, 1%) 100%);
+        .lineargradient(top, lighten(@after-gradient-from, 1%) 63%, lighten(@after-gradient-to, 3%) 100%);
      }
     &.frm3:after {
         border-top-color: darken(@toGradientOuter, 8%);
         border-top-width: @refScale*.125;
         .box-shadow(0 @refScale*.34375 @refScale*.5 0 hsla(0, 0%, 0%, .4));
-        .lineargradient(top, lighten(@after-gradient-from, 2%) 40%, lighten(@after-gradient-to, 2%) 100%);
+        .lineargradient(top, lighten(@after-gradient-from, 2%) 58%, lighten(@after-gradient-to, 6%) 100%);
     }
     &.frm4:after {
         border-top-color: darken(@toGradientOuter, 15%);
         .box-shadow(0 @refScale*.4375 @refScale*.5 0 hsla(0, 0%, 0%, .4));
-        .lineargradient(top, lighten(@after-gradient-from, 3%) 38%, lighten(@after-gradient-to, 3%) 100%);
+        .lineargradient(top, lighten(@after-gradient-from, 3%) 50%, lighten(@after-gradient-to, 10%) 100%);
     }
 
     span.onoff {
@@ -254,6 +301,7 @@
         top: 10%;
         bottom: 10%;
         right: 10%;
+        @shadeSelected: fade(@texton, 40%);
 
         /* 1 */
         &:before {
@@ -262,13 +310,13 @@
             margin: 10% auto 0;
             width: 0;
             height: 25%;
-            border: 0 solid hsl(60, 100%, 23%);
+            border: 0 solid @textoff;
             border-left-width: @refScale*.125;
         }
         /* 1 selected */
         &.on:before {
-            border-color: hsl(60, 100%, 40%);
-            .box-shadow(0 0 @refScale*.1875 @refScale*.125 hsla(55, 50%, 40%, 0.6));
+            border-color: @texton;
+            .box-shadow(0 0 @refScale*.1875 @refScale*.125 @shadeSelected);
         }
 
         /* 0 */
@@ -278,17 +326,17 @@
             margin: 35% auto 0;
             width: 10%;
             height: 20%;
-            border-radius: 50%;
-            border: @refScale*.125 solid hsl(60, 100%, 23%);
+            border-radius: 1em;
+            border: @refScale*.125 solid @textoff;
         }
         /* 0 selected */
         &.off:after {
-            border-color: hsl(60, 100%, 32%);
-            .box-shadow(0 0 @refScale*.1875 @refScale*.125 hsla(55, 50%, 30%, 0.6), inset 0 0 @refScale*.0625 hsla(55, 50%, 30%, 0.6));
+            border-color: @texton;
+            .box-shadow(0 0 @refScale*.1875 @refScale*.125 @shadeSelected, inset 0 0 @refScale*.2 @shadeSelected);
         }
     }
 
-    &:focus span.onoff {
+    &:focus s____pan.onoff {
         &:before, /* 1 unselected focused */
         &:after { /* 0 unselected focused */
             border-color: hsl(60, 100%, 26%);
@@ -303,6 +351,33 @@
         &.off:after {
             border-color: hsl(60, 100%, 35%);
             .box-shadow(0 0 @refScale*.1875 @refScale*.125 hsla(55, 50%, 40%, 0.6), inset 0 0 @refScale*.0625 hsla(55, 50%, 40%, 0.6));
+        }
+    }
+
+    border-radius: 1em;
+    &:before,
+    &:after {
+        border-radius: 1em;
+    }
+    &.corners-halfrounded {
+        border-radius: .5em;
+        &:before,
+        &:after {
+            border-radius: .5em;
+        }
+    }
+    &.corners-quarterrounded {
+        border-radius: .25em;
+        &:before,
+        &:after {
+            border-radius: .25em;
+        }
+    }
+    &.corners-sharp {
+        border-radius: 0;
+        &:before,
+        &:after {
+            border-radius: 0;
         }
     }
 }
@@ -387,13 +462,6 @@
     background: linear-gradient(@g1), linear-gradient(@g2);
 }
 
-.border-radius(@radius) {
-    -webkit-border-radius: @radius;
-    -moz-border-radius: @radius;
-    -o-border-radius: @radius;
-    border-radius: @radius;
-}
-
 .box-shadow(@shadow) {
     -webkit-box-shadow: @shadow;
     -moz-box-shadow: @shadow;
@@ -420,4 +488,12 @@
     -moz-user-select: @s;
     -webkit-user-select: @s;
     user-select: @s;
+}
+
+.transform(@transf) {
+    -webkit-transform: @transf;
+    -moz-transform: @transf;
+    -o-transform: @transf;
+    -ms-transform: @transf;
+    transform: @transf;
 }

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>jquery-rsCheckboxSwitch plug-in</title>
+		<link rel="stylesheet" href="../../dist/rsCheckboxSwitch.css" />
+		<link rel="stylesheet" href="./normalize.css" />
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+		<script src="../jquery.rsCheckboxSwitch.js"></script>
+		<script>
+			$(document).ready(function () {
+				var createPlugins = function (section, cssCorners) {
+					$("input[type=checkbox]", section).eq(0).rsCheckboxSwitch({
+						slidingType: {
+							horizontal: false,
+							outerClass: 'checkboxswitch-outer ' + cssCorners
+						}
+					});
+					$("input[type=checkbox]", section).eq(1).rsCheckboxSwitch({
+						slidingType: {
+							horizontal: false,
+							handleClass: 'handleraised',
+							outerClass: 'checkboxswitch-outer ' + cssCorners
+						}
+					});
+					$("input[type=checkbox]", section).eq(2).rsCheckboxSwitch({
+						type: 'toggle',
+						toggleType: {
+							outerClass: 'toggle ' + cssCorners
+						}
+					});
+					$("input[type=checkbox]", section).eq(3).rsCheckboxSwitch({
+						slidingType: {
+							horizontal: true,
+							outerClass: 'checkboxswitch-outer ' + cssCorners
+						}
+					});
+					$("input[type=checkbox]", section).eq(4).rsCheckboxSwitch({
+						slidingType: {
+							horizontal: true,
+							handleClass: 'handleraised',
+							outerClass: 'checkboxswitch-outer ' + cssCorners
+						}
+					});
+				};
+				createPlugins($("section:first-child"), "corners-rounded");
+				createPlugins($("section:first-child + section"), "corners-halfrounded");
+				createPlugins($("section:first-child + section + section"), "corners-quarterrounded");
+				createPlugins($("section:last-child"), "corners-sharp");
+			});
+		</script>
+		<style>
+			body {
+				margin: 1em;
+			}
+			section {
+				margin: 3em 0;
+			}
+			.checkboxswitch-outer {
+				margin: 0 1em;
+			}
+		</style>
+	</head>
+	<body>
+		<section>
+			<h1>rounded corners</h1>
+			<input type="checkbox" name="vehicle" tabindex="1" value="Bike">
+			<input type="checkbox" name="vehicle" tabindex="2" value="Car">
+			<input type="checkbox" name="vehicle" tabindex="3" value="Bike">
+			<input type="checkbox" name="vehicle" tabindex="4" value="Bike">
+			<input type="checkbox" name="vehicle" tabindex="5" value="Bike">
+		</section>
+
+		<section>
+			<h1>50% rounded corners</h1>
+			<input type="checkbox" name="vehicle" tabindex="6" value="Bike">
+			<input type="checkbox" name="vehicle" tabindex="7" value="Car">
+			<input type="checkbox" name="vehicle" tabindex="8" value="Bike">
+			<input type="checkbox" name="vehicle" tabindex="9" value="Bike">
+			<input type="checkbox" name="vehicle" tabindex="10" value="Bike">
+		</section>
+
+		<section>
+			<h1>25% rounded corners</h1>
+			<input type="checkbox" name="vehicle" tabindex="11" value="Bike">
+			<input type="checkbox" name="vehicle" tabindex="12" value="Car">
+			<input type="checkbox" name="vehicle" tabindex="13" value="Bike">
+			<input type="checkbox" name="vehicle" tabindex="14" value="Bike">
+			<input type="checkbox" name="vehicle" tabindex="15" value="Bike">
+		</section>
+
+		<section>
+			<h1>sharp corners</h1>
+			<input type="checkbox" name="vehicle" tabindex="16" value="Bike">
+			<input type="checkbox" name="vehicle" tabindex="17" value="Car">
+			<input type="checkbox" name="vehicle" tabindex="18" value="Bike">
+			<input type="checkbox" name="vehicle" tabindex="19" value="Bike">
+			<input type="checkbox" name="vehicle" tabindex="20" value="Bike">
+		</section>
+	</body>
+</html>
