@@ -79,11 +79,13 @@
                     tabIndex = 0;
                 }
                 var elemCssPos = $elem.css('position'),
-                    isInline = isSelfClosing($elem);
+                    isInline = isSelfClosing($elem),
+                    $switchInnerElem = null;
                 originalClass = $elem.attr('class');
                 originalStyle = $elem.attr('style');
                 if (isSlidingType || isInline) {
-                    $switch = $elem.wrap($('<div />').addClass(isSlidingType ? opts.slidingType.outerClass : null)).hide().parent();
+                    $switchInnerElem = $elem.wrap($('<div />')).hide().parent();
+                    $switch = $switchInnerElem.wrap($('<div />').addClass(isSlidingType ? opts.slidingType.outerClass : null)).parent();
                     if (isInline) {
                         $switch.addClass($elem.attr('class')).css('position', elemCssPos);
                         if (isSlidingType) {
@@ -100,7 +102,12 @@
                 }
                 if (isSlidingType) {
                     $sliderBar = $('<div />').addClass(opts.slidingType.sliderClass).css('position', 'relative');
-                    $switch.append($sliderBar);
+                    $switchInnerElem = $switchInnerElem || $("div:first-child", $switch);
+                    $switchInnerElem.css({
+                        'display': 'inline-block',
+                        'position': 'relative',
+                        'overflow': 'hidden'
+                    }).append($sliderBar);
                     // need to retrieve the $sliderHandle height or width, so add it temporarily as hidden to the DOM
                     $sliderHandle = $('<div />').hide().addClass(opts.slidingType.handleClass);
                     $sliderBar.append($sliderHandle);
@@ -117,13 +124,11 @@
 
                     if (opts.slidingType.horizontal) {
                         $switch.css({
-                            'overflow': 'hidden',
                             'width': (($sliderBar.outerWidth(true) + $sliderHandle.outerWidth(true)) / 2) + 'px',
                             'height': $sliderBar.outerHeight(true) + 'px'
                         });
                     } else {
                         $switch.css({
-                            'overflow': 'hidden',
                             'width': $sliderBar.outerWidth(true) + 'px',
                             'height': (($sliderBar.outerHeight(true) + $sliderHandle.outerHeight(true)) / 2) + 'px'
                         });

@@ -38,54 +38,77 @@ body {
 .checkboxswitch-outer {
     outline: none;
     @offset: @refScale*.0625;
-    .box-shadow(-@offset -@offset @offset @offset @fromGradientOuter, @offset @offset @offset @offset @toGradientOuter);
+    // .box-shadow(
+    //     0 -@offset*2 @offset @offset/4 @fromGradientOuter,
+    //     0 @offset*2 @offset @offset/4 @toGradientOuter);
     width: (@sliderMaxSize + @sliderHandleSize)/2 !important;
     height: @sliderMinSize !important;
+    &:before {
+        content: '';
+        position: absolute;
+        top: -@refScale*.25;
+        right: -@refScale*.15625;
+        bottom: -@refScale*.15625;
+        left: -@refScale*.15625;
+        background: @background;
+        .lineargradient(top, @fromGradientOuter, @toGradientOuter);
+        z-index: -1;
+    }
 
     @onBackground: darken(@texton, 7%);
     @offBackground: lighten(@textoff, 4%);
-    > .switch {
-        width: @sliderMaxSize;
-        height: @sliderMinSize;
-        .lineargradient(left, @onBackground 0%, @onBackground 50%, @offBackground 50%, @offBackground 100%);
+    > div {
+        width: inherit !important;
+        height: inherit !important;
 
-        &:before,
-        &:after {
-            position: absolute;
-            font-size: @refScale*0.75;
-            font-weight: bold;
-            top: 50%;
-            color: @background;
-        }
-        &:before {
-            content: 'ON';
-            left: 17%;
-            .transform(translateX(-50%) translateY(-50%));
-        }
-        &:after {
-            content: 'OFF';
-            right: 17%;
-            .transform(translateX(50%) translateY(-50%));
-        }
-
-        .handleflat,
-        .handleraised {
-            width: @sliderHandleSize;
+        > .switch {
+            width: @sliderMaxSize;
             height: @sliderMinSize;
-            top: 0;
-            left: (@sliderMaxSize - @sliderHandleSize)/2;
-            background-color: @background;
-            .box-shadow(0 0 @offset*2 @offset*2 @offBackground, inset -@offset -@offset @offset @offset @fromGradientOuter, inset @offset @offset @offset @offset @toGradientOuter);
-            &.down {
-                .box-shadow(0 0 @offset*2 @offset*2 @offBackground, inset -@offset -@offset @offset @offset @fromGradientOuter, inset @offset @offset @offset @offset darken(@toGradientOuter, 2%));
+            .lineargradient(left, @onBackground 0%, @onBackground 50%, @offBackground 50%, @offBackground 100%);
+
+            &:before,
+            &:after {
+                position: absolute;
+                font-size: @refScale*0.75;
+                top: 50%;
+                color: @background;
             }
-        }
-        .handleraised {
-            @handle: lighten(@background, 4%);
-            @handleHighlight: lighten(@handle, 8%);
-            @handleHighlight2: lighten(@handleHighlight, 8%);
-            .lineargradient2grads(~'left, @{background} 20%, @{fromGradientOuter} 43%, transparent 47%, transparent 53%, @{fromGradientOuter} 57%, @{background} 80%',
-                                  ~'top, @{handle} 20%, @{handleHighlight} 38%, @{handleHighlight2} 50%, @{handleHighlight} 62%, @{handle} 80%');
+            &:before {
+                content: 'ON';
+                left: 17%;
+                .transform(translateX(-50%) translateY(-50%));
+            }
+            &:after {
+                content: 'OFF';
+                right: 17%;
+                .transform(translateX(50%) translateY(-50%));
+            }
+
+            .handleflat,
+            .handleraised {
+                width: @sliderHandleSize;
+                height: @sliderMinSize;
+                top: 0;
+                left: (@sliderMaxSize - @sliderHandleSize)/2;
+                background-color: @background;
+                .box-shadow(
+                    0 0 @offset*2 @offset*2 @offBackground,
+                    inset 0 -@offset*2 @offset @offset/4 @fromGradientOuter,
+                    inset 0 @offset*2 @offset @offset/4 @toGradientOuter);
+                &.down {
+                    .box-shadow(
+                        0 0 @offset*2 @offset*2 @offBackground,
+                        inset 0 -@offset*2 @offset @offset/4 @fromGradientOuter,
+                        inset 0 @offset*2 @offset @offset/4 darken(@toGradientOuter, 2%));
+                }
+            }
+            .handleraised {
+                @handle: lighten(@background, 4%);
+                @handleHighlight: lighten(@handle, 8%);
+                @handleHighlight2: lighten(@handleHighlight, 8%);
+                .lineargradient2grads(~'left, @{background} 20%, @{fromGradientOuter} 43%, transparent 47%, transparent 53%, @{fromGradientOuter} 57%, @{background} 80%',
+                                      ~'top, @{handle} 20%, @{handleHighlight} 38%, @{handleHighlight2} 50%, @{handleHighlight} 62%, @{handle} 80%');
+            }
         }
     }
 
@@ -97,7 +120,7 @@ body {
         width: @sliderMinSize !important;
         height: (@sliderMaxSize + @sliderHandleSize)/2 !important;
 
-        > .switch {
+        > div > .switch {
             width: @sliderMinSize;
             height: @sliderMaxSize;
             .lineargradient(top, @onBackground 0%, @onBackground 50%, @offBackground 50%, @offBackground 100%);
@@ -139,37 +162,57 @@ body {
         }
     }
 
-    border-radius: @refScale;
-    > .switch {
-        .handleflat,
-        .handleraised {
-            border-radius: @refScale;
-        }
+    &:before {
+        border-radius: @refScale;
     }
-    &.corners-halfrounded {
-        border-radius: @refScale/2;
+    > div {
+        border-radius: @refScale;
         > .switch {
             .handleflat,
             .handleraised {
-                border-radius: @refScale/2;
+                border-radius: @refScale;
+            }
+        }
+    }
+    &.corners-halfrounded {
+        &:before {
+            border-radius: @refScale/2;
+        }
+        > div {
+            border-radius: @refScale/2;
+            > .switch {
+                .handleflat,
+                .handleraised {
+                    border-radius: @refScale/2;
+                }
             }
         }
     }
     &.corners-quarterrounded {
-        border-radius: @refScale/4;
-        > .switch {
-            .handleflat,
-            .handleraised {
-                border-radius: @refScale/4;
+        &:before {
+            border-radius: @refScale/4;
+        }
+        > div {
+            border-radius: @refScale/4;
+            > .switch {
+                .handleflat,
+                .handleraised {
+                    border-radius: @refScale/4;
+                }
             }
         }
     }
     &.corners-sharp {
-        border-radius: 0;
-        > .switch {
-            .handleflat,
-            .handleraised {
-                border-radius: 0;
+        &:before {
+            border-radius: 0;
+        }
+        > div {
+            border-radius: 0;
+            > .switch {
+                .handleflat,
+                .handleraised {
+                    border-radius: 0;
+                }
             }
         }
     }
