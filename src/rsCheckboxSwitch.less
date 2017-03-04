@@ -5,7 +5,7 @@
 
 // scalar values
 // ===============
-@refScale: 2vw;   // Allowed units are: px, pt (for fixed layout) or em, rem, vw, vh, vmin, vmax (for elastic layout).
+@refScale: 4vw;   // Allowed units are: px, pt (for fixed layout) or em, rem, vw, vh, vmin, vmax (for elastic layout).
                   // To try other sizes, you only need to change this line. All the rest will resize according to this @refScale
                   // 1em corresponds to 16px in most browsers, which is the default font size.
                   // However, some users might define another default font size for accessibility reasons.
@@ -246,44 +246,59 @@ body {
 
 /* Toggle button */
 .toggle {
-    min-height: @refScale*1.6;
-    color: @text;
+    @vert-padding: .25;
+    @horiz-padding: .875;
+    @border-width-ratio: .125;
+    @border-width-top-ratio: .31875;
+    @text-shadow: 0 0 @refScale*.1875 @texton;
+
+    color: @textoff;
     font-size: @refScale;
     position: relative;
-    padding: @refScale*.375 @refScale*.875 @refScale*.25;
-    border: @refScale*.125 solid @fromGradientOuter; 
-    border-top: @refScale*.1875 solid @fromGradientInner;
+    padding: @refScale*@vert-padding @refScale*@horiz-padding;
+    border: @refScale*@border-width-ratio solid @fromGradientOuter; 
+    border-top: @refScale*@border-width-top-ratio solid @fromGradientInner;
     cursor: pointer;
-    background: @background;
+    background: darken(@background, 5%);
     .box-shadow(0 -@refScale*.125 @refScale*.0625 @fromGradientOuter);
     .user-select(none);
-    margin-top: @refScale*.125;
     vertical-align: top;
     outline: none;
+    &.on {
+        color: @texton;
+        text-shadow: @text-shadow;
+    }
 
+    @border-width-delta-ratio: (@border-width-top-ratio - @border-width-ratio)/4;
     &.frm2,
     &.frm3 {
-        border-top-width: @refScale*.125;
-        border-bottom: @refScale*.1875 solid @fromGradientOuter;
-        color: hsla(55, 50%, 50%, .8);
-        text-shadow: 0 -@refScale*.0625 @refScale*.0625 @toGradientInner, 0 0 @refScale*.0625 hsl(55,50%,50%);
+        border-top-width: @refScale*(@border-width-top-ratio - @border-width-delta-ratio);
+        border-bottom-width: @refScale*(@border-width-ratio + @border-width-delta-ratio);
+        border-top-color: mix(@fromGradientInner, @fromGradientOuter, 75%);
     }
-    &.frm3,
-    &.frm4 {
-        padding-bottom: @refScale*.25;
-        margin-top: 0;
-        margin-bottom: @refScale*.125;
-        border: @refScale*.125 solid @fromGradientOuter;          //@toGradientInner; 
-        border-bottom: @refScale*.1875 solid lighten(@fromGradientOuter, 5%);
-        .box-shadow(0 @refScale*.125 @fromGradientOuter);
+    &.frm3 {
+        border-top-width: @refScale*(@border-width-top-ratio - @border-width-delta-ratio*2);
+        border-bottom-width: @refScale*(@border-width-ratio + @border-width-delta-ratio*2);
+        border-top-color: mix(@fromGradientInner, @fromGradientOuter, 50%);
     }
     &.frm4 {
-        text-shadow: 0 -@refScale*.0625 @refScale*.0625 @toGradientInner,
-                     @refScale*.0625 @refScale*.0625 @refScale*.375 hsla(55,50%,50%,.5),
-                     -@refScale*.0625 -@refScale*.0625 @refScale*.375 hsla(55,50%,50%,.5);
-        color: hsl(55, 50%, 50%);
+        border-top-width: @refScale*(@border-width-top-ratio - @border-width-delta-ratio*3);
+        border-bottom-width: @refScale*(@border-width-ratio + @border-width-delta-ratio*3);
+        border-top-color: mix(@fromGradientInner, @fromGradientOuter, 25%);
     }
-
+    &.frm5 {
+        border-top-width: @refScale*@border-width-ratio;
+        border-bottom-width: @refScale*@border-width-top-ratio;
+        border-top-color: @fromGradientOuter;
+    }
+    &.frm4,
+    &.frm5 {
+        border-bottom-color: lighten(@fromGradientOuter, 2.5%);
+        .box-shadow(0 @refScale*.085 @refScale*.02 @fromGradientOuter);
+    }
+    &.frm5 {
+        border-bottom-color: lighten(@fromGradientOuter, 5%);
+    }
     &:before,
     &:after {
         content: '';
@@ -294,25 +309,33 @@ body {
         left: 0;
     }
 
+    @outline-margin-ratio: .3125;
     &:before {
-        top: -@refScale*.5;
-        right: -@refScale*.3125;
-        bottom: -@refScale*.3125;
-        left: -@refScale*.3125;
+        top: -@refScale*(@outline-margin-ratio + @border-width-top-ratio - @border-width-ratio);
+        right: -@refScale*@outline-margin-ratio;
+        bottom: -@refScale*@outline-margin-ratio;
+        left: -@refScale*@outline-margin-ratio;
         background: @background;
         .lineargradient(top, @fromGradientOuter, @toGradientOuter);
         z-index: -1;
     }
-    &.frm2:before {
-        top: -@refScale*.4375;
-        bottom: -@refScale*.375;
-    }
-    &.frm3:before,
-    &.frm4:before {
-        top: -@refScale*.3125;
-        bottom: -@refScale*.5;
-    }
 
+    &.frm2:before {
+        top: -@refScale*(@outline-margin-ratio + @border-width-top-ratio - @border-width-ratio - @border-width-delta-ratio);
+        bottom: -@refScale*(@outline-margin-ratio + @border-width-top-ratio - @border-width-ratio - @border-width-delta-ratio*3);
+    }
+    &.frm3:before {
+        top: -@refScale*(@outline-margin-ratio + @border-width-top-ratio - @border-width-ratio - @border-width-delta-ratio*2);
+        bottom: -@refScale*(@outline-margin-ratio + @border-width-top-ratio - @border-width-ratio - @border-width-delta-ratio*2);
+    }
+    &.frm4:before {
+        top: -@refScale*(@outline-margin-ratio + @border-width-top-ratio - @border-width-ratio - @border-width-delta-ratio*3);
+        bottom: -@refScale*(@outline-margin-ratio + @border-width-top-ratio - @border-width-ratio - @border-width-delta-ratio);
+    }
+    &.frm5:before {
+        top: -@refScale*@outline-margin-ratio;
+        bottom: -@refScale*(@outline-margin-ratio + @border-width-top-ratio - @border-width-ratio);
+    }
     @after-gradient-from: fade(@toGradientInner, 50%);
     @after-gradient-to: fade(@toGradientOuter, 50%);
     &:after {
@@ -328,7 +351,6 @@ body {
      }
     &.frm3:after {
         border-top-color: darken(@toGradientOuter, 8%);
-        border-top-width: @refScale*.125;
         .box-shadow(0 @refScale*.34375 @refScale*.5 0 hsla(0, 0%, 0%, .4));
         .lineargradient(top, lighten(@after-gradient-from, 2%) 58%, lighten(@after-gradient-to, 6%) 100%);
     }
@@ -337,47 +359,147 @@ body {
         .box-shadow(0 @refScale*.4375 @refScale*.5 0 hsla(0, 0%, 0%, .4));
         .lineargradient(top, lighten(@after-gradient-from, 3%) 50%, lighten(@after-gradient-to, 10%) 100%);
     }
+    &.frm5:after {
+        border-top-color: darken(@toGradientOuter, 18%);
+        .box-shadow(0 @refScale*.5 @refScale*.5 0 hsla(0, 0%, 0%, .5));
+        .lineargradient(top, lighten(@after-gradient-from, 4%) 45%, lighten(@after-gradient-to, 13%) 100%);
+    }
 
-    span.onoff {
-        position: absolute;
-        left: 10%;
-        top: 10%;
-        bottom: 10%;
-        right: 10%;
-        @shadeSelected: fade(@texton, 40%);
-
-        /* 1 */
+    &.push {
+        border-bottom-width: @refScale*@border-width-top-ratio;
+        .box-shadow(none);
+        > div.hiddenwrap {
+            position: absolute;
+            top: -@refScale*@border-width-top-ratio;
+            right: -@refScale*@border-width-ratio;
+            bottom: -@refScale*@border-width-top-ratio;
+            left: -@refScale*@border-width-ratio;
+            z-index: 1;
+            .box-shadow(inset 0 0 @refScale/10 darken(@fromGradientOuter, 50%));
+        }
+        > div.textwrapper,
+        span.onoff {
+            display: inline-block;
+            .transform-origin(center center);
+        }
         &:before {
-            content: '';
-            display: block;
-            margin: 10% auto 0;
-            width: 0;
-            height: 25%;
-            border: 0 solid @textoff;
-            border-left-width: @refScale*.125;
+            bottom: -@refScale*(@outline-margin-ratio + @border-width-top-ratio - @border-width-ratio);
         }
-        /* 1 selected */
-        &.on:before {
-            border-color: @texton;
-            .box-shadow(0 0 @refScale*.1875 @refScale*.125 @shadeSelected);
+        &:after {
+            border-top-color: darken(@toGradientOuter, 2%);
+            border-bottom: @refScale*.0625 solid lighten(@fromGradientOuter, 20%);
+            .box-shadow(0 @refScale*.25 @refScale*.5 0 hsla(0, 0%, 0%, .2));
+            .lineargradient(top, @after-gradient-from 50%, @after-gradient-to 100%);
         }
 
-        /* 0 */
-        &:after {
-            content: '';
-            display: block;
-            margin: 35% auto 0;
-            width: 10%;
-            height: 20%;
-            border-radius: 1em;
-            border: @refScale*.125 solid @textoff;
+        .frame(@coef, @border-mix, @scale) {
+            border-top-color: mix(@fromGradientInner, @fromGradientOuter, @border-mix);
+            border-width: @refScale*(@border-width-top-ratio + @border-width-delta-ratio*@coef) @refScale*(@border-width-ratio + @border-width-delta-ratio*@coef);
+            padding: @refScale*(@vert-padding - @border-width-delta-ratio*@coef) @refScale*(@horiz-padding - @border-width-delta-ratio*@coef);
+            &:before {
+                top: -@refScale*(@outline-margin-ratio + @border-width-top-ratio - @border-width-ratio + @border-width-delta-ratio*@coef);
+                right: -@refScale*(@outline-margin-ratio + @border-width-delta-ratio*@coef);
+                bottom: -@refScale*(@outline-margin-ratio + @border-width-top-ratio - @border-width-ratio + @border-width-delta-ratio*@coef);
+                left: -@refScale*(@outline-margin-ratio + @border-width-delta-ratio*@coef);
+            }
+            > div.hiddenwrap {
+                top: -@refScale*(@border-width-top-ratio + @border-width-delta-ratio*@coef);
+                right: -@refScale*(@border-width-ratio + @border-width-delta-ratio*@coef);
+                bottom: -@refScale*(@border-width-top-ratio + @border-width-delta-ratio*@coef);
+                left: -@refScale*(@border-width-ratio + @border-width-delta-ratio*@coef);
+            }
+            > div.textwrapper,
+            span.onoff {
+                .transform(scale(@scale));
+            }
         }
-        /* 0 selected */
-        &.off:after {
-            border-color: @texton;
-            .box-shadow(0 0 @refScale*.1875 @refScale*.125 @shadeSelected, inset 0 0 @refScale*.2 @shadeSelected);
+
+        &.frm2 {
+            .frame(1.25, 75%, 0.925);
+            &:after {
+                border-top-color: darken(@toGradientOuter, 5%);
+                border-bottom-color: lighten(@fromGradientOuter, 18%);
+                .lineargradient(top, darken(@after-gradient-from, 2%) 50%, darken(@after-gradient-to, 2%) 100%);
+            }
+            > div.hiddenwrap {
+                .box-shadow(inset 0 0 @refScale/5 @refScale/18 darken(@fromGradientOuter, 8%));
+            }
+        }
+        &.frm3 {
+            .frame(1.5, 50%, 0.9);
+            &:after {
+                border-top-color: darken(@toGradientOuter, 9%);
+                border-bottom-color: lighten(@fromGradientOuter, 15%);
+                .lineargradient(top, darken(@after-gradient-from, 3%) 50%, darken(@after-gradient-to, 3%) 100%);
+            }
+            > div.hiddenwrap {
+                .box-shadow(inset 0 0 @refScale/4 @refScale/15 darken(@fromGradientOuter, 10%));
+            }
+        }
+        &.frm4 {
+            .frame(1.75, 40%, 0.875);
+            &:after {
+                border-top-color: darken(@toGradientOuter, 12%);
+                border-bottom-color: lighten(@fromGradientOuter, 12%);
+                .lineargradient(top, darken(@after-gradient-from, 4%) 50%, darken(@after-gradient-to, 4%) 100%);
+            }
+            > div.hiddenwrap {
+                .box-shadow(inset 0 0 @refScale/3 @refScale/12 darken(@fromGradientOuter, 12%));
+            }
+        }
+        &.frm5 {
+            .frame(2, 35%, 0.85);
+            border-bottom-color: @fromGradientOuter;
+            &:after {
+                border-top-color: darken(@toGradientOuter, 15%);
+                border-bottom-color: lighten(@fromGradientOuter, 10%);
+                .lineargradient(top, darken(@after-gradient-from, 7%) 50%, darken(@after-gradient-to, 7%) 100%);
+            }
+            > div.hiddenwrap {
+                .box-shadow(inset 0 0 @refScale/2 @refScale/8 darken(@fromGradientOuter, 15%));
+            }
         }
     }
+
+    span.onoff {
+        text-align: center;
+
+        &:before,   /* 1 */
+        &:after {   /* 0 */
+            display: block;
+            color: @textoff;
+            text-shadow: none;
+            line-height: @refScale;
+        }
+
+        &:before {   /* 1 */
+            content: '\007C';
+            font-size: @refScale*0.6;
+        }
+
+        &:after {   /* 0 */
+            content: '\026AC';
+        }
+    }
+
+    .selected() {
+        color: @texton;
+        text-shadow: inherit;
+    }
+
+    &.on span.onoff {
+        &:before { /* 1 selected */
+            .selected();
+        }
+    }
+
+    &.off span.onoff {
+        &:after { /* 0 selected */
+            .selected();
+            text-shadow: @text-shadow;
+        }
+    }
+
 
     &:focus s____pan.onoff {
         &:before, /* 1 unselected focused */
@@ -399,27 +521,37 @@ body {
 
     border-radius: 1em;
     &:before,
-    &:after {
+    > div.hiddenwrap {
         border-radius: 1em;
+    }
+    &:after {
+        border-radius: .85em;
     }
     &.corners-halfrounded {
         border-radius: .5em;
         &:before,
-        &:after {
+        > div.hiddenwrap {
             border-radius: .5em;
+        }
+        &:after {
+            border-radius: .33em;
         }
     }
     &.corners-quarterrounded {
         border-radius: .25em;
         &:before,
-        &:after {
+        > div.hiddenwrap {
             border-radius: .25em;
+        }
+        &:after {
+            border-radius: .125em;
         }
     }
     &.corners-sharp {
         border-radius: 0;
         &:before,
-        &:after {
+        &:after,
+        > div.hiddenwrap {
             border-radius: 0;
         }
     }
@@ -539,4 +671,12 @@ body {
     -o-transform: @transf;
     -ms-transform: @transf;
     transform: @transf;
+}
+
+.transform-origin(@transfOrig) {
+    -webkit-transform-origin: @transfOrig;
+    -moz-transform-origin: @transfOrig;
+    -o-transform-origin: @transfOrig;
+    -ms-transform-origin: @transfOrig;
+    transform-origin: @transfOrig;
 }

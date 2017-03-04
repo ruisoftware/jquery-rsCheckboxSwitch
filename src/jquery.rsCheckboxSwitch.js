@@ -34,7 +34,6 @@
             
             // Toggle type related data
             currFrame = 1,
-            $onoffSpan = null,
             isSelfClosing = function($e) {
                 return /^(?:area|br|col|embed|hr|img|input|link|meta|param)$/i.test($e[0].tagName);
             },
@@ -84,7 +83,7 @@
                 originalClass = $elem.attr('class');
                 originalStyle = $elem.attr('style');
                 if (isSlidingType || isInline) {
-                    $switchInnerElem = $elem.wrap($('<div />')).hide().parent();
+                    $switchInnerElem = $elem.wrap($('<div />').addClass('hiddenwrap')).hide().parent();
                     $switch = $switchInnerElem.wrap($('<div />').addClass(isSlidingType ? opts.slidingType.outerClass : null)).parent();
                     if (isInline) {
                         $switch.addClass($elem.attr('class')).css('position', elemCssPos);
@@ -164,8 +163,7 @@
                         $switch.append(opts.toggleType.caption);
                     }
                     if (opts.toggleType.showOnOff) {
-                        $onoffSpan = $('<span>').addClass(opts.toggleType.onOffClass);
-                        $switch.append($onoffSpan);
+                        $switch.append($('<span>').addClass(opts.toggleType.onOffClass));
                     }
                     if (!$switch.height()) {
                         $switch.height($switch.css('line-height'));
@@ -299,25 +297,22 @@
                 doOnOff(anim, false, onFinish);
             },
             checkChangedClass = function () {
-                if (initialValue === isOnInput()) {
+                var isOn = isOnInput();
+                if (initialValue === isOn) {
                     $switch.removeClass(opts.changedClass);
                 } else {
                     $switch.addClass(opts.changedClass);
                 }
+                toggleClassOnOff(isOn);
             },
             toggleClassOnOff = function (isOn) {
-                if ($onoffSpan) {
-                    $onoffSpan.removeClass(isOn ? 'off' : 'on').addClass(isOn ? 'on' : 'off');
-                }
+                $switch.removeClass(isOn ? 'off' : 'on').addClass(isOn ? 'on' : 'off');
             },
             resetToggleClasses = function () {
-                if ($onoffSpan) {
-                    $onoffSpan.removeClass('on off');
-                }
+                $switch.removeClass('off on');
             },
             triggerOn = function (fireEvents) {
                 $elem.attr(getCheckedAttrName(), 'checked');
-                toggleClassOnOff(true);
                 checkChangedClass();
                 if (fireEvents) {
                     $elem.triggerHandler('onChange.rsCheckboxSwitch', [true]);
@@ -326,7 +321,6 @@
             },
             triggerOff = function (fireEvents) {
                 $elem.removeAttr(getCheckedAttrName());
-                toggleClassOnOff(false);
                 checkChangedClass();
                 if (fireEvents) {
                     $elem.triggerHandler('onChange.rsCheckboxSwitch', [false]);
@@ -340,6 +334,8 @@
                     if (fireEvents === undefined) {
                         if (state !== isOnSwitch()) {
                             triggerOn(true);
+                        } else {
+                            toggleClassOnOff(true);
                         }
                     } else {
                         triggerOn(fireEvents);
@@ -353,6 +349,8 @@
                     if (fireEvents === undefined) {
                         if (state !== isOffSwitch()) {
                             triggerOff(true);
+                        } else {
+                            toggleClassOnOff(false);
                         }
                     } else {
                         triggerOff(fireEvents);
@@ -365,10 +363,14 @@
             },
             onmousedown = function (e) {
                 e.preventDefault();
-                mouseIsDown = true;
                 if ($animObj) { // is some animation going on?
+                    if (!isSlidingType) { // if is toggle type, then let the first animation finish
+                        mouseIsDown = false;
+                        return;
+                    }
                     $animObj.stop();
                 }
+                mouseIsDown = true;
                 if (isSlidingType) {
                     startPos = slidingPos;
                     startPosSwitch = isOnSwitch();
@@ -521,7 +523,7 @@
                         enter: 13,
                         esc: 27,
                         space: 32
-                    }, allowedKey = function () {                    
+                    }, allowedKey = function () {
                         switch (event.which) {
                             case key.enter: return $.inArray('enter', opts.keyboard.allowed) > -1;
                             case key.esc:   return $.inArray('esc', opts.keyboard.allowed) > -1;
@@ -704,12 +706,12 @@
                                                     // - corners-halfrounded for 50% rounded corners;
                                                     // - corners-quarterrounded for 25% rounded corners;
                                                     // - corners-sharp for no rounded corners;
-                                                    // If none of the above three are specified, corners-rounded is used. 
+                                                    // If none of the above four are specified, corners-rounded is used.
             showOnOff: true,        // Determines whether a span child is used to display 0 or 1 (you can change CSS to display something else). Type: boolean.
             onOffClass: 'onoff',    // Class added to the span created when showOnOff is true. Type: String.
-            caption: null,  // Specifies the text caption that appears in toogle switches. If null, then uses the text from the markup. 
+            caption: null,  // Specifies the text caption that appears in toggle switches. If null, then uses the text from the markup. 
                             // If the plugin is not bounded to an <input type=checkbox> element, this caption is appended to the existing markup text (if any). Type: String.
-            frameClasses: ['frm1', 'frm2', 'frm3', 'frm4']
+            frameClasses: ['frm1', 'frm2', 'frm3', 'frm4', 'frm5']
                 // Each class represents a frame in the animation that runs from OFF to ON position. Type: array of String.
                 // The first class is used for the OFF image, the last for the ON image. Optional frames in the middle can be used to create a more realistic animation.
                 // For ON to OFF animations, the plug-in simply iterates from the last to the first class.
@@ -735,7 +737,7 @@
         changedClass: 'changed',    // Classes set to the outer div when the switch has been changed. Type: string.
         disabledClass: 'disabled',  // Classes set to the outer div when the switch is disabled. Type: string.
         enabled: true,  // Determines whether the control is editable. If the plugin is associated with a disabled <input type="checkbox" disabled>, then enabled is set to false. Type: boolean.
-        speed: 100,     // Handle animation in milliseconds. Type: positive integer number.
+        speed: 75,      // Handle animation in milliseconds. Type: positive integer number.
                         // For Sliding switches, specifies the time it takes to move from one side to the other.
                         // For Toggle switches, specifies the time it takes to change from one position to another (see toggleType.frameClasses above).
         onChange: null,     // Event fired when switch changes to either On or Off. Type: function (event, $elem, value)
