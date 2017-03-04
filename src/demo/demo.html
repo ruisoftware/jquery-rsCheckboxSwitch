@@ -25,58 +25,51 @@
 					$("input[type=checkbox]", section).eq(2).rsCheckboxSwitch({
 						type: 'toggle',
 						toggleType: {
-							outerClass: 'toggle power ' + cssCorners
+							outerClass: 'toggle ' + cssCorners
 						}
 					});
-					$("button", section).rsCheckboxSwitch({
+					$("button", section).eq(0).rsCheckboxSwitch({
 						type: 'toggle',
 						toggleType: {
-							outerClass: 'toggle power' + cssCorners,
+							outerClass: 'toggle ' + cssCorners,
 							showOnOff: false
 						}
 					});
 					$("input[type=checkbox]", section).eq(3).rsCheckboxSwitch({
 						slidingType: {
 							horizontal: true,
-							outerClass: 'checkboxswitch-outer power ' + cssCorners
+							outerClass: 'checkboxswitch-outer ' + cssCorners
 						}
 					});
 					$("input[type=checkbox]", section).eq(4).rsCheckboxSwitch({
 						slidingType: {
 							horizontal: true,
 							handleClass: 'handleraised',
-							outerClass: 'checkboxswitch-outer power ' + cssCorners
+							outerClass: 'checkboxswitch-outer ' + cssCorners
+						}
+					});
+
+					$("input[type=checkbox]", section).eq(5).rsCheckboxSwitch({
+						type: 'toggle',
+						toggleType: {
+							outerClass: 'toggle push ' + cssCorners,
+							frameClasses: ['frm1', 'frm2', 'frm3', 'frm4']
+						}
+					});
+					$("button", section).eq(1).rsCheckboxSwitch({
+						type: 'toggle',
+						toggleType: {
+							outerClass: 'toggle push ' + cssCorners,
+							frameClasses: ['frm1', 'frm2', 'frm3', 'frm4'],
+							showOnOff: false
 						}
 					});
 				};
 
-				$("input[type=checkbox]", $("section:first-child")).slice(0, 5).rsCheckboxSwitch({
-					type: 'toggle',
-					toggleType: {
-						outerClass: 'toggle corners-rounded'
-					}
-				});
-				$("input[type=checkbox]", $("section:first-child")).slice(5).rsCheckboxSwitch({
-					type: 'toggle',
-					toggleType: {
-						outerClass: 'toggle corners-rounded'
-					}
-				}).closest('div.toggle').addClass('push');
-				$(".toggle", $("section:first-child")).eq(1).removeClass('frm1').addClass('frm2');
-				$(".toggle", $("section:first-child")).eq(2).removeClass('frm1').addClass('frm3');
-				$(".toggle", $("section:first-child")).eq(3).removeClass('frm1').addClass('frm4');
-				$(".toggle", $("section:first-child")).eq(4).removeClass('frm1').addClass('frm5');
-
-				$(".toggle", $("section:first-child")).eq(6).removeClass('frm1').addClass('frm2');
-				$(".toggle", $("section:first-child")).eq(7).removeClass('frm1').addClass('frm3');
-				$(".toggle", $("section:first-child")).eq(8).removeClass('frm1').addClass('frm4');
-				$(".toggle", $("section:first-child")).eq(9).removeClass('frm1').addClass('frm5');
-				$("div.sep", $("section:first-child")).css('margin', '3em 0');
-
-				createPlugins($("section:first-child + section"), "corners-rounded");
-				createPlugins($("section:first-child + section + section"), "corners-halfrounded");
-				createPlugins($("section:first-child + section + section + section"), "corners-quarterrounded");
-				createPlugins($("section:last-child"), "corners-sharp");
+				createPlugins($("section:first-child"), "corners-rounded");
+				createPlugins($("section:first-child + section"), "corners-halfrounded");
+				createPlugins($("section:first-child + section + section"), "corners-quarterrounded");
+				createPlugins($("section:last-of-type"), "corners-sharp");
 			});
 		</script>
 		<style>
@@ -98,35 +91,9 @@
 				left: 0;
 				right: 0;
 			}
-			#a1 {
-				top: 96px;
-			}
-			#a3 {
-				top: 353px;
-			}
-			#a4 {
-				top: 569px;
-			}
 		</style>
 	</head>
 	<body>
-		<section>
-			<h1>each frame</h1>
-			<input type="checkbox" name="vehicle" value="Bike">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<input type="checkbox" name="vehicle" value="Bike">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<input type="checkbox" name="vehicle" value="Bike">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<input type="checkbox" name="vehicle" value="Bike">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<input type="checkbox" name="vehicle" value="Bike">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<div class="sep"></div>
-			<input type="checkbox" name="vehicle" value="Bike">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<input type="checkbox" name="vehicle" value="Bike">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<input type="checkbox" name="vehicle" value="Bike">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<input type="checkbox" name="vehicle" value="Bike">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<input type="checkbox" name="vehicle" value="Bike">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<div class="sep"></div>
-			<input type="checkbox" name="vehicle" value="Bike">
-		</section>
-
 		<section>
 			<h1>rounded corners</h1>
 			<input type="checkbox" name="vehicle" tabindex="1" value="Bike">
@@ -135,37 +102,44 @@
 			<button>faster</button>
 			<input type="checkbox" name="vehicle" tabindex="4" value="Bike">
 			<input type="checkbox" name="vehicle" tabindex="5" value="Bike">
+			<input type="checkbox" name="vehicle" tabindex="6" value="Bike">
+			<button>faster</button>
 		</section>
 
 		<section>
 			<h1>50% rounded corners</h1>
-			<input type="checkbox" name="vehicle" tabindex="6" value="Bike">
-			<input type="checkbox" name="vehicle" tabindex="7" value="Car">
-			<input type="checkbox" name="vehicle" tabindex="8" value="Bike">
+			<input type="checkbox" name="vehicle" tabindex="7" value="Bike">
+			<input type="checkbox" name="vehicle" tabindex="8" value="Car">
 			<input type="checkbox" name="vehicle" tabindex="9" value="Bike">
+			<button>faster</button>
 			<input type="checkbox" name="vehicle" tabindex="10" value="Bike">
+			<input type="checkbox" name="vehicle" tabindex="11" value="Bike">
+			<input type="checkbox" name="vehicle" tabindex="12" value="Bike">
+			<button>faster</button>
 		</section>
 
 		<section>
 			<h1>25% rounded corners</h1>
-			<input type="checkbox" name="vehicle" tabindex="11" value="Bike">
-			<input type="checkbox" name="vehicle" tabindex="12" value="Car">
 			<input type="checkbox" name="vehicle" tabindex="13" value="Bike">
-			<input type="checkbox" name="vehicle" tabindex="14" value="Bike">
+			<input type="checkbox" name="vehicle" tabindex="14" value="Car">
 			<input type="checkbox" name="vehicle" tabindex="15" value="Bike">
+			<button>faster</button>
+			<input type="checkbox" name="vehicle" tabindex="16" value="Bike">
+			<input type="checkbox" name="vehicle" tabindex="17" value="Bike">
+			<input type="checkbox" name="vehicle" tabindex="18" value="Bike">
+			<button>faster</button>
 		</section>
 
 		<section>
 			<h1>sharp corners</h1>
-			<input type="checkbox" name="vehicle" tabindex="16" value="Bike">
-			<input type="checkbox" name="vehicle" tabindex="17" value="Car">
-			<input type="checkbox" name="vehicle" tabindex="18" value="Bike">
 			<input type="checkbox" name="vehicle" tabindex="19" value="Bike">
-			<input type="checkbox" name="vehicle" tabindex="20" value="Bike">
+			<input type="checkbox" name="vehicle" tabindex="20" value="Car">
+			<input type="checkbox" name="vehicle" tabindex="21" value="Bike">
+			<button>faster</button>
+			<input type="checkbox" name="vehicle" tabindex="22" value="Bike">
+			<input type="checkbox" name="vehicle" tabindex="23" value="Bike">
+			<input type="checkbox" name="vehicle" tabindex="24" value="Bike">
+			<button>faster</button>
 		</section>
-		<aside id="a1"></aside>
-		<aside id="a2"></aside>
-		<aside id="a3"></aside>
-		<aside id="a4"></aside>
 	</body>
 </html>

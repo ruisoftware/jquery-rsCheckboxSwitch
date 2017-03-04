@@ -83,8 +83,8 @@
                 originalClass = $elem.attr('class');
                 originalStyle = $elem.attr('style');
                 if (isSlidingType || isInline) {
-                    $switchInnerElem = $elem.wrap($('<div />').addClass('hiddenwrap')).hide().parent();
-                    $switch = $switchInnerElem.wrap($('<div />').addClass(isSlidingType ? opts.slidingType.outerClass : null)).parent();
+                    $switchInnerElem = $elem.wrap($('<div>').addClass('hiddenwrap')).hide().parent();
+                    $switch = $switchInnerElem.wrap($('<div>').addClass(isSlidingType ? opts.slidingType.outerClass : null)).parent();
                     if (isInline) {
                         $switch.addClass($elem.attr('class')).css('position', elemCssPos);
                         if (isSlidingType) {
@@ -97,10 +97,14 @@
                         $switch.attr('tabindex', tabIndex);
                     }
                 } else {
-                    $switch = $elem;
+                    $elem.
+                        contents().
+                        filter(function () { return this.nodeType === 3; }).
+                        wrap($('<div>').addClass('textwrapper'));
+                    $switch = $elem.append($('<div>').addClass('hiddenwrap'));
                 }
                 if (isSlidingType) {
-                    $sliderBar = $('<div />').addClass(opts.slidingType.sliderClass).css('position', 'relative');
+                    $sliderBar = $('<div>').addClass(opts.slidingType.sliderClass).css('position', 'relative');
                     $switchInnerElem = $switchInnerElem || $("div:first-child", $switch);
                     $switchInnerElem.css({
                         'display': 'inline-block',
@@ -108,7 +112,7 @@
                         'overflow': 'hidden'
                     }).append($sliderBar);
                     // need to retrieve the $sliderHandle height or width, so add it temporarily as hidden to the DOM
-                    $sliderHandle = $('<div />').hide().addClass(opts.slidingType.handleClass);
+                    $sliderHandle = $('<div>').hide().addClass(opts.slidingType.handleClass);
                     $sliderBar.append($sliderHandle);
 
                     if (elemCssPos === 'static') {
