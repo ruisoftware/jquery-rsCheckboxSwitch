@@ -38,9 +38,6 @@ body {
 .checkboxswitch-outer {
     outline: none;
     @offset: @refScale*.0625;
-    // .box-shadow(
-    //     0 -@offset*2 @offset @offset/4 @fromGradientOuter,
-    //     0 @offset*2 @offset @offset/4 @toGradientOuter);
     width: (@sliderMaxSize + @sliderHandleSize)/2 !important;
     height: @sliderMinSize !important;
     &:before {
@@ -264,6 +261,7 @@ body {
     .user-select(none);
     vertical-align: top;
     outline: none;
+    text-align: center;
     &.on {
         color: @texton;
         text-shadow: @text-shadow;
@@ -367,7 +365,7 @@ body {
 
     &.push {
         border-bottom-width: @refScale*@border-width-top-ratio;
-        .box-shadow(none);
+        .box-shadow(0 @refScale*.085 @refScale*.2 @fromGradientOuter);
         > div.hiddenwrap {
             position: absolute;
             top: -@refScale*@border-width-top-ratio;
@@ -415,7 +413,20 @@ body {
         }
 
         &.frm2 {
-            .frame(1.25, 75%, 0.925);
+            .frame(1.025, 85%, 0.975);
+            .box-shadow(0 @refScale*.05 @refScale*.2 @fromGradientOuter);
+            &:after {
+                border-top-color: darken(@toGradientOuter, 2%);
+                border-bottom-color: lighten(@fromGradientOuter, 20%);
+                .lineargradient(top, darken(@after-gradient-from, 1%) 50%, darken(@after-gradient-to, 1%) 100%);
+            }
+            > div.hiddenwrap {
+                .box-shadow(inset 0 0 @refScale/6 @refScale/20 darken(@fromGradientOuter, 6%));
+            }
+        }
+        &.frm3 {
+            .frame(1.05, 75%, 0.95);
+            .box-shadow(0 @refScale*.025 @refScale*.2 @fromGradientOuter);
             &:after {
                 border-top-color: darken(@toGradientOuter, 5%);
                 border-bottom-color: lighten(@fromGradientOuter, 18%);
@@ -425,8 +436,9 @@ body {
                 .box-shadow(inset 0 0 @refScale/5 @refScale/18 darken(@fromGradientOuter, 8%));
             }
         }
-        &.frm3 {
-            .frame(1.5, 50%, 0.9);
+        &.frm4 {
+            .frame(1.075, 50%, 0.925);
+            .box-shadow(none);
             &:after {
                 border-top-color: darken(@toGradientOuter, 9%);
                 border-bottom-color: lighten(@fromGradientOuter, 15%);
@@ -434,17 +446,6 @@ body {
             }
             > div.hiddenwrap {
                 .box-shadow(inset 0 0 @refScale/4 @refScale/15 darken(@fromGradientOuter, 10%));
-            }
-        }
-        &.frm4 {
-            .frame(1.75, 40%, 0.875);
-            &:after {
-                border-top-color: darken(@toGradientOuter, 12%);
-                border-bottom-color: lighten(@fromGradientOuter, 12%);
-                .lineargradient(top, darken(@after-gradient-from, 4%) 50%, darken(@after-gradient-to, 4%) 100%);
-            }
-            > div.hiddenwrap {
-                .box-shadow(inset 0 0 @refScale/3 @refScale/12 darken(@fromGradientOuter, 12%));
             }
         }
     }
@@ -485,25 +486,6 @@ body {
         &:after { /* 0 selected */
             .selected();
             text-shadow: @text-shadow;
-        }
-    }
-
-
-    &:focus s____pan.onoff {
-        &:before, /* 1 unselected focused */
-        &:after { /* 0 unselected focused */
-            border-color: hsl(60, 100%, 26%);
-        }
-        /* 1 selected focused */
-        &.on:before {
-            border-color: hsl(60, 100%, 46%);
-            .box-shadow(0 0 @refScale*.1875 @refScale*.125 hsla(55, 50%, 40%, 0.85));
-        }
-
-        /* 0 selected focused */
-        &.off:after {
-            border-color: hsl(60, 100%, 35%);
-            .box-shadow(0 0 @refScale*.1875 @refScale*.125 hsla(55, 50%, 40%, 0.6), inset 0 0 @refScale*.0625 hsla(55, 50%, 40%, 0.6));
         }
     }
 
