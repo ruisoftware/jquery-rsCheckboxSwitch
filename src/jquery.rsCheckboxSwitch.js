@@ -17,6 +17,7 @@
             $animObj = null,
             isDocumentKeyEventsBound = false,
             isSlidingType,
+            optionsTogglePushType,
             tabIndex,
             
             // sliding type related data
@@ -72,6 +73,9 @@
                     };
                 }
                 isSlidingType = opts.type === 'sliding';
+                if (!isSlidingType) {
+                    optionsTogglePushType = opts.type === 'push' ? opts.pushType : opts.toggleType;
+                }
                 tabIndex = $elem.attr('tabindex');
                 // input elements are focusable, even if there is no tabindex attribute
                 if ($elem.is('input') && tabIndex === undefined) {
@@ -124,7 +128,9 @@
                     if (!opts.slidingType.horizontal && !!opts.slidingType.verticalClass) {
                         $switch.addClass(opts.slidingType.verticalClass);
                     }
-
+                    if (opts.slidingType.flipped) {
+                        $switch.addClass(opts.slidingType.flippedClass);
+                    }
                     if (opts.slidingType.horizontal) {
                         $switch.css({
                             'width': (($sliderBar.outerWidth(true) + $sliderHandle.outerWidth(true)) / 2) + 'px',
@@ -155,7 +161,7 @@
                     if (elemCssPos === 'static') {
                         $switch.css('position', 'relative');
                     }
-                    $switch.css('display', 'inline-block').addClass(opts.toggleType.outerClass);
+                    $switch.css('display', 'inline-block').addClass(optionsTogglePushType.outerClass);
                     if (opts.enabled) {
                         $switch.bind('mousedown.rsCheckboxSwitch', onmousedown).bind('mouseup.rsCheckboxSwitch', onmouseup);
                     } else {
@@ -163,11 +169,11 @@
                             $switch.addClass(opts.disabledClass);
                         }
                     }
-                    if (opts.toggleType.caption) {
-                        $switch.append(opts.toggleType.caption);
+                    if (optionsTogglePushType.caption) {
+                        $switch.append(optionsTogglePushType.caption);
                     }
-                    if (opts.toggleType.showOnOff) {
-                        $switch.append($('<span>').addClass(opts.toggleType.onOffClass));
+                    if (optionsTogglePushType.showOnOff) {
+                        $switch.append($('<span>').addClass(optionsTogglePushType.onOffClass));
                     }
                     if (!$switch.height()) {
                         $switch.height($switch.css('line-height'));
@@ -193,7 +199,7 @@
                     bind('destroy.rsCheckboxSwitch', onDestroy).
                     bind('on.rsCheckboxSwitch', onOn).
                     bind('off.rsCheckboxSwitch', onOff);
-                    
+
                 $switch.
                     bind('focus.rsCheckboxSwitch', gotFocus).
                     bind('blur.rsCheckboxSwitch', loseFocus);
@@ -255,14 +261,14 @@
                 }
             },
             doOnOffToggle = function(anim, changeToOn, onFinish) {
-                var qtFrames = opts.toggleType && opts.toggleType.frameClasses ? opts.toggleType.frameClasses.length : 0;
+                var qtFrames = optionsTogglePushType && optionsTogglePushType.frameClasses ? optionsTogglePushType.frameClasses.length : 0;
                 if (qtFrames > 0) {
                     var dest = changeToOn ? qtFrames : 1,
                         prevFrame = 0,
                         doStep = function (now) {
                             var frame = Math.round(now);
                             if (prevFrame === 0 || frame !== prevFrame) {
-                                $switch.removeClass(opts.toggleType.frameClasses[(prevFrame === 0 ? currFrame : prevFrame) - 1]).addClass(opts.toggleType.frameClasses[frame - 1]);
+                                $switch.removeClass(optionsTogglePushType.frameClasses[(prevFrame === 0 ? currFrame : prevFrame) - 1]).addClass(optionsTogglePushType.frameClasses[frame - 1]);
                                 prevFrame = currFrame = frame;
                             }
                          },
@@ -568,16 +574,15 @@
                     if (!$elem.is('input') && tabIndex !== undefined) {
                         $elem.attr('tabindex', tabIndex);
                     }
-                    $elem.unwrap();
                     $sliderBar.remove();
-                    $sliderHandle.unwrap().remove();
+                    $elem.unwrap().unwrap().show();
                 } else {
                     var $contents = $switch.contents();
-                    if (opts.toggleType.showOnOff && $contents.length > 0) {
+                    if (optionsTogglePushType.showOnOff && $contents.length > 0) {
                         $contents.last().remove();
                         $contents = $switch.contents();
                     }
-                    if (opts.toggleType.caption && $contents.length > 0) {
+                    if (optionsTogglePushType.caption && $contents.length > 0) {
                         $contents.last().remove();
                     }
                     if ($switch !== $elem) {
@@ -661,6 +666,7 @@
         var opts = $.extend({}, $.fn.rsCheckboxSwitch.defaults, options);
         opts.slidingType = $.extend({}, $.fn.rsCheckboxSwitch.defaults.slidingType, options ? options.slidingType : options);
         opts.toggleType = $.extend({}, $.fn.rsCheckboxSwitch.defaults.toggleType, options ? options.toggleType : options);
+        opts.pushType = $.extend({}, $.fn.rsCheckboxSwitch.defaults.pushType, options ? options.pushType : options);
         opts.keyboard = $.extend({}, $.fn.rsCheckboxSwitch.defaults.keyboard, options ? options.keyboard : options);
 
         return this.each(function () {
@@ -678,13 +684,13 @@
 
     // public access to the default input parameters
     $.fn.rsCheckboxSwitch.defaults = {
-        type: 'sliding', // Determines whether this is a sliding switch or a toggle switch. Type: 'sliding' or 'toggle' string.
+        type: 'sliding', // Determines whether this is a sliding switch or a toggle switch. Type: 'sliding', 'toggle' or 'push' string.
                          // A sliding switch only shows one half (ON or OFF) while the other half is hidden. This means, that the switch must be longer than the container in order to clip the switch.
-                         // A toggle switch always shows the same size. Instead of having a sliding motion, a toggle switch remains in the same location and transitions ON to OFF (or vice-versa) might be animated.
+                         // A toggle or push switch always has the same size. Instead of having a sliding motion, a toggle switch remains in the same location and transitions ON to OFF (or vice-versa) might be animated.
         
         // slidingType is only meaningful if type is 'sliding'
         slidingType: { // multiple classes are separated by a space
-            outerClass: 'checkboxswitch-outer corners-rounded', // Classes for the outer container. Type: string.
+            outerClass: 'checkboxswitch-outer sliding corners-rounded', // Classes for the outer container. Type: string.
                                                                 // Add:
                                                                 // - corners-rounded for full rounded corners;
                                                                 // - corners-halfrounded for 50% rounded corners;
@@ -695,16 +701,17 @@
             handleClass: 'handleflat',            // Classes for the handle usually located in the middle of the slider element. Type: string.
             pushdownClass: 'down',                // Classes for the handle when mouse is applied to it. Type: string.
             draggingClass: 'switch-dragging',     // Classes used during the time user is moving the switch with the mouse. Type: string.
-            verticalClass: 'vert',                // Classes applied to the topmost element for vertical sliders (when horizontal is false). 
+            verticalClass: 'vert',                // Classes applied to the topmost element for vertical sliders (when horizontal is false).
+            flippedClass: 'flipped',              // Classes applied to the topmost element when the slider is flipped
             flipped: false,     // Determines the location of the on and off. Type: boolean.
                                 // When flipped is false, the switch is ON--OFF (for horizontal switches) or ON on the top and OFF on the bottom (for vertical switches)
                                 // When flipped is true, the switch is OFF--ON (for horizontal switches) or OFF on the top and ON on the bottom (for vertical switches) 
             horizontal: true    // Determines the switch orientation, either horizontal or vertical. Type: boolean.
         },
 
-        // toggleType is only meaningful if type is 'toggle' (or other value other than 'sliding')
+        // toggleType is only meaningful if type is 'toggle'
         toggleType: {
-            outerClass: 'toggle corners-rounded',   // Classes for the container. Type: string.
+            outerClass: 'checkboxswitch-outer toggle corners-rounded',   // Classes for the container. Type: string.
                                                     // Add:
                                                     // - corners-rounded for full rounded corners;
                                                     // - corners-halfrounded for 50% rounded corners;
@@ -716,6 +723,25 @@
             caption: null,  // Specifies the text caption that appears in toggle switches. If null, then uses the text from the markup. 
                             // If the plugin is not bounded to an <input type=checkbox> element, this caption is appended to the existing markup text (if any). Type: String.
             frameClasses: ['frm1', 'frm2', 'frm3', 'frm4', 'frm5']
+                // Each class represents a frame in the animation that runs from OFF to ON position. Type: array of String.
+                // The first class is used for the OFF image, the last for the ON image. Optional frames in the middle can be used to create a more realistic animation.
+                // For ON to OFF animations, the plug-in simply iterates from the last to the first class.
+        },
+
+        // pushType is only meaningful if type is 'push'
+        pushType: {
+            outerClass: 'checkboxswitch-outer toggle push corners-rounded',   // Classes for the container. Type: string.
+                                                    // Add:
+                                                    // - corners-rounded for full rounded corners;
+                                                    // - corners-halfrounded for 50% rounded corners;
+                                                    // - corners-quarterrounded for 25% rounded corners;
+                                                    // - corners-sharp for no rounded corners;
+                                                    // If none of the above four are specified, corners-rounded is used.
+            showOnOff: true,        // Determines whether a span child is used to display 0 or 1 (you can change CSS to display something else). Type: boolean.
+            onOffClass: 'onoff',    // Class added to the span created when showOnOff is true. Type: String.
+            caption: null,  // Specifies the text caption that appears in toggle switches. If null, then uses the text from the markup. 
+                            // If the plugin is not bounded to an <input type=checkbox> element, this caption is appended to the existing markup text (if any). Type: String.
+            frameClasses: ['frm1', 'frm2', 'frm3', 'frm4']
                 // Each class represents a frame in the animation that runs from OFF to ON position. Type: array of String.
                 // The first class is used for the OFF image, the last for the ON image. Optional frames in the middle can be used to create a more realistic animation.
                 // For ON to OFF animations, the plug-in simply iterates from the last to the first class.
@@ -743,7 +769,7 @@
         enabled: true,  // Determines whether the control is editable. If the plugin is associated with a disabled <input type="checkbox" disabled>, then enabled is set to false. Type: boolean.
         speed: 75,      // Handle animation in milliseconds. Type: positive integer number.
                         // For Sliding switches, specifies the time it takes to move from one side to the other.
-                        // For Toggle switches, specifies the time it takes to change from one position to another (see toggleType.frameClasses above).
+                        // For Toggle or Push switches, specifies the time it takes to change from one position to another.
         onChange: null,     // Event fired when switch changes to either On or Off. Type: function (event, $elem, value)
         onChangeOn: null,   // Event fired when switch changes to On position. Type: function (event, $elem)
                             // If the markup is an <input type="checkbox"> then an attribute checked="checked" is added. If other markup is used, then an attribute data-checked="checked" is added.

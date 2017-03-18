@@ -8,73 +8,62 @@
 		<script src="../jquery.rsCheckboxSwitch.js"></script>
 		<script>
 			$(document).ready(function () {
-				var createPlugins = function (section, cssCorners) {
-					$("input[type=checkbox]", section).eq(0).rsCheckboxSwitch({
-						slidingType: {
-							horizontal: false,
-							outerClass: 'checkboxswitch-outer ' + cssCorners
+				var $plugin = $("input[type=checkbox]"),
+					createPlugin = function () {
+						switch ($("input[name='type']:checked").val()) {
+							case 'sliding':
+								$plugin.rsCheckboxSwitch({
+									type: 'sliding',
+									slidingType: {
+										outerClass: 'checkboxswitch-outer sliding ' + $("input[name='corners']:checked").val(),
+										handleClass: $("input[name='handle-style']:checked").val(),
+										flipped: $("input[name='flipped']:checked").val() === 'yes',
+										horizontal: $("input[name='orientation']:checked").val() === 'horiz'
+									}
+								});
+								break;
+							case 'toggle':
+								$plugin.rsCheckboxSwitch({
+									type: 'toggle',
+									toggleType: {
+										outerClass: 'checkboxswitch-outer toggle ' + $("input[name='corners']:checked").val(),
+										showOnOff: $("input[name='toggle-content']:checked").val() === 'show01',
+										caption: $("input[name='toggle-content']:checked").val() === 'show01' ? null : 'turbo'
+									}
+								});
+								break;
+							case 'push':
+								$plugin.rsCheckboxSwitch({
+									type: 'push',
+									pushType: {
+										outerClass: 'checkboxswitch-outer toggle push ' + $("input[name='corners']:checked").val(),
+										showOnOff: $("input[name='toggle-content']:checked").val() === 'show01',
+										caption: $("input[name='toggle-content']:checked").val() === 'show01' ? null : 'turbo'
+									}
+								});
 						}
-					});
-					$("input[type=checkbox]", section).eq(1).rsCheckboxSwitch({
-						slidingType: {
-							horizontal: false,
-							handleClass: 'handleraised',
-							outerClass: 'checkboxswitch-outer ' + cssCorners
-						}
-					});
-					$("input[type=checkbox]", section).eq(2).rsCheckboxSwitch({
-						type: 'toggle',
-						toggleType: {
-							outerClass: 'toggle ' + cssCorners
-						}
-					});
-					$("button", section).eq(0).rsCheckboxSwitch({
-						type: 'toggle',
-						toggleType: {
-							outerClass: 'toggle ' + cssCorners,
-							showOnOff: false
-						}
-					});
-					$("input[type=checkbox]", section).eq(3).rsCheckboxSwitch({
-						slidingType: {
-							horizontal: true,
-							outerClass: 'checkboxswitch-outer ' + cssCorners
-						}
-					});
-					$("input[type=checkbox]", section).eq(4).rsCheckboxSwitch({
-						slidingType: {
-							horizontal: true,
-							handleClass: 'handleraised',
-							outerClass: 'checkboxswitch-outer ' + cssCorners
-						}
-					});
+					},
+					destroyPlugin = function () {
+						$plugin.rsCheckboxSwitch('destroy');
+					}
 
-					$("input[type=checkbox]", section).eq(5).rsCheckboxSwitch({
-						type: 'toggle',
-						toggleType: {
-							outerClass: 'toggle push ' + cssCorners,
-							frameClasses: ['frm1', 'frm2', 'frm3', 'frm4']
+				$("aside input").change(function (e) {
+					if (this.name !== 'size') {
+						destroyPlugin();
+						createPlugin();
+						if (this.name === 'type') {
+							$("aside:not(.all,." + this.value + ")").hide();
+							$("aside." + this.value).show();
 						}
-					});
-					$("button", section).eq(1).rsCheckboxSwitch({
-						type: 'toggle',
-						toggleType: {
-							outerClass: 'toggle push ' + cssCorners,
-							frameClasses: ['frm1', 'frm2', 'frm3', 'frm4'],
-							showOnOff: false
-						}
-					});
-				};
-
-				createPlugins($("section:first-child"), "corners-rounded");
-				createPlugins($("section:first-child + section"), "corners-halfrounded");
-				createPlugins($("section:first-child + section + section"), "corners-quarterrounded");
-				createPlugins($("section:last-of-type"), "corners-sharp");
+					}
+					$(".checkboxswitch-outer").css('font-size', $("input[name='size']:checked").val());
+				}).eq(1).trigger('change');
 			});
 		</script>
 		<style>
 			body {
 				margin: 1em;
+				color: white;
 			}
 			section {
 				margin: 3em 0;
@@ -83,63 +72,78 @@
 				margin: 0 1em;
 			}
 			aside {
-				border: 1px solid transparent;
-				border-bottom-color: white;
-				position: absolute;
-				top: 112px;
-				height: 1px;
-				left: 0;
-				right: 0;
+				display: inline-block;
+				margin: 1em 1em 1em 0;
+			}
+			aside h1 {
+				font-size: .9em;
+				border-bottom: 1px dotted white;
+				padding-bottom: .2em;
+			}
+			aside label {
+				cursor: pointer;
+			}
+			aside.toggle {
+				display: none;
+			}
+			aside.all.size label {
+				display: block;
+			}
+			input {
+				margin-right: .25em;
+			}
+			label {
+				margin: 1em;
 			}
 		</style>
 	</head>
 	<body>
-		<section>
-			<h1>rounded corners</h1>
-			<input type="checkbox" name="vehicle" tabindex="1" value="Bike">
-			<input type="checkbox" name="vehicle" tabindex="2" value="Car">
-			<input type="checkbox" name="vehicle" tabindex="3" value="Bike">
-			<button>faster</button>
-			<input type="checkbox" name="vehicle" tabindex="4" value="Bike">
-			<input type="checkbox" name="vehicle" tabindex="5" value="Bike">
-			<input type="checkbox" name="vehicle" tabindex="6" value="Bike">
-			<button>faster</button>
-		</section>
+		<h1>jquery-rsCheckboxSwitch plug-in demo</h1>
+		<p>A CSS toggle button that displays several frames when the user clicks on it.</p>
+		<p>This plug-in quickly shows a series of frames between a checked and unchecked state.</p>
 
 		<section>
-			<h1>50% rounded corners</h1>
-			<input type="checkbox" name="vehicle" tabindex="7" value="Bike">
-			<input type="checkbox" name="vehicle" tabindex="8" value="Car">
-			<input type="checkbox" name="vehicle" tabindex="9" value="Bike">
-			<button>faster</button>
-			<input type="checkbox" name="vehicle" tabindex="10" value="Bike">
-			<input type="checkbox" name="vehicle" tabindex="11" value="Bike">
-			<input type="checkbox" name="vehicle" tabindex="12" value="Bike">
-			<button>faster</button>
+			<input type="checkbox">
 		</section>
 
-		<section>
-			<h1>25% rounded corners</h1>
-			<input type="checkbox" name="vehicle" tabindex="13" value="Bike">
-			<input type="checkbox" name="vehicle" tabindex="14" value="Car">
-			<input type="checkbox" name="vehicle" tabindex="15" value="Bike">
-			<button>faster</button>
-			<input type="checkbox" name="vehicle" tabindex="16" value="Bike">
-			<input type="checkbox" name="vehicle" tabindex="17" value="Bike">
-			<input type="checkbox" name="vehicle" tabindex="18" value="Bike">
-			<button>faster</button>
-		</section>
-
-		<section>
-			<h1>sharp corners</h1>
-			<input type="checkbox" name="vehicle" tabindex="19" value="Bike">
-			<input type="checkbox" name="vehicle" tabindex="20" value="Car">
-			<input type="checkbox" name="vehicle" tabindex="21" value="Bike">
-			<button>faster</button>
-			<input type="checkbox" name="vehicle" tabindex="22" value="Bike">
-			<input type="checkbox" name="vehicle" tabindex="23" value="Bike">
-			<input type="checkbox" name="vehicle" tabindex="24" value="Bike">
-			<button>faster</button>
-		</section>
+		<aside class="all">
+			<h1>Type</h1>
+			<label><input type="radio" name="type" value="sliding">Sliding</label>
+			<label><input type="radio" name="type" value="toggle" checked>Toggle</label>
+			<label><input type="radio" name="type" value="push">Push</label>
+		</aside>
+		<aside class="sliding">
+			<h1>Orientation</h1>
+			<label><input type="radio" name="orientation" value="horiz" checked>Horizontal</label>
+			<label><input type="radio" name="orientation" value="vert">Vertical</label>
+		</aside>
+		<aside class="sliding">
+			<h1>Handle style</h1>
+			<label><input type="radio" name="handle-style" value="handleflat" checked>Flat</label>
+			<label><input type="radio" name="handle-style" value="handleraised">Raised</label>
+		</aside>
+		<aside class="sliding">
+			<h1>Flipped</h1>
+			<label><input type="radio" name="flipped" value="no" checked>No (ON - OFF)</label>
+			<label><input type="radio" name="flipped" value="yes">Yes (OFF - ON)</label>
+		</aside>
+		<aside class="toggle push">
+			<h1>Content properties</h1>
+			<label><input type="radio" name="toggle-content" value="content" checked>Show original content</label>
+			<label><input type="radio" name="toggle-content" value="show01">Show 0/1 content</label>
+		</aside><br>
+		<aside class="all">
+			<h1>Corners</h1>
+			<label><input type="radio" name="corners" value="" checked>Rounded</label>
+			<label><input type="radio" name="corners" value="corners-halfrounded">Half rounded</label>
+			<label><input type="radio" name="corners" value="corners-quarterrounded">Quarter rounded</label>
+			<label><input type="radio" name="corners" value="corners-sharp">Sharp</label>
+		</aside>
+		<aside class="all size">
+			<h1>Size</h1>
+			<label><input type="radio" name="size" value="16px">Fixed size 16px</label>
+			<label><input type="radio" name="size" value="2em">Fixed size 2em</label>
+			<label><input type="radio" name="size" value="6vw" checked>Responsive size 6vw (according to browser width)</label>
+		</aside>
 	</body>
 </html>
