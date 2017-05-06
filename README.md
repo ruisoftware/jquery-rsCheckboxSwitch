@@ -34,7 +34,7 @@ The following table shows each individual frame used during the transition from 
 
 As you can see, by default, toggle buttons have 5 frames and Push button have 4 frames.
 
-[Live demo here](https://codepen.io/ruisoftware/pen/mmqrKy).
+[Live demo here](https://rawgit.com/ruisoftware/jquery-rsCheckboxSwitch/master/src/demo/demo.html).
 
 # Faq
 ### Is it possible to change the colors and style?
