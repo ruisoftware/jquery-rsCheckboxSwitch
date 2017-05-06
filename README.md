@@ -1,5 +1,5 @@
 # jquery-rsCheckboxSwitch [![Build Status](https://travis-ci.org/ruisoftware/jquery-rsCheckboxSwitch.svg?branch=master)](https://travis-ci.org/ruisoftware/jquery-rsCheckboxSwitch)
-Animates an on/off control with multiple frames for a realistic look.
+A CSS only plug-in that animates an on/off control with multiple frames for a realistic look.
 
 It displays three types of buttons:
 - Toggle button  
