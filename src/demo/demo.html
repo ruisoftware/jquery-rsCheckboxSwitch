@@ -105,6 +105,58 @@
 				}).eq(4).trigger("change");
 			});
 		</script>
+		<style>
+			body {
+				margin: 1em;
+				color: white;
+			}
+			section {
+				margin: 3em 0;
+			}
+			section > input,
+			section > div#sample,
+			section > button {
+				display: none;
+			}
+			section code {
+				display: inline-block;
+				padding: .5em;
+				background-color: white;
+				color: black;
+				margin: 1em 0 0 1em;
+				vertical-align: top;
+				border-radius: .5em;
+			}
+			.checkboxswitch-outer {
+				margin: 1em;
+			}
+			aside {
+				display: inline-block;
+				margin: 1em 1em 1em 0;
+				vertical-align: top;
+			}
+			aside h1 {
+				font-size: .9em;
+				border-bottom: 1px dotted #bbb;
+				padding-bottom: .2em;
+				color: #bbb;
+			}
+			aside label {
+				cursor: pointer;
+			}
+			aside.toggle {
+				display: none;
+			}
+			aside.all.size label {
+				display: block;
+			}
+			input {
+				margin-right: .25em;
+			}
+			label {
+				margin: 1em;
+			}
+		</style>
 	</head>
 	<body>
 		<h1>jquery-rsCheckboxSwitch plug-in demo</h1>
@@ -162,57 +214,5 @@
 			<label><input type="radio" name="size" value="./rsCheckboxSwitch2em.css">Fixed size 2em</label>
 			<label><input type="radio" name="size" value="./rsCheckboxSwitch5vw.css" checked>Responsive size 5vw (according to browser width)</label>
 		</aside>
-		<style>
-			body {
-				margin: 1em;
-				color: white;
-			}
-			section {
-				margin: 3em 0;
-			}
-			section > input,
-			section > div#sample,
-			section > button {
-				display: none;
-			}
-			section code {
-				display: inline-block;
-				padding: .5em;
-				background-color: white;
-				color: black;
-				margin: 1em 0 0 1em;
-				vertical-align: top;
-				border-radius: .5em;
-			}
-			.checkboxswitch-outer {
-				margin: 1em;
-			}
-			aside {
-				display: inline-block;
-				margin: 1em 1em 1em 0;
-				vertical-align: top;
-			}
-			aside h1 {
-				font-size: .9em;
-				border-bottom: 1px dotted #bbb;
-				padding-bottom: .2em;
-				color: #bbb;
-			}
-			aside label {
-				cursor: pointer;
-			}
-			aside.toggle {
-				display: none;
-			}
-			aside.all.size label {
-				display: block;
-			}
-			input {
-				margin-right: .25em;
-			}
-			label {
-				margin: 1em;
-			}
-		</style>
 	</body>
 </html>
