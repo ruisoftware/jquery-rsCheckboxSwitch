@@ -2,62 +2,107 @@
 <html>
 	<head>
 		<title>jquery-rsCheckboxSwitch plug-in</title>
-		<link rel="stylesheet" href="../../dist/rsCheckboxSwitch.css" />
+		<link rel="stylesheet" id="styledata" href="../../dist/rsCheckboxSwitch.css" />
 		<link rel="stylesheet" href="./normalize.css" />
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 		<script src="../jquery.rsCheckboxSwitch.js"></script>
 		<script>
 			$(document).ready(function () {
-				var $plugin = $("input[type=checkbox]"),
+				var $pluginInput = $("section > input[type=checkbox]"),
+					$pluginDiv = $("section > div#sample"),
+					$pluginButton = $("section > button"),
 					createPlugin = function () {
+						var data, corner = $("input[name='corners']:checked").val();
+						if (corner) {
+							corner = " " + corner;
+						}
 						switch ($("input[name='type']:checked").val()) {
-							case 'sliding':
-								$plugin.rsCheckboxSwitch({
-									type: 'sliding',
+							case "sliding":
+								data = {
+									type: "sliding",
 									slidingType: {
-										outerClass: 'checkboxswitch-outer sliding ' + $("input[name='corners']:checked").val(),
+										outerClass: "checkboxswitch-outer sliding" + corner,
 										handleClass: $("input[name='handle-style']:checked").val(),
-										flipped: $("input[name='flipped']:checked").val() === 'yes',
-										horizontal: $("input[name='orientation']:checked").val() === 'horiz'
+										flipped: $("input[name='flipped']:checked").val() === "yes",
+										horizontal: $("input[name='orientation']:checked").val() === "horiz"
 									}
-								});
+								};
 								break;
-							case 'toggle':
-								$plugin.rsCheckboxSwitch({
-									type: 'toggle',
+							case "toggle":
+								data = {
+									type: "toggle",
 									toggleType: {
-										outerClass: 'checkboxswitch-outer toggle ' + $("input[name='corners']:checked").val(),
-										showOnOff: $("input[name='toggle-content']:checked").val() === 'show01',
-										caption: $("input[name='toggle-content']:checked").val() === 'show01' ? null : 'turbo'
+										outerClass: "checkboxswitch-outer toggle" + corner,
+										showOnOff: $("input[name='toggle-content']:checked").val() === "show01",
+										caption: $("input[name='toggle-content']:checked").val() === "show01" ? null : "turbo"
 									}
-								});
+								};
 								break;
-							case 'push':
-								$plugin.rsCheckboxSwitch({
-									type: 'push',
+							case "push":
+								data = {
+									type: "push",
 									pushType: {
-										outerClass: 'checkboxswitch-outer toggle push ' + $("input[name='corners']:checked").val(),
-										showOnOff: $("input[name='toggle-content']:checked").val() === 'show01',
-										caption: $("input[name='toggle-content']:checked").val() === 'show01' ? null : 'turbo'
+										outerClass: "checkboxswitch-outer toggle push" + corner,
+										showOnOff: $("input[name='toggle-content']:checked").val() === "show01",
+										caption: $("input[name='toggle-content']:checked").val() === "show01" ? null : "turbo"
 									}
-								});
+								};
+						}
+						data.onChange = function(event, $elem, value) {
+							showCode(data, value);
+						};
+						switch ($("input[name='html']:checked").val()) {
+							case 'div': 	$pluginDiv.show().rsCheckboxSwitch(data);
+											$pluginButton.add($pluginInput).hide();
+											showCode(data, $pluginDiv.rsCheckboxSwitch('option', 'value'));
+											break;
+							case 'button': 	$pluginButton.show().rsCheckboxSwitch(data);
+											$pluginDiv.add($pluginInput).hide();
+											showCode(data, $pluginButton.rsCheckboxSwitch('option', 'value'));
+											break;
+							default: 		$pluginInput.show().rsCheckboxSwitch(data);
+											$pluginDiv.add($pluginButton).hide();
+											showCode(data, $pluginInput.rsCheckboxSwitch('option', 'value'));
 						}
 					},
 					destroyPlugin = function () {
-						$plugin.rsCheckboxSwitch('destroy');
-					}
+						$pluginDiv.rsCheckboxSwitch("destroy");
+						$pluginButton.rsCheckboxSwitch("destroy");
+						$pluginInput.rsCheckboxSwitch("destroy");
+					},
+					showCode = function (data, isOn) {
+						var json = JSON.stringify(data, null, 4),
+							ctrl, sel;
+						switch ($("input[name='html']:checked").val()) {
+							case 'div':		ctrl = "&lt;div" + (isOn ? " data-checked='checked'" : "") + "&gt;I am a div&lt;/div&gt;\n\n";
+											sel = "div";
+											break;
+							case 'button':	ctrl = "&lt;button" + (isOn ? " data-checked='checked'" : "") + "&gt;I am a button&lt;/button&gt;\n\n";
+											sel = "button";
+											break;
+							default:		ctrl = "&lt;input type='checkbox'" + (isOn ? " checked='checked'" : "") + "&gt;\n\n";
+											sel = "input[type=checkbox]";
+						}
+						$("section > code > pre").html(
+							ctrl +
+							"&lt;script&gt;\n" +
+							"$('" + sel + "').rsCheckboxSwitch({" +
+								json.substring(1, json.length - 1)
+							+ "});\n" +
+							"&lt;/script&gt;");
+					};
 
 				$("aside input").change(function (e) {
-					if (this.name !== 'size') {
+					if (this.name !== "size") {
 						destroyPlugin();
 						createPlugin();
-						if (this.name === 'type') {
+						if (this.name === "type") {
 							$("aside:not(.all,." + this.value + ")").hide();
 							$("aside." + this.value).show();
 						}
 					}
-					$(".checkboxswitch-outer").css('font-size', $("input[name='size']:checked").val());
-				}).eq(1).trigger('change');
+					$("#styledata").attr("href", $("input[name='size']:checked").val());
+				}).eq(4).trigger("change");
 			});
 		</script>
 		<style>
@@ -68,17 +113,33 @@
 			section {
 				margin: 3em 0;
 			}
+			section > input,
+			section > div#sample,
+			section > button {
+				display: none;
+			}
+			section code {
+				display: inline-block;
+				padding: .5em;
+				background-color: white;
+				color: black;
+				margin: 1em 0 0 1em;
+				vertical-align: top;
+				border-radius: .5em;
+			}
 			.checkboxswitch-outer {
-				margin: 0 1em;
+				margin: 1em;
 			}
 			aside {
 				display: inline-block;
 				margin: 1em 1em 1em 0;
+				vertical-align: top;
 			}
 			aside h1 {
 				font-size: .9em;
-				border-bottom: 1px dotted white;
+				border-bottom: 1px dotted #bbb;
 				padding-bottom: .2em;
+				color: #bbb;
 			}
 			aside label {
 				cursor: pointer;
@@ -99,13 +160,21 @@
 	</head>
 	<body>
 		<h1>jquery-rsCheckboxSwitch plug-in demo</h1>
-		<p>A CSS toggle button that displays several frames when the user clicks on it.</p>
-		<p>This plug-in quickly shows a series of frames between a checked and unchecked state.</p>
+		<p>A CSS toggle button that quickly shows a series of frames between a checked and unchecked state.</p>
 
 		<section>
 			<input type="checkbox">
+			<div id="sample">I am a div</div>
+			<button>I am a button</button>
+			<code><pre></pre></code>
 		</section>
 
+		<aside class="all">
+			<h1>Bounded HTML element</h1>
+			<label><input type="radio" name="html" value="input" checked>&lt;input&gt;</label>
+			<label><input type="radio" name="html" value="div">&lt;div&gt;</label>
+			<label><input type="radio" name="html" value="button">&lt;button&gt;</label>
+		</aside><br>
 		<aside class="all">
 			<h1>Type</h1>
 			<label><input type="radio" name="type" value="sliding">Sliding</label>
@@ -129,8 +198,8 @@
 		</aside>
 		<aside class="toggle push">
 			<h1>Content properties</h1>
-			<label><input type="radio" name="toggle-content" value="content" checked>Show original content</label>
-			<label><input type="radio" name="toggle-content" value="show01">Show 0/1 content</label>
+			<label><input type="radio" name="toggle-content" value="content" checked>Show caption</label>
+			<label><input type="radio" name="toggle-content" value="show01">Show on/off (recommended for &lt;input&gt;)</label>
 		</aside><br>
 		<aside class="all">
 			<h1>Corners</h1>
@@ -141,9 +210,9 @@
 		</aside>
 		<aside class="all size">
 			<h1>Size</h1>
-			<label><input type="radio" name="size" value="16px">Fixed size 16px</label>
-			<label><input type="radio" name="size" value="2em">Fixed size 2em</label>
-			<label><input type="radio" name="size" value="6vw" checked>Responsive size 6vw (according to browser width)</label>
+			<label><input type="radio" name="size" value="./rsCheckboxSwitch24px.css">Fixed size 24px</label>
+			<label><input type="radio" name="size" value="./rsCheckboxSwitch2em.css">Fixed size 2em</label>
+			<label><input type="radio" name="size" value="../../dist/rsCheckboxSwitch.css" checked>Responsive size 5vw (according to browser width)</label>
 		</aside>
 	</body>
 </html>

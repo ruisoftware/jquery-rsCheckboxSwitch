@@ -1,0 +1,619 @@
+body {
+  background: #454545;
+}
+.checkboxswitch-outer {
+  /* Horizontal and Vertical slider switch */
+  /* Toggle button */
+}
+.checkboxswitch-outer.sliding {
+  outline: none;
+  cursor: pointer;
+  width: 96px !important;
+  height: 31.2px !important;
+  /* Vertical slider switch */
+}
+.checkboxswitch-outer.sliding:before {
+  content: '';
+  position: absolute;
+  top: -6px;
+  right: -3.75px;
+  bottom: -3.75px;
+  left: -3.75px;
+  background: #454545;
+  background: -webkit-linear-gradient(top, #262626, #646464);
+  background: -moz-linear-gradient(top, #262626, #646464);
+  background: -o-linear-gradient(top, #262626, #646464);
+  background: -ms-linear-gradient(top, #262626, #646464);
+  background: linear-gradient(top, #262626, #646464);
+  z-index: -1;
+}
+.checkboxswitch-outer.sliding > div {
+  width: inherit !important;
+  height: inherit !important;
+}
+.checkboxswitch-outer.sliding > div > .switch {
+  width: 144px;
+  height: 31.2px;
+  background: -webkit-linear-gradient(left, #8e882e 0%, #8e882e 50%, #313131 50%, #313131 100%);
+  background: -moz-linear-gradient(left, #8e882e 0%, #8e882e 50%, #313131 50%, #313131 100%);
+  background: -o-linear-gradient(left, #8e882e 0%, #8e882e 50%, #313131 50%, #313131 100%);
+  background: -ms-linear-gradient(left, #8e882e 0%, #8e882e 50%, #313131 50%, #313131 100%);
+  background: linear-gradient(left, #8e882e 0%, #8e882e 50%, #313131 50%, #313131 100%);
+}
+.checkboxswitch-outer.sliding > div > .switch:before,
+.checkboxswitch-outer.sliding > div > .switch:after {
+  position: absolute;
+  font-size: 18px;
+  top: 50%;
+  color: #454545;
+}
+.checkboxswitch-outer.sliding > div > .switch:before {
+  content: 'ON';
+  left: 17%;
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  -moz-transform: translateX(-50%) translateY(-50%);
+  -o-transform: translateX(-50%) translateY(-50%);
+  -ms-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
+}
+.checkboxswitch-outer.sliding > div > .switch:after {
+  content: 'OFF';
+  right: 17%;
+  -webkit-transform: translateX(50%) translateY(-50%);
+  -moz-transform: translateX(50%) translateY(-50%);
+  -o-transform: translateX(50%) translateY(-50%);
+  -ms-transform: translateX(50%) translateY(-50%);
+  transform: translateX(50%) translateY(-50%);
+}
+.checkboxswitch-outer.sliding > div > .switch .handleflat,
+.checkboxswitch-outer.sliding > div > .switch .handleraised {
+  cursor: pointer;
+  width: 48px;
+  height: 31.2px;
+  top: 0;
+  left: 48px;
+  background-color: #454545;
+  -webkit-box-shadow: 0 0 3px 3px #313131, inset 0 -3px 1.5px 0.375px #262626, inset 0 3px 1.5px 0.375px #646464;
+  -moz-box-shadow: 0 0 3px 3px #313131, inset 0 -3px 1.5px 0.375px #262626, inset 0 3px 1.5px 0.375px #646464;
+  -o-box-shadow: 0 0 3px 3px #313131, inset 0 -3px 1.5px 0.375px #262626, inset 0 3px 1.5px 0.375px #646464;
+  box-shadow: 0 0 3px 3px #313131, inset 0 -3px 1.5px 0.375px #262626, inset 0 3px 1.5px 0.375px #646464;
+}
+.checkboxswitch-outer.sliding > div > .switch .handleflat.down,
+.checkboxswitch-outer.sliding > div > .switch .handleraised.down {
+  -webkit-box-shadow: 0 0 3px 3px #313131, inset 0 -3px 1.5px 0.375px #262626, inset 0 3px 1.5px 0.375px #5e5e5e;
+  -moz-box-shadow: 0 0 3px 3px #313131, inset 0 -3px 1.5px 0.375px #262626, inset 0 3px 1.5px 0.375px #5e5e5e;
+  -o-box-shadow: 0 0 3px 3px #313131, inset 0 -3px 1.5px 0.375px #262626, inset 0 3px 1.5px 0.375px #5e5e5e;
+  box-shadow: 0 0 3px 3px #313131, inset 0 -3px 1.5px 0.375px #262626, inset 0 3px 1.5px 0.375px #5e5e5e;
+}
+.checkboxswitch-outer.sliding > div > .switch .handleraised {
+  background: -webkit-linear-gradient(left, #454545 20%, #262626 43%, transparent 47%, transparent 53%, #262626 57%, #454545 80%), -webkit-linear-gradient(top, #4f4f4f 20%, #646464 38%, #787878 50%, #646464 62%, #4f4f4f 80%);
+  background: -moz-linear-gradient(left, #454545 20%, #262626 43%, transparent 47%, transparent 53%, #262626 57%, #454545 80%), -moz-linear-gradient(top, #4f4f4f 20%, #646464 38%, #787878 50%, #646464 62%, #4f4f4f 80%);
+  background: -o-linear-gradient(left, #454545 20%, #262626 43%, transparent 47%, transparent 53%, #262626 57%, #454545 80%), -o-linear-gradient(top, #4f4f4f 20%, #646464 38%, #787878 50%, #646464 62%, #4f4f4f 80%);
+  background: -ms-linear-gradient(left, #454545 20%, #262626 43%, transparent 47%, transparent 53%, #262626 57%, #454545 80%), -ms-linear-gradient(top, #4f4f4f 20%, #646464 38%, #787878 50%, #646464 62%, #4f4f4f 80%);
+  background: linear-gradient(left, #454545 20%, #262626 43%, transparent 47%, transparent 53%, #262626 57%, #454545 80%), linear-gradient(top, #4f4f4f 20%, #646464 38%, #787878 50%, #646464 62%, #4f4f4f 80%);
+}
+.checkboxswitch-outer.sliding.flipped > div > .switch {
+  background: -webkit-linear-gradient(left, #313131 0%, #313131 50%, #8e882e 50%, #8e882e 100%);
+  background: -moz-linear-gradient(left, #313131 0%, #313131 50%, #8e882e 50%, #8e882e 100%);
+  background: -o-linear-gradient(left, #313131 0%, #313131 50%, #8e882e 50%, #8e882e 100%);
+  background: -ms-linear-gradient(left, #313131 0%, #313131 50%, #8e882e 50%, #8e882e 100%);
+  background: linear-gradient(left, #313131 0%, #313131 50%, #8e882e 50%, #8e882e 100%);
+}
+.checkboxswitch-outer.sliding.flipped > div > .switch:before {
+  content: 'OFF';
+}
+.checkboxswitch-outer.sliding.flipped > div > .switch:after {
+  content: 'ON';
+}
+.checkboxswitch-outer.sliding.vert {
+  width: 31.2px !important;
+  height: 96px !important;
+}
+.checkboxswitch-outer.sliding.vert > div > .switch {
+  width: 31.2px;
+  height: 144px;
+  background: -webkit-linear-gradient(top, #8e882e 0%, #8e882e 50%, #313131 50%, #313131 100%);
+  background: -moz-linear-gradient(top, #8e882e 0%, #8e882e 50%, #313131 50%, #313131 100%);
+  background: -o-linear-gradient(top, #8e882e 0%, #8e882e 50%, #313131 50%, #313131 100%);
+  background: -ms-linear-gradient(top, #8e882e 0%, #8e882e 50%, #313131 50%, #313131 100%);
+  background: linear-gradient(top, #8e882e 0%, #8e882e 50%, #313131 50%, #313131 100%);
+  text-align: center;
+}
+.checkboxswitch-outer.sliding.vert > div > .switch:before,
+.checkboxswitch-outer.sliding.vert > div > .switch:after {
+  left: 0;
+  right: 0;
+  font-size: 12px;
+  display: inline-block;
+}
+.checkboxswitch-outer.sliding.vert > div > .switch:before {
+  content: 'ON';
+  top: 15%;
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+.checkboxswitch-outer.sliding.vert > div > .switch:after {
+  content: 'OFF';
+  top: auto;
+  bottom: 15%;
+  -webkit-transform: translateY(50%);
+  -moz-transform: translateY(50%);
+  -o-transform: translateY(50%);
+  -ms-transform: translateY(50%);
+  transform: translateY(50%);
+}
+.checkboxswitch-outer.sliding.vert > div > .switch .handleflat,
+.checkboxswitch-outer.sliding.vert > div > .switch .handleraised {
+  width: 31.2px;
+  height: 48px;
+  left: 0;
+  top: 48px;
+}
+.checkboxswitch-outer.sliding.vert > div > .switch .handleraised {
+  background: -webkit-linear-gradient(top, #454545 20%, #262626 43%, transparent 47%, transparent 53%, #262626 57%, #454545 80%), -webkit-linear-gradient(left, #4f4f4f 20%, #646464 38%, #787878 50%, #646464 62%, #4f4f4f 80%);
+  background: -moz-linear-gradient(top, #454545 20%, #262626 43%, transparent 47%, transparent 53%, #262626 57%, #454545 80%), -moz-linear-gradient(left, #4f4f4f 20%, #646464 38%, #787878 50%, #646464 62%, #4f4f4f 80%);
+  background: -o-linear-gradient(top, #454545 20%, #262626 43%, transparent 47%, transparent 53%, #262626 57%, #454545 80%), -o-linear-gradient(left, #4f4f4f 20%, #646464 38%, #787878 50%, #646464 62%, #4f4f4f 80%);
+  background: -ms-linear-gradient(top, #454545 20%, #262626 43%, transparent 47%, transparent 53%, #262626 57%, #454545 80%), -ms-linear-gradient(left, #4f4f4f 20%, #646464 38%, #787878 50%, #646464 62%, #4f4f4f 80%);
+  background: linear-gradient(top, #454545 20%, #262626 43%, transparent 47%, transparent 53%, #262626 57%, #454545 80%), linear-gradient(left, #4f4f4f 20%, #646464 38%, #787878 50%, #646464 62%, #4f4f4f 80%);
+}
+.checkboxswitch-outer.sliding.vert.flipped > div > .switch {
+  background: -webkit-linear-gradient(top, #313131 0%, #313131 50%, #8e882e 50%, #8e882e 100%);
+  background: -moz-linear-gradient(top, #313131 0%, #313131 50%, #8e882e 50%, #8e882e 100%);
+  background: -o-linear-gradient(top, #313131 0%, #313131 50%, #8e882e 50%, #8e882e 100%);
+  background: -ms-linear-gradient(top, #313131 0%, #313131 50%, #8e882e 50%, #8e882e 100%);
+  background: linear-gradient(top, #313131 0%, #313131 50%, #8e882e 50%, #8e882e 100%);
+}
+.checkboxswitch-outer.sliding.vert.flipped > div > .switch:before {
+  content: 'OFF';
+}
+.checkboxswitch-outer.sliding.vert.flipped > div > .switch:after {
+  content: 'ON';
+}
+.checkboxswitch-outer.sliding:before {
+  border-radius: 24px;
+}
+.checkboxswitch-outer.sliding > div {
+  border-radius: 24px;
+}
+.checkboxswitch-outer.sliding > div > .switch .handleflat,
+.checkboxswitch-outer.sliding > div > .switch .handleraised {
+  border-radius: 24px;
+}
+.checkboxswitch-outer.sliding.corners-halfrounded:before {
+  border-radius: 12px;
+}
+.checkboxswitch-outer.sliding.corners-halfrounded > div {
+  border-radius: 12px;
+}
+.checkboxswitch-outer.sliding.corners-halfrounded > div > .switch .handleflat,
+.checkboxswitch-outer.sliding.corners-halfrounded > div > .switch .handleraised {
+  border-radius: 12px;
+}
+.checkboxswitch-outer.sliding.corners-quarterrounded:before {
+  border-radius: 6px;
+}
+.checkboxswitch-outer.sliding.corners-quarterrounded > div {
+  border-radius: 6px;
+}
+.checkboxswitch-outer.sliding.corners-quarterrounded > div > .switch .handleflat,
+.checkboxswitch-outer.sliding.corners-quarterrounded > div > .switch .handleraised {
+  border-radius: 6px;
+}
+.checkboxswitch-outer.sliding.corners-sharp:before {
+  border-radius: 0;
+}
+.checkboxswitch-outer.sliding.corners-sharp > div {
+  border-radius: 0;
+}
+.checkboxswitch-outer.sliding.corners-sharp > div > .switch .handleflat,
+.checkboxswitch-outer.sliding.corners-sharp > div > .switch .handleraised {
+  border-radius: 0;
+}
+.checkboxswitch-outer.sliding.disabled .switch,
+.checkboxswitch-outer.sliding.disabled .handleflat,
+.checkboxswitch-outer.sliding.disabled .handleraised {
+  cursor: default;
+}
+.checkboxswitch-outer.sliding.switch-dragging,
+.checkboxswitch-outer.sliding .handleflat.down,
+.checkboxswitch-outer.sliding .handleraised.down {
+  cursor: ew-resize !important;
+}
+.checkboxswitch-outer.sliding.vert.switch-dragging,
+.checkboxswitch-outer.sliding.vert .handleflat.down,
+.checkboxswitch-outer.sliding.vert .handleraised.down {
+  cursor: ns-resize !important;
+}
+.checkboxswitch-outer.toggle {
+  color: #262626;
+  font-size: 24px;
+  position: relative;
+  padding: 6px 21px;
+  border: 3px solid #262626;
+  border-top: 7.65px solid #4a4a4a;
+  cursor: pointer;
+  background: #383838;
+  -webkit-box-shadow: 0 -3px 1.5px #262626;
+  -moz-box-shadow: 0 -3px 1.5px #262626;
+  -o-box-shadow: 0 -3px 1.5px #262626;
+  box-shadow: 0 -3px 1.5px #262626;
+  -o-user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+  vertical-align: top;
+  outline: none;
+  text-align: center;
+  border-radius: 1em;
+}
+.checkboxswitch-outer.toggle.on {
+  color: #a9a137;
+  text-shadow: 0 0 4.5px #a9a137;
+}
+.checkboxswitch-outer.toggle.frm2,
+.checkboxswitch-outer.toggle.frm3 {
+  border-top-width: 6.4875px;
+  border-bottom-width: 4.1625px;
+  border-top-color: #414141;
+}
+.checkboxswitch-outer.toggle.frm3 {
+  border-top-width: 5.325px;
+  border-bottom-width: 5.325px;
+  border-top-color: #383838;
+}
+.checkboxswitch-outer.toggle.frm4 {
+  border-top-width: 4.1625px;
+  border-bottom-width: 6.4875px;
+  border-top-color: #363636;
+}
+.checkboxswitch-outer.toggle.frm5 {
+  border-top-width: 3px;
+  border-bottom-width: 7.65px;
+  border-top-color: #262626;
+}
+.checkboxswitch-outer.toggle.frm4,
+.checkboxswitch-outer.toggle.frm5 {
+  border-bottom-color: #2d2d2d;
+}
+.checkboxswitch-outer.toggle.frm5 {
+  border-bottom-color: #333333;
+}
+.checkboxswitch-outer.toggle:before,
+.checkboxswitch-outer.toggle:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+.checkboxswitch-outer.toggle:before {
+  top: -12.15px;
+  right: -7.5px;
+  bottom: -7.5px;
+  left: -7.5px;
+  background: #454545;
+  background: -webkit-linear-gradient(top, #262626, #646464);
+  background: -moz-linear-gradient(top, #262626, #646464);
+  background: -o-linear-gradient(top, #262626, #646464);
+  background: -ms-linear-gradient(top, #262626, #646464);
+  background: linear-gradient(top, #262626, #646464);
+  z-index: -1;
+}
+.checkboxswitch-outer.toggle.frm2:before {
+  top: -10.9875px;
+  bottom: -8.6625px;
+}
+.checkboxswitch-outer.toggle.frm3:before {
+  top: -9.825px;
+  bottom: -9.825px;
+}
+.checkboxswitch-outer.toggle.frm4:before {
+  top: -8.6625px;
+  bottom: -10.9875px;
+}
+.checkboxswitch-outer.toggle.frm5:before {
+  top: -7.5px;
+  bottom: -12.15px;
+}
+.checkboxswitch-outer.toggle:after {
+  border-top: 1.5px solid #5e5e5e;
+  border-bottom: none;
+  background: -webkit-linear-gradient(top, rgba(33, 33, 33, 0.5) 65%, rgba(100, 100, 100, 0.5) 100%);
+  background: -moz-linear-gradient(top, rgba(33, 33, 33, 0.5) 65%, rgba(100, 100, 100, 0.5) 100%);
+  background: -o-linear-gradient(top, rgba(33, 33, 33, 0.5) 65%, rgba(100, 100, 100, 0.5) 100%);
+  background: -ms-linear-gradient(top, rgba(33, 33, 33, 0.5) 65%, rgba(100, 100, 100, 0.5) 100%);
+  background: linear-gradient(top, rgba(33, 33, 33, 0.5) 65%, rgba(100, 100, 100, 0.5) 100%);
+}
+.checkboxswitch-outer.toggle.frm2:after {
+  border-top-color: #575757;
+  -webkit-box-shadow: 0 6px 12px 0 rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0 6px 12px 0 rgba(0, 0, 0, 0.2);
+  -o-box-shadow: 0 6px 12px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: 0 6px 12px 0 rgba(0, 0, 0, 0.2);
+  background: -webkit-linear-gradient(top, rgba(36, 36, 36, 0.5) 63%, rgba(107, 107, 107, 0.5) 100%);
+  background: -moz-linear-gradient(top, rgba(36, 36, 36, 0.5) 63%, rgba(107, 107, 107, 0.5) 100%);
+  background: -o-linear-gradient(top, rgba(36, 36, 36, 0.5) 63%, rgba(107, 107, 107, 0.5) 100%);
+  background: -ms-linear-gradient(top, rgba(36, 36, 36, 0.5) 63%, rgba(107, 107, 107, 0.5) 100%);
+  background: linear-gradient(top, rgba(36, 36, 36, 0.5) 63%, rgba(107, 107, 107, 0.5) 100%);
+}
+.checkboxswitch-outer.toggle.frm3:after {
+  border-top-color: #4f4f4f;
+  -webkit-box-shadow: 0 8.25px 12px 0 rgba(0, 0, 0, 0.4);
+  -moz-box-shadow: 0 8.25px 12px 0 rgba(0, 0, 0, 0.4);
+  -o-box-shadow: 0 8.25px 12px 0 rgba(0, 0, 0, 0.4);
+  box-shadow: 0 8.25px 12px 0 rgba(0, 0, 0, 0.4);
+  background: -webkit-linear-gradient(top, rgba(38, 38, 38, 0.5) 58%, rgba(115, 115, 115, 0.5) 100%);
+  background: -moz-linear-gradient(top, rgba(38, 38, 38, 0.5) 58%, rgba(115, 115, 115, 0.5) 100%);
+  background: -o-linear-gradient(top, rgba(38, 38, 38, 0.5) 58%, rgba(115, 115, 115, 0.5) 100%);
+  background: -ms-linear-gradient(top, rgba(38, 38, 38, 0.5) 58%, rgba(115, 115, 115, 0.5) 100%);
+  background: linear-gradient(top, rgba(38, 38, 38, 0.5) 58%, rgba(115, 115, 115, 0.5) 100%);
+}
+.checkboxswitch-outer.toggle.frm4:after {
+  border-top-color: #3d3d3d;
+  -webkit-box-shadow: 0 10.5px 12px 0 rgba(0, 0, 0, 0.4);
+  -moz-box-shadow: 0 10.5px 12px 0 rgba(0, 0, 0, 0.4);
+  -o-box-shadow: 0 10.5px 12px 0 rgba(0, 0, 0, 0.4);
+  box-shadow: 0 10.5px 12px 0 rgba(0, 0, 0, 0.4);
+  background: -webkit-linear-gradient(top, rgba(41, 41, 41, 0.5) 50%, rgba(125, 125, 125, 0.5) 100%);
+  background: -moz-linear-gradient(top, rgba(41, 41, 41, 0.5) 50%, rgba(125, 125, 125, 0.5) 100%);
+  background: -o-linear-gradient(top, rgba(41, 41, 41, 0.5) 50%, rgba(125, 125, 125, 0.5) 100%);
+  background: -ms-linear-gradient(top, rgba(41, 41, 41, 0.5) 50%, rgba(125, 125, 125, 0.5) 100%);
+  background: linear-gradient(top, rgba(41, 41, 41, 0.5) 50%, rgba(125, 125, 125, 0.5) 100%);
+}
+.checkboxswitch-outer.toggle.frm5:after {
+  border-top-color: #363636;
+  border-bottom: 1.5px solid #696969;
+  -webkit-box-shadow: 0 12px 12px 0 rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 0 12px 12px 0 rgba(0, 0, 0, 0.5);
+  -o-box-shadow: 0 12px 12px 0 rgba(0, 0, 0, 0.5);
+  box-shadow: 0 12px 12px 0 rgba(0, 0, 0, 0.5);
+  background: -webkit-linear-gradient(top, rgba(44, 44, 44, 0.5) 45%, rgba(133, 133, 133, 0.5) 100%);
+  background: -moz-linear-gradient(top, rgba(44, 44, 44, 0.5) 45%, rgba(133, 133, 133, 0.5) 100%);
+  background: -o-linear-gradient(top, rgba(44, 44, 44, 0.5) 45%, rgba(133, 133, 133, 0.5) 100%);
+  background: -ms-linear-gradient(top, rgba(44, 44, 44, 0.5) 45%, rgba(133, 133, 133, 0.5) 100%);
+  background: linear-gradient(top, rgba(44, 44, 44, 0.5) 45%, rgba(133, 133, 133, 0.5) 100%);
+}
+.checkboxswitch-outer.toggle.push {
+  -webkit-box-shadow: 0 2.04px 4.8px #262626;
+  -moz-box-shadow: 0 2.04px 4.8px #262626;
+  -o-box-shadow: 0 2.04px 4.8px #262626;
+  box-shadow: 0 2.04px 4.8px #262626;
+}
+.checkboxswitch-outer.toggle.push > div.hiddenwrap {
+  position: absolute;
+  top: -7.65px;
+  right: -3px;
+  bottom: -7.65px;
+  left: -3px;
+  z-index: 1;
+  -webkit-box-shadow: inset 0 0 2.4px #000000;
+  -moz-box-shadow: inset 0 0 2.4px #000000;
+  -o-box-shadow: inset 0 0 2.4px #000000;
+  box-shadow: inset 0 0 2.4px #000000;
+}
+.checkboxswitch-outer.toggle.push > div.textwrapper,
+.checkboxswitch-outer.toggle.push span.onoff {
+  display: inline-block;
+  -webkit-transform-origin: center center;
+  -moz-transform-origin: center center;
+  -o-transform-origin: center center;
+  -ms-transform-origin: center center;
+  transform-origin: center center;
+}
+.checkboxswitch-outer.toggle.push:after {
+  border-bottom: 1.5px solid #595959;
+}
+.checkboxswitch-outer.toggle.push.frm1,
+.checkboxswitch-outer.toggle.push.frm2 {
+  border-top-color: #454545;
+  border-width: 8.8415625px 4.1915625px;
+  padding: 4.8084375px 19.8084375px;
+  -webkit-box-shadow: 0 1.2px 4.8px #262626;
+  -moz-box-shadow: 0 1.2px 4.8px #262626;
+  -o-box-shadow: 0 1.2px 4.8px #262626;
+  box-shadow: 0 1.2px 4.8px #262626;
+}
+.checkboxswitch-outer.toggle.push.frm1 > div.hiddenwrap,
+.checkboxswitch-outer.toggle.push.frm2 > div.hiddenwrap {
+  top: -8.8415625px;
+  right: -4.1915625px;
+  bottom: -8.8415625px;
+  left: -4.1915625px;
+}
+.checkboxswitch-outer.toggle.push.frm1:before,
+.checkboxswitch-outer.toggle.push.frm2:before {
+  top: -13.3415625px;
+  right: -8.6915625px;
+  bottom: -13.3415625px;
+  left: -8.6915625px;
+}
+.checkboxswitch-outer.toggle.push.frm1 > div.textwrapper,
+.checkboxswitch-outer.toggle.push.frm2 > div.textwrapper,
+.checkboxswitch-outer.toggle.push.frm1 span.onoff,
+.checkboxswitch-outer.toggle.push.frm2 span.onoff {
+  -webkit-transform: scale(0.975);
+  -moz-transform: scale(0.975);
+  -o-transform: scale(0.975);
+  -ms-transform: scale(0.975);
+  transform: scale(0.975);
+}
+.checkboxswitch-outer.toggle.push.frm1:after,
+.checkboxswitch-outer.toggle.push.frm2:after {
+  border-top-color: #5e5e5e;
+  border-bottom-color: #595959;
+  background: -webkit-linear-gradient(top, rgba(31, 31, 31, 0.5) 50%, rgba(97, 97, 97, 0.5) 100%);
+  background: -moz-linear-gradient(top, rgba(31, 31, 31, 0.5) 50%, rgba(97, 97, 97, 0.5) 100%);
+  background: -o-linear-gradient(top, rgba(31, 31, 31, 0.5) 50%, rgba(97, 97, 97, 0.5) 100%);
+  background: -ms-linear-gradient(top, rgba(31, 31, 31, 0.5) 50%, rgba(97, 97, 97, 0.5) 100%);
+  background: linear-gradient(top, rgba(31, 31, 31, 0.5) 50%, rgba(97, 97, 97, 0.5) 100%);
+}
+.checkboxswitch-outer.toggle.push.frm2 > div.hiddenwrap {
+  -webkit-box-shadow: inset 0 0 4px 1.2px #171717;
+  -moz-box-shadow: inset 0 0 4px 1.2px #171717;
+  -o-box-shadow: inset 0 0 4px 1.2px #171717;
+  box-shadow: inset 0 0 4px 1.2px #171717;
+}
+.checkboxswitch-outer.toggle.push.frm3 {
+  border-top-color: #414141;
+  border-width: 8.870625px 4.220625px;
+  padding: 4.779375px 19.779375px;
+  -webkit-box-shadow: 0 0.6px 4.8px #262626;
+  -moz-box-shadow: 0 0.6px 4.8px #262626;
+  -o-box-shadow: 0 0.6px 4.8px #262626;
+  box-shadow: 0 0.6px 4.8px #262626;
+}
+.checkboxswitch-outer.toggle.push.frm3 > div.hiddenwrap {
+  top: -8.870625px;
+  right: -4.220625px;
+  bottom: -8.870625px;
+  left: -4.220625px;
+}
+.checkboxswitch-outer.toggle.push.frm3:before {
+  top: -13.370625px;
+  right: -8.720625px;
+  bottom: -13.370625px;
+  left: -8.720625px;
+}
+.checkboxswitch-outer.toggle.push.frm3 > div.textwrapper,
+.checkboxswitch-outer.toggle.push.frm3 span.onoff {
+  -webkit-transform: scale(0.95);
+  -moz-transform: scale(0.95);
+  -o-transform: scale(0.95);
+  -ms-transform: scale(0.95);
+  transform: scale(0.95);
+}
+.checkboxswitch-outer.toggle.push.frm3:after {
+  border-top-color: #525252;
+  border-bottom-color: #545454;
+  background: -webkit-linear-gradient(top, rgba(28, 28, 28, 0.5) 50%, rgba(94, 94, 94, 0.5) 100%);
+  background: -moz-linear-gradient(top, rgba(28, 28, 28, 0.5) 50%, rgba(94, 94, 94, 0.5) 100%);
+  background: -o-linear-gradient(top, rgba(28, 28, 28, 0.5) 50%, rgba(94, 94, 94, 0.5) 100%);
+  background: -ms-linear-gradient(top, rgba(28, 28, 28, 0.5) 50%, rgba(94, 94, 94, 0.5) 100%);
+  background: linear-gradient(top, rgba(28, 28, 28, 0.5) 50%, rgba(94, 94, 94, 0.5) 100%);
+}
+.checkboxswitch-outer.toggle.push.frm3 > div.hiddenwrap {
+  -webkit-box-shadow: inset 0 0 4.8px 1.33333333px #121212;
+  -moz-box-shadow: inset 0 0 4.8px 1.33333333px #121212;
+  -o-box-shadow: inset 0 0 4.8px 1.33333333px #121212;
+  box-shadow: inset 0 0 4.8px 1.33333333px #121212;
+}
+.checkboxswitch-outer.toggle.push.frm4 {
+  border-top-color: #383838;
+  border-width: 8.8996875px 4.2496875px;
+  padding: 4.7503125px 19.7503125px;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  -o-box-shadow: none;
+  box-shadow: none;
+}
+.checkboxswitch-outer.toggle.push.frm4 > div.hiddenwrap {
+  top: -8.8996875px;
+  right: -4.2496875px;
+  bottom: -8.8996875px;
+  left: -4.2496875px;
+}
+.checkboxswitch-outer.toggle.push.frm4:before {
+  top: -13.3996875px;
+  right: -8.7496875px;
+  bottom: -13.3996875px;
+  left: -8.7496875px;
+}
+.checkboxswitch-outer.toggle.push.frm4 > div.textwrapper,
+.checkboxswitch-outer.toggle.push.frm4 span.onoff {
+  -webkit-transform: scale(0.925);
+  -moz-transform: scale(0.925);
+  -o-transform: scale(0.925);
+  -ms-transform: scale(0.925);
+  transform: scale(0.925);
+}
+.checkboxswitch-outer.toggle.push.frm4:after {
+  border-top-color: #424242;
+  border-bottom-color: #4d4d4d;
+  background: -webkit-linear-gradient(top, rgba(26, 26, 26, 0.5) 50%, rgba(92, 92, 92, 0.5) 100%);
+  background: -moz-linear-gradient(top, rgba(26, 26, 26, 0.5) 50%, rgba(92, 92, 92, 0.5) 100%);
+  background: -o-linear-gradient(top, rgba(26, 26, 26, 0.5) 50%, rgba(92, 92, 92, 0.5) 100%);
+  background: -ms-linear-gradient(top, rgba(26, 26, 26, 0.5) 50%, rgba(92, 92, 92, 0.5) 100%);
+  background: linear-gradient(top, rgba(26, 26, 26, 0.5) 50%, rgba(92, 92, 92, 0.5) 100%);
+}
+.checkboxswitch-outer.toggle.push.frm4 > div.hiddenwrap {
+  -webkit-box-shadow: inset 0 0 6px 1.6px #0d0d0d;
+  -moz-box-shadow: inset 0 0 6px 1.6px #0d0d0d;
+  -o-box-shadow: inset 0 0 6px 1.6px #0d0d0d;
+  box-shadow: inset 0 0 6px 1.6px #0d0d0d;
+}
+.checkboxswitch-outer.toggle span.onoff {
+  text-align: center;
+}
+.checkboxswitch-outer.toggle span.onoff:before,
+.checkboxswitch-outer.toggle span.onoff:after {
+  /* 0 */
+  display: block;
+  color: #262626;
+  text-shadow: none;
+  line-height: 24px;
+}
+.checkboxswitch-outer.toggle span.onoff:before,
+.checkboxswitch-outer.toggle span.onoff:after {
+  /* 0 */
+  content: '\007C';
+  font-size: 14.4px;
+}
+.checkboxswitch-outer.toggle span.onoff:after {
+  content: '\026AC';
+}
+.checkboxswitch-outer.toggle.on span.onoff:before {
+  /* 1 selected */
+  color: #a9a137;
+  text-shadow: inherit;
+}
+.checkboxswitch-outer.toggle.off span.onoff:after {
+  /* 0 selected */
+  color: #a9a137;
+  text-shadow: inherit;
+  text-shadow: 0 0 4.5px #a9a137;
+}
+.checkboxswitch-outer.toggle:before,
+.checkboxswitch-outer.toggle > div.hiddenwrap {
+  border-radius: 1em;
+}
+.checkboxswitch-outer.toggle:after {
+  border-radius: .85em;
+}
+.checkboxswitch-outer.toggle.corners-halfrounded {
+  border-radius: .5em;
+}
+.checkboxswitch-outer.toggle.corners-halfrounded:before,
+.checkboxswitch-outer.toggle.corners-halfrounded > div.hiddenwrap {
+  border-radius: .5em;
+}
+.checkboxswitch-outer.toggle.corners-halfrounded:after {
+  border-radius: .33em;
+}
+.checkboxswitch-outer.toggle.corners-quarterrounded {
+  border-radius: .25em;
+}
+.checkboxswitch-outer.toggle.corners-quarterrounded:before,
+.checkboxswitch-outer.toggle.corners-quarterrounded > div.hiddenwrap {
+  border-radius: .25em;
+}
+.checkboxswitch-outer.toggle.corners-quarterrounded:after {
+  border-radius: .125em;
+}
+.checkboxswitch-outer.toggle.corners-sharp {
+  border-radius: 0;
+}
+.checkboxswitch-outer.toggle.corners-sharp:before,
+.checkboxswitch-outer.toggle.corners-sharp:after,
+.checkboxswitch-outer.toggle.corners-sharp > div.hiddenwrap {
+  border-radius: 0;
+}
+.checkboxswitch-outer.toggle button {
+  background: inherit;
+  border: none;
+  text-shadow: inherit;
+  color: inherit;
+}

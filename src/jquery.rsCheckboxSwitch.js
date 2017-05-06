@@ -101,11 +101,11 @@
                         $switch.attr('tabindex', tabIndex);
                     }
                 } else {
-                    $elem.
-                        contents().
-                        filter(function () { return this.nodeType === 3; }).
-                        wrap($('<div>').addClass('textwrapper'));
-                    $switch = $elem.append($('<div>').addClass('hiddenwrap'));
+                    var $textNodes = $elem.contents().filter(function () { return this.nodeType === 3; });
+                    if ($textNodes.length) {
+                        $elem.wrap($('<div>').addClass('textwrapper'));
+                    }
+                    $switch = $elem.parent().append($('<div>').addClass('hiddenwrap'));
                 }
                 if (isSlidingType) {
                     $sliderBar = $('<div>').addClass(opts.slidingType.sliderClass).css('position', 'relative');
@@ -270,6 +270,9 @@
                             if (prevFrame === 0 || frame !== prevFrame) {
                                 $switch.removeClass(optionsTogglePushType.frameClasses[(prevFrame === 0 ? currFrame : prevFrame) - 1]).addClass(optionsTogglePushType.frameClasses[frame - 1]);
                                 prevFrame = currFrame = frame;
+                                if (frame === dest) {
+                                    doComplete();
+                                }
                             }
                          },
                         doComplete = function () {
@@ -283,9 +286,8 @@
                         $animObj = $({ 'n': currFrame });
                         $animObj.animate({ 'n': dest }, { 
                             queue: false,
-                            duration: opts.speed, 
-                            step: doStep, 
-                            complete: doComplete
+                            duration: opts.speed,
+                            step: doStep
                         });
                     } else {
                         doStep(dest);
@@ -566,7 +568,7 @@
                 $elem.unbind('.rsCheckboxSwitch');
                 $switch.unbind('.rsCheckboxSwitch');
                 $(document).unbind('.rsCheckboxSwitch');
-                
+
                 if (isSlidingType) {
                     $sliderBar.unbind('.rsCheckboxSwitch');
                     $sliderHandle.unbind('.rsCheckboxSwitch');
@@ -585,8 +587,15 @@
                     if (optionsTogglePushType.caption && $contents.length > 0) {
                         $contents.last().remove();
                     }
+                    if (!$elem.closest(".hiddenwrap").length) {
+                        $switch.find('.hiddenwrap').remove();
+                    }
                     if ($switch !== $elem) {
-                       $elem.unwrap().unwrap(); // inline elements have an extra parent
+                        if (isSelfClosing($elem)) {
+                            $elem.unwrap().unwrap(); // inline elements have an extra parent
+                        } else {
+                            $elem.unwrap();
+                        }
                     } else {
                        $switch.unwrap();
                     }

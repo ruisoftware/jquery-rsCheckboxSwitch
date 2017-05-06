@@ -245,8 +245,8 @@ body {
             cursor: ew-resize !important;
         }
         &.vert.switch-dragging,
-        .vert .handleflat.down,
-        .vert .handleraised.down {
+        &.vert .handleflat.down,
+        &.vert .handleraised.down {
             cursor: ns-resize !important;
         }
     }
@@ -292,7 +292,7 @@ body {
         &.frm4 {
             border-top-width: @refScale*(@border-width-top-ratio - @border-width-delta-ratio*3);
             border-bottom-width: @refScale*(@border-width-ratio + @border-width-delta-ratio*3);
-            border-top-color: mix(@fromGradientInner, @fromGradientOuter, 25%);
+            border-top-color: mix(@fromGradientInner, @fromGradientOuter, 45%);
         }
         &.frm5 {
             border-top-width: @refScale*@border-width-ratio;
@@ -302,7 +302,6 @@ body {
         &.frm4,
         &.frm5 {
             border-bottom-color: lighten(@fromGradientOuter, 2.5%);
-            .box-shadow(0 @refScale*.085 @refScale*.02 @fromGradientOuter);
         }
         &.frm5 {
             border-bottom-color: lighten(@fromGradientOuter, 5%);
@@ -347,7 +346,6 @@ body {
         @after-gradient-from: fade(@toGradientInner, 50%);
         @after-gradient-to: fade(@toGradientOuter, 50%);
         &:after {
-            border: @refScale*.125 solid fade(@fromGradientOuter, 25%);
             border-top: @refScale*.0625 solid darken(@toGradientOuter, 2%);
             border-bottom: none;
             .lineargradient(top, @after-gradient-from 65%, @after-gradient-to 100%);
@@ -369,12 +367,12 @@ body {
         }
         &.frm5:after {
             border-top-color: darken(@toGradientOuter, 18%);
+            border-bottom: @refScale*.0625 solid lighten(@toGradientOuter, 2%);
             .box-shadow(0 @refScale*.5 @refScale*.5 0 hsla(0, 0%, 0%, .5));
             .lineargradient(top, lighten(@after-gradient-from, 4%) 45%, lighten(@after-gradient-to, 13%) 100%);
         }
 
         &.push {
-            border-bottom-width: @refScale*@border-width-top-ratio;
             .box-shadow(0 @refScale*.085 @refScale*.2 @fromGradientOuter);
             > div.hiddenwrap {
                 position: absolute;
@@ -390,31 +388,24 @@ body {
                 display: inline-block;
                 .transform-origin(center center);
             }
-            &:before {
-                bottom: -@refScale*(@outline-margin-ratio + @border-width-top-ratio - @border-width-ratio);
-            }
             &:after {
-                border-top-color: darken(@toGradientOuter, 2%);
                 border-bottom: @refScale*.0625 solid lighten(@fromGradientOuter, 20%);
-                .box-shadow(0 @refScale*.25 @refScale*.5 0 hsla(0, 0%, 0%, .2));
-                .lineargradient(top, @after-gradient-from 50%, @after-gradient-to 100%);
             }
-
             .frame(@coef, @border-mix, @scale) {
                 border-top-color: mix(@fromGradientInner, @fromGradientOuter, @border-mix);
                 border-width: @refScale*(@border-width-top-ratio + @border-width-delta-ratio*@coef) @refScale*(@border-width-ratio + @border-width-delta-ratio*@coef);
                 padding: @refScale*(@vert-padding - @border-width-delta-ratio*@coef) @refScale*(@horiz-padding - @border-width-delta-ratio*@coef);
-                &:before {
-                    top: -@refScale*(@outline-margin-ratio + @border-width-top-ratio - @border-width-ratio + @border-width-delta-ratio*@coef);
-                    right: -@refScale*(@outline-margin-ratio + @border-width-delta-ratio*@coef);
-                    bottom: -@refScale*(@outline-margin-ratio + @border-width-top-ratio - @border-width-ratio + @border-width-delta-ratio*@coef);
-                    left: -@refScale*(@outline-margin-ratio + @border-width-delta-ratio*@coef);
-                }
                 > div.hiddenwrap {
                     top: -@refScale*(@border-width-top-ratio + @border-width-delta-ratio*@coef);
                     right: -@refScale*(@border-width-ratio + @border-width-delta-ratio*@coef);
                     bottom: -@refScale*(@border-width-top-ratio + @border-width-delta-ratio*@coef);
                     left: -@refScale*(@border-width-ratio + @border-width-delta-ratio*@coef);
+                }
+                &:before {
+                    top: -@refScale*(@outline-margin-ratio + @border-width-top-ratio - @border-width-ratio + @border-width-delta-ratio*@coef);
+                    right: -@refScale*(@outline-margin-ratio + @border-width-delta-ratio*@coef);
+                    bottom: -@refScale*(@outline-margin-ratio + @border-width-top-ratio - @border-width-ratio + @border-width-delta-ratio*@coef);
+                    left: -@refScale*(@outline-margin-ratio + @border-width-delta-ratio*@coef);
                 }
                 > div.textwrapper,
                 span.onoff {
@@ -422,6 +413,7 @@ body {
                 }
             }
 
+            &.frm1,
             &.frm2 {
                 .frame(1.025, 85%, 0.975);
                 .box-shadow(0 @refScale*.05 @refScale*.2 @fromGradientOuter);
@@ -430,6 +422,8 @@ body {
                     border-bottom-color: lighten(@fromGradientOuter, 20%);
                     .lineargradient(top, darken(@after-gradient-from, 1%) 50%, darken(@after-gradient-to, 1%) 100%);
                 }
+            }
+            &.frm2 {
                 > div.hiddenwrap {
                     .box-shadow(inset 0 0 @refScale/6 @refScale/20 darken(@fromGradientOuter, 6%));
                 }
@@ -438,7 +432,7 @@ body {
                 .frame(1.05, 75%, 0.95);
                 .box-shadow(0 @refScale*.025 @refScale*.2 @fromGradientOuter);
                 &:after {
-                    border-top-color: darken(@toGradientOuter, 5%);
+                    border-top-color: darken(@toGradientOuter, 7%);
                     border-bottom-color: lighten(@fromGradientOuter, 18%);
                     .lineargradient(top, darken(@after-gradient-from, 2%) 50%, darken(@after-gradient-to, 2%) 100%);
                 }
@@ -450,7 +444,7 @@ body {
                 .frame(1.075, 50%, 0.925);
                 .box-shadow(none);
                 &:after {
-                    border-top-color: darken(@toGradientOuter, 9%);
+                    border-top-color: darken(@toGradientOuter, 13%);
                     border-bottom-color: lighten(@fromGradientOuter, 15%);
                     .lineargradient(top, darken(@after-gradient-from, 3%) 50%, darken(@after-gradient-to, 3%) 100%);
                 }
@@ -535,6 +529,13 @@ body {
             > div.hiddenwrap {
                 border-radius: 0;
             }
+        }
+
+        button {
+            background: inherit;
+            border: none;
+            text-shadow: inherit;
+            color: inherit;
         }
     }
 }
